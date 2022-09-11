@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using lounga.Data;
@@ -11,9 +12,10 @@ using lounga.Data;
 namespace lounga.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220911081523_AddDb")]
+    partial class AddDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,12 +36,7 @@ namespace lounga.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
@@ -111,14 +108,12 @@ namespace lounga.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ArrivalAirport")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DepartureAirport")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DepartureDate")
@@ -128,36 +123,30 @@ namespace lounga.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DestinationFrom")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("DestinationTo")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FacilitiesFlight")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("FlightDuration")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
                     b.Property<string>("SeatClass")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("TransitFlight")
                         .HasColumnType("boolean");
 
                     b.Property<string>("TravelRoute")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

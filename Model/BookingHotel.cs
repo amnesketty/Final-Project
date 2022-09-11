@@ -8,8 +8,8 @@ namespace lounga.Model
     public class BookingHotel
     {
         public int Id { get; set; }
-        public DateOnly BookingDate { get; set; }
+        public DateTime BookingDate { get; set; }
         public int TotalRoom { get; set; }
-        public int TotalPrice { get; set; }
+        public int Price { get; set; }
     }
 }

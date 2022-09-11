@@ -10,5 +10,8 @@ namespace lounga.Model
         public int Id { get; set; }
         public DateTime BookingDate { get; set; }
         public int Status { get; set; }
+        public int TotalRoom {get; set;}
+        public int Price {get; set;}
+        
     }
 }
