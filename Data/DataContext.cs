@@ -13,6 +13,6 @@ namespace lounga.Data
         {
             
         }
-        public DbSet<Hotel> Characters {get; set;}
+        public DbSet<Hotel> Hotels {get; set;}
     }
 }
