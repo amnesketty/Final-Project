@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Lounga.Models
 {
-    public class Airlines
+    public class Airline
     {
         public int Id {get; set;}
         public string? Name {get; set;}
