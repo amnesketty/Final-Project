@@ -11,5 +11,9 @@ namespace lounga.Model
         public DateTime BookingDate { get; set; }
         public int TotalRoom { get; set; }
         public int Price { get; set; }
+        public Hotel? Hotel {get; set;}
+        public List<Room>? Room {get; set;}
+        public User? User {get; set;}
+        public Guest? Guest {get; set;}
     }
 }

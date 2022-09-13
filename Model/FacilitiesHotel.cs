@@ -14,8 +14,10 @@ namespace lounga.Model
         public bool Restaurant { get; set; } = true;
         public bool Spa { get; set; } = true;
         public bool Pool { get; set; } = true;
-        public bool PlayGround { get; set; } = true;
+        public bool Playground { get; set; } = true;
         public bool Gym { get; set; } = true;
         public bool Parking { get; set; } = true;
+        public Hotel? Hotel {get; set; }
+        public int HotelId {get; set;}
     }
 }
