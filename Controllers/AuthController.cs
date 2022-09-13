@@ -31,5 +31,18 @@ namespace lounga.Controllers
             };
             return BadRequest(response);
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<ServiceResponse<UserProfileDto>>> Login (UserLoginDto userLoginDto)
+        {
+            var response = await _authService.Login(userLoginDto);
+
+            if (response.Success == true)
+            {
+                return Ok(response);
+            };
+            return BadRequest(response);
+
+        }
     }
 }

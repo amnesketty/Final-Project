@@ -1,20 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using lounga.Data;
+using lounga.Dto.User;
 using lounga.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Lounga.Services.AuthServices
 {
     public class AuthService : IAuthService
     {
         private readonly DataContext _context;
-        public AuthService(DataContext context)
+        private readonly IConfiguration _configuration;
+
+        public AuthService(DataContext context, IConfiguration configuration)
         {
+            _configuration = configuration;
             _context = context;
-            
         }
         public async Task<bool> IsRegistered(string username)
         {
@@ -23,11 +29,6 @@ namespace Lounga.Services.AuthServices
                 return true;
             }
             return false;
-        }
-
-        public Task<ServiceResponse<string>> Login(string username, string password)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ServiceResponse<int>> Register(User user, string password)
@@ -63,6 +64,63 @@ namespace Lounga.Services.AuthServices
                 var ComputeHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return ComputeHash.SequenceEqual(passwordHash);
             }
+        }
+        
+        private string CreateToken (User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
+            };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(System.Text.Encoding.UTF8
+                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+            
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddHours(1),
+                SigningCredentials = creds
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<ServiceResponse<UserProfileDto>> Login(UserLoginDto userLoginDto)
+        {
+            var response = new ServiceResponse<UserProfileDto>();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(item => item.Username.ToLower() == userLoginDto.Username.ToLower());
+
+            if (user == null)    
+            {
+                response.Success = false;
+                response.Message = "User not found!";
+            }
+            
+            else if (!VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                response.Success = false;
+                response.Message = "Password incorrect!";
+            }
+
+            else 
+            {
+                response.Data.Token = CreateToken(user);
+                response.Data.FirstName = user.FirstName;
+                response.Data.LastName = user.LastName;
+                response.Data.Email = user.Email;
+                response.Data.Phone = user.Phone;
+                response.Message = "Login success!";
+            }
+
+            return response;
         }
     }
 }
