@@ -13,6 +13,8 @@ namespace lounga.Model
         public string Address { get; set; } = string.Empty;
         public string City {get; set;} = string.Empty;
         public int Rating { get; set; }
-
+        public List<Photo> Photos {get; set; }
+        public FacilitiesHotel? FacilitiesHotel {get; set;}
+        public List<Room> Rooms {get; set;}
     }
 }

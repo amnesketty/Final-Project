@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace lounga.Model
 {
-    public class BookingDateFlight
+    public class Photo
     {
         public int Id { get; set; }
-        public DateTime BookingDate { get; set; }
-        public int Status { get; set; }
-        public int Price {get; set;}
+        public string Image { get; set; } = string.Empty;
+        public Hotel? Hotel {get; set; }
     }
 }

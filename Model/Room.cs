@@ -10,5 +10,7 @@ namespace lounga.Model
         public int Id { get; set; }
         public string Type { get; set; } = string.Empty;
         public int Price { get; set; }
+        public Hotel? Hotel {get; set;}
+        public List<BookingHotel> BookingHotels {get; set;}
     }
 }

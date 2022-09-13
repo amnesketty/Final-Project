@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lounga.Models
+namespace lounga.Model
 {
     public class BookingFlight
     {
         public int Id {get; set;}
         public DateTime BookingDate {get; set;}
+        public int Status { get; set; }
+        public int AmountPassenger { get; set; }
         public int TotalPrice {get; set;}
-        public string GateDeparture {get; set;} = string.Empty;
-        public string GateArrival {get; set;} = string.Empty;
+        public User? User {get; set;}
+        public List<Passenger>? Passengers { get; set; }
+        public Airline? Airline { get; set; }
+        public Aircraft? Aircraft { get; set; }
     }
 }
