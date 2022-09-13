@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.User;
 using lounga.Model;
-using Lounga.Services.AuthServices;
+using lounga.Services.AuthServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
@@ -20,10 +20,10 @@ namespace lounga.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<ServiceResponse<int>>> Register (UserRegisterDto UserRegisterDto)
+        public async Task<ActionResult<ServiceResponse<int>>> Register (UserRegisterDto userRegisterDto)
         {
             var response = await _authService.Register(
-                new User {Username = UserRegisterDto.Username}, UserRegisterDto.Password
+                userRegisterDto
             );
             if (response.Success == true)
             {

@@ -4,21 +4,24 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using lounga.Data;
 using lounga.Dto.User;
 using lounga.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Lounga.Services.AuthServices
+namespace lounga.Services.AuthServices
 {
     public class AuthService : IAuthService
     {
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public AuthService(DataContext context, IConfiguration configuration)
+        public AuthService(DataContext context, IConfiguration configuration, IMapper mapper)
         {
+            _mapper = mapper;
             _configuration = configuration;
             _context = context;
         }
@@ -31,16 +34,17 @@ namespace Lounga.Services.AuthServices
             return false;
         }
 
-        public async Task<ServiceResponse<int>> Register(User user, string password)
+        public async Task<ServiceResponse<int>> Register(UserRegisterDto userRegisterDto)
         {
             ServiceResponse<int> response = new ServiceResponse<int>();
-            if (await IsRegistered(user.Username))
+            if (await IsRegistered(userRegisterDto.Username))
             {
                 response.Success = false;
                 response.Message = "Username already exist!";
                 return response;
             }
-            CreatePasswordHash (password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash (userRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            User user = _mapper.Map<User>(userRegisterDto);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             _context.Users.Add(user);
@@ -103,7 +107,7 @@ namespace Lounga.Services.AuthServices
                 response.Success = false;
                 response.Message = "User not found!";
             }
-            
+
             else if (!VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt))
             {
                 response.Success = false;
@@ -112,11 +116,12 @@ namespace Lounga.Services.AuthServices
 
             else 
             {
+                response.Data = _mapper.Map<UserProfileDto>(user);
                 response.Data.Token = CreateToken(user);
-                response.Data.FirstName = user.FirstName;
-                response.Data.LastName = user.LastName;
-                response.Data.Email = user.Email;
-                response.Data.Phone = user.Phone;
+                // response.Data.FirstName = user.FirstName;
+                // response.Data.LastName = user.LastName;
+                // response.Data.Email = user.Email;
+                // response.Data.Phone = user.Phone;
                 response.Message = "Login success!";
             }
 

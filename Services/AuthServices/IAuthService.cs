@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using lounga.Dto.User;
 using lounga.Model;
 
-namespace Lounga.Services.AuthServices
+namespace lounga.Services.AuthServices
 {
     public interface IAuthService
     {
-        Task<ServiceResponse<int>>Register (User User, string Password);
-        Task<ServiceResponse<UserProfileDto>>Login (UserLoginDto userLoginDto);
-        Task<bool>IsRegistered (string Username);
+        Task<ServiceResponse<int>> Register (UserRegisterDto userRegisterDto);
+        Task<ServiceResponse<UserProfileDto>> Login (UserLoginDto userLoginDto);
+        Task<bool> IsRegistered (string Username);
          
     }
 }
