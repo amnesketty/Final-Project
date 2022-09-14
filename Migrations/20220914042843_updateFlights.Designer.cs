@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using lounga.Data;
@@ -11,9 +12,10 @@ using lounga.Data;
 namespace lounga.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220914042843_updateFlights")]
+    partial class updateFlights
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +39,87 @@ namespace lounga.Migrations
                     b.ToTable("BookingHotelRoom");
                 });
 
+            modelBuilder.Entity("lounga.Model.Aircraft", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AircraftsType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("AirlineId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AmountPassenger")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SeatCapacity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SeatLayout")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SeatPitch")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AirlineId");
+
+                    b.ToTable("Aircrafts");
+                });
+
+            modelBuilder.Entity("lounga.Model.Airline", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ArrivalTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DepartureDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DepartureTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DestinationFrom")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DestinationTo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SeatClass")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Airlines");
+                });
+
             modelBuilder.Entity("lounga.Model.BookingFlight", b =>
                 {
                     b.Property<int>("Id")
@@ -44,6 +127,12 @@ namespace lounga.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AircraftId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("AirlineId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AmountPassenger")
                         .HasColumnType("integer");
@@ -64,6 +153,10 @@ namespace lounga.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AircraftId");
+
+                    b.HasIndex("AirlineId");
 
                     b.HasIndex("FlightId");
 
@@ -104,13 +197,16 @@ namespace lounga.Migrations
                     b.ToTable("BookingHotels");
                 });
 
-            modelBuilder.Entity("lounga.Model.FacilitiesFlight", b =>
+            modelBuilder.Entity("lounga.Model.FacilitiesAircraft", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AircraftId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Baggage")
                         .HasColumnType("integer");
@@ -121,9 +217,6 @@ namespace lounga.Migrations
                     b.Property<bool>("Entertainment")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("FlightId")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("PowerPort")
                         .HasColumnType("boolean");
 
@@ -132,10 +225,10 @@ namespace lounga.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FlightId")
+                    b.HasIndex("AircraftId")
                         .IsUnique();
 
-                    b.ToTable("FacilitiesFlights");
+                    b.ToTable("FacilitiesAircrafts");
                 });
 
             modelBuilder.Entity("lounga.Model.FacilitiesHotel", b =>
@@ -224,6 +317,9 @@ namespace lounga.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("FacilitiesAircraftId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
@@ -243,6 +339,8 @@ namespace lounga.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacilitiesAircraftId");
 
                     b.ToTable("Flights");
                 });
@@ -447,9 +545,26 @@ namespace lounga.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("lounga.Model.Aircraft", b =>
+                {
+                    b.HasOne("lounga.Model.Airline", "Airline")
+                        .WithMany("Aircrafts")
+                        .HasForeignKey("AirlineId");
+
+                    b.Navigation("Airline");
+                });
+
             modelBuilder.Entity("lounga.Model.BookingFlight", b =>
                 {
-                    b.HasOne("lounga.Model.Flight", "Flight")
+                    b.HasOne("lounga.Model.Aircraft", "Aircraft")
+                        .WithMany("BookingFlights")
+                        .HasForeignKey("AircraftId");
+
+                    b.HasOne("lounga.Model.Airline", "Airline")
+                        .WithMany("BookingFlights")
+                        .HasForeignKey("AirlineId");
+
+                    b.HasOne("lounga.Model.Flight", null)
                         .WithMany("BookingFlights")
                         .HasForeignKey("FlightId");
 
@@ -457,7 +572,9 @@ namespace lounga.Migrations
                         .WithMany("BookingFlights")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Flight");
+                    b.Navigation("Aircraft");
+
+                    b.Navigation("Airline");
 
                     b.Navigation("User");
                 });
@@ -477,15 +594,15 @@ namespace lounga.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("lounga.Model.FacilitiesFlight", b =>
+            modelBuilder.Entity("lounga.Model.FacilitiesAircraft", b =>
                 {
-                    b.HasOne("lounga.Model.Flight", "Flight")
-                        .WithOne("FacilitiesFlight")
-                        .HasForeignKey("lounga.Model.FacilitiesFlight", "FlightId")
+                    b.HasOne("lounga.Model.Aircraft", "Aircraft")
+                        .WithOne("FacilitiesAircraft")
+                        .HasForeignKey("lounga.Model.FacilitiesAircraft", "AircraftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Flight");
+                    b.Navigation("Aircraft");
                 });
 
             modelBuilder.Entity("lounga.Model.FacilitiesHotel", b =>
@@ -497,6 +614,15 @@ namespace lounga.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("lounga.Model.Flight", b =>
+                {
+                    b.HasOne("lounga.Model.FacilitiesAircraft", "FacilitiesAircraft")
+                        .WithMany()
+                        .HasForeignKey("FacilitiesAircraftId");
+
+                    b.Navigation("FacilitiesAircraft");
                 });
 
             modelBuilder.Entity("lounga.Model.Guest", b =>
@@ -537,6 +663,20 @@ namespace lounga.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("lounga.Model.Aircraft", b =>
+                {
+                    b.Navigation("BookingFlights");
+
+                    b.Navigation("FacilitiesAircraft");
+                });
+
+            modelBuilder.Entity("lounga.Model.Airline", b =>
+                {
+                    b.Navigation("Aircrafts");
+
+                    b.Navigation("BookingFlights");
+                });
+
             modelBuilder.Entity("lounga.Model.BookingFlight", b =>
                 {
                     b.Navigation("Passengers");
@@ -550,8 +690,6 @@ namespace lounga.Migrations
             modelBuilder.Entity("lounga.Model.Flight", b =>
                 {
                     b.Navigation("BookingFlights");
-
-                    b.Navigation("FacilitiesFlight");
                 });
 
             modelBuilder.Entity("lounga.Model.Hotel", b =>

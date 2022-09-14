@@ -5,18 +5,24 @@ using System.Threading.Tasks;
 
 namespace lounga.Model
 {
-    public class Aircraft
+    public class Flight
     {
         public int Id {get; set;}
-        public string Name { get; set; } = string.Empty;
+        public string Airline {get; set;} = string.Empty;
+        public string SeatClass {get; set;} = string.Empty;
+        public string Aircraft { get; set; } = string.Empty;
         public string AircraftsType {get; set;} = string.Empty;
         public string SeatLayout {get; set;} = string.Empty;
         public string SeatPitch {get; set;} = string.Empty;
         public int SeatCapacity {get;set;}
         public int AmountPassenger { get; set; }
         public int Price { get; set; }
-        public Airline? Airline {get; set;}
-        public FacilitiesAircraft? FacilitiesAircraft {get; set;}
+        public string DestinationFrom {get; set;} = string.Empty;
+        public string DestinationTo {get; set;} = string.Empty;
+        public DateTime DepartureDate {get; set;}
+        public DateTime DepartureTime {get; set;}
+        public DateTime ArrivalTime {get; set;}
+        public FacilitiesFlight? FacilitiesFlight {get; set;}
         public List<BookingFlight>? BookingFlights {get; set; }
     }
 }

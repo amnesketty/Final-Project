@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using lounga.Model;
 
-namespace lounga.Dto.Airline
+namespace lounga.Dto.Flight
 {
-    public class GetAirlineDto
+    public class UpdateFlightDto
     {
         public string Name {get; set;} = string.Empty;
         public string SeatClass {get; set;} = string.Empty;
@@ -14,6 +14,5 @@ namespace lounga.Dto.Airline
         public DateTime ArrivalTime {get; set;}
         public string DestinationFrom {get; set;} = string.Empty;
         public string DestinationTo {get; set;} = string.Empty;
-        public List<Aircraft>? Aircrafts {get; set; }   
     }
 }

@@ -1,5 +1,7 @@
 using lounga.Data;
+using lounga.Services.FlightService;
 using lounga.Services.AuthServices;
+using lounga.Services.FacilitiesService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -38,7 +40,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
+builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IFacilitiesService, FacilitiesService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -24,9 +24,8 @@ namespace lounga.Data
         public DbSet<Photo> Photos {get; set; }
         public DbSet<BookingHotel> BookingHotels {get; set; }
         public DbSet<Guest> Guests {get; set; }
-        public DbSet<Airline> Airlines {get; set; }
-        public DbSet<Aircraft> Aircrafts {get; set; }
-        public DbSet<FacilitiesAircraft> FacilitiesAircrafts {get; set; }
+        public DbSet<Flight> Flights {get; set; }
+        public DbSet<FacilitiesFlight> FacilitiesFlights {get; set; }
         public DbSet<BookingFlight> BookingFlights {get; set; }
         public DbSet<Passenger> Passengers {get; set; }
     }

@@ -14,7 +14,6 @@ namespace lounga.Model
         public int TotalPrice {get; set;}
         public User? User {get; set;}
         public List<Passenger>? Passengers { get; set; }
-        public Airline? Airline { get; set; }
-        public Aircraft? Aircraft { get; set; }
+        public Flight? Flight { get; set; }
     }
 }

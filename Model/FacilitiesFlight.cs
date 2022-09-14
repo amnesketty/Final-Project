@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace lounga.Model
 {
-    public class FacilitiesAircraft
+    public class FacilitiesFlight
     {
         public int Id {get; set;}
         public int Baggage {get; set;}
@@ -13,7 +13,7 @@ namespace lounga.Model
         public bool Wifi {get; set;} = true;
         public bool PowerPort {get; set;} = true;
         public bool Entertainment {get; set;} = true;
-        public Aircraft? Aircraft {get;set;}
-        public int AircraftId {get; set;}
+        public Flight? Flight {get;set;}
+        public int FlightId {get; set;}
     }
 }
