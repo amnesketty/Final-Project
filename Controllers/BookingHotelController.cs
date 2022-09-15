@@ -40,7 +40,7 @@ namespace lounga.Controllers
             return Ok(await _GuestService.AddGuest(addGuest));
         }
 
-        
+        [AllowAnonymous]
         [HttpGet("GetBookingHotel")]
         public async Task<ActionResult<ServiceResponse<List<GetBookingHotelDto>>>> GetBookedHotels (string date)
         {
