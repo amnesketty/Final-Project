@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using lounga.Model;
 using lounga.Dto.FacilitiesFlight;
 
-namespace lounga.Services.FacilitiesService
+namespace lounga.Services.FacilitiesFlightService
 {
-    public interface IFacilitiesService
+    public interface IFacilitiesFlightService
     {
-        Task<ServiceResponse<List<GetFacilitiesFlightDto>>> GetFacilitiesFlight ();
-        Task<ServiceResponse<AddFacilitiesFlightDto>> AddFacilitiesFlight (AddFacilitiesFlightDto newFacilitiesFlight);
+        Task<ServiceResponse<GetFacilitiesFlightDto>> AddFacilitiesFlight (AddFacilitiesFlightDto newFacilitiesFlight);
         Task<ServiceResponse<UpdateFacilitiesFlightDto>> UpdateFacilitiesFlight (UpdateFacilitiesFlightDto updateFacilitiesFlight);
         Task<ServiceResponse<GetFacilitiesFlightDto>> DeleteFacilitiesFlight (GetFacilitiesFlightDto deleteFlight);
 

@@ -25,5 +25,23 @@ namespace lounga.Controllers
             return Ok(await _flightService.AddFlight(newFlight));
         }
 
+        [HttpGet("GetFlight{id}")]
+        public async Task<ActionResult<ServiceResponse<GetFlightDto>>> GetFlightDtoById (int id)
+        {
+            return Ok(await _flightService.GetFlightDtoById(id));
+        }
+
+        [HttpGet("GetAllFlight")]
+        public async Task<ActionResult<ServiceResponse<List<GetFlightDto>>>> GetAllFlight()
+        {
+            return Ok(await _flightService.GetAllFlight());
+        }
+
+        [HttpPost("FindFlight")]
+        public async Task<ActionResult<ServiceResponse<List<GetFlightDto>>>> FindFlight (FindFlightDto findFlightDto)
+        {
+            return Ok(await _flightService.FindFlight(findFlightDto));
+        }
+
     }
 }

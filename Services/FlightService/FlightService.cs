@@ -21,16 +21,18 @@ namespace lounga.Services.FlightService
             _context = context;
        }
 
-        public async Task<ServiceResponse<AddFlightDto>> AddFlight(AddFlightDto newAirline)
+        public async Task<ServiceResponse<GetFlightDto>> AddFlight(AddFlightDto newAirline)
         {
             //throw new NotImplementedException();
-            ServiceResponse<AddFlightDto> response = new ServiceResponse<AddFlightDto>();
+            ServiceResponse<GetFlightDto> response = new ServiceResponse<GetFlightDto>();
             try
             {
                 Flight flight = _mapper.Map<Flight>(newAirline);
                 _context.Flights.Add(flight);
                 await _context.SaveChangesAsync();
-                response.Data = _mapper.Map<AddFlightDto>(flight);
+                response.Data = _mapper.Map<GetFlightDto>(flight);
+                response.Message = "Data Flight succesfully added";
+                return response;
                 }
                 catch (Exception ex)
                 {
@@ -40,24 +42,44 @@ namespace lounga.Services.FlightService
                 return response;
         }
 
+
+        public async Task<ServiceResponse<List<GetFlightDto>>> GetAllFlight()
+        {
+            var response = new ServiceResponse<List<GetFlightDto>>();
+            var dbFlight = await _context.Flights
+                .Include(f => f.FacilitiesFlight)              
+                .ToListAsync();
+            response.Data = dbFlight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
+            return response;
+        }
+        public async Task<ServiceResponse<GetFlightDto>> GetFlightDtoById(int id)
+        {
+            var response = new ServiceResponse<GetFlightDto>();
+            var flight = await _context.Flights
+                .Include(f => f.FacilitiesFlight)
+                .FirstOrDefaultAsync(f => f.Id == id);
+            response.Data = _mapper.Map<GetFlightDto>(flight);
+            return response;
+        }
+        public Task<ServiceResponse<UpdateFlightDto>> UpdateFlight(UpdateFlightDto newUpdateFlight)
+        {
+            throw new NotImplementedException();
+        }
         public Task<ServiceResponse<List<GetFlightDto>>> DeleteFlight(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<List<GetFlightDto>>> GetAllFlight()
+        public async Task<ServiceResponse<List<GetFlightDto>>> FindFlight (FindFlightDto findFlightDto)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<ServiceResponse<GetFlightDto>> GetFlightDtoById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ServiceResponse<UpdateFlightDto>> UpdateFlight(UpdateFlightDto newUpdateFlight)
-        {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<List<GetFlightDto>>();
+            var flight = await _context.Flights
+                .Where(f => f.SeatClass == findFlightDto.SeatClass)
+                .Where(f => f.DestinationFrom == findFlightDto.DestinationFrom)
+                .Where(f => f.DestinationTo == findFlightDto.DestinationTo)
+                .ToListAsync();
+            response.Data = flight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
+            return response;
         }
     }
 }

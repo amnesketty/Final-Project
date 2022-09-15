@@ -6,29 +6,32 @@ using AutoMapper;
 using lounga.Data;
 using lounga.Model;
 using lounga.Dto.FacilitiesFlight;
+using Microsoft.EntityFrameworkCore;
 
-namespace lounga.Services.FacilitiesService
+namespace lounga.Services.FacilitiesFlightService
 {
-    public class FacilitiesService : IFacilitiesService
+    public class FacilitiesFlightService : IFacilitiesFlightService
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
-        public FacilitiesService (IMapper mapper, DataContext context)
+        public FacilitiesFlightService (IMapper mapper, DataContext context)
        {
             _mapper = mapper;
             _context = context;
        }
 
-        public async Task<ServiceResponse<AddFacilitiesFlightDto>> AddFacilitiesFlight(AddFacilitiesFlightDto newFacilitiesFlight)
+        public async Task<ServiceResponse<GetFacilitiesFlightDto>> AddFacilitiesFlight(AddFacilitiesFlightDto newFacilitiesFlight)
         {
-            ServiceResponse<AddFacilitiesFlightDto> response = new ServiceResponse<AddFacilitiesFlightDto>();
+            ServiceResponse<GetFacilitiesFlightDto> response = new ServiceResponse<GetFacilitiesFlightDto>();
             try
             {
                 FacilitiesFlight facilitiesFlight = _mapper.Map<FacilitiesFlight>(newFacilitiesFlight);
                 _context.FacilitiesFlights.Add(facilitiesFlight);
                 await _context.SaveChangesAsync();
-                response.Data = _mapper.Map<AddFacilitiesFlightDto>(facilitiesFlight);
+                response.Data = _mapper.Map<GetFacilitiesFlightDto>(facilitiesFlight);
+                response.Message = "Facilities Flight succesfully added";
+                return response;
                 }
                 catch (Exception ex)
                 {
@@ -39,11 +42,6 @@ namespace lounga.Services.FacilitiesService
         }
 
         public Task<ServiceResponse<GetFacilitiesFlightDto>> DeleteFacilitiesFlight(GetFacilitiesFlightDto deleteFlight)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ServiceResponse<List<GetFacilitiesFlightDto>>> GetFacilitiesFlight()
         {
             throw new NotImplementedException();
         }

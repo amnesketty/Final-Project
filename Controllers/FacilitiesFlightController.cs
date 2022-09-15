@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using lounga.Model;
 using lounga.Dto.FacilitiesFlight;
-using lounga.Services.FacilitiesService;
+using lounga.Services.FacilitiesFlightService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
 {
     public class FacilitiesFlightController : ControllerBase
     {
-        private readonly IFacilitiesService _facilitiesFlightService;
-        public FacilitiesFlightController(IFacilitiesService facilitiesFlightService)
+        private readonly IFacilitiesFlightService _facilitiesFlightService;
+        public FacilitiesFlightController(IFacilitiesFlightService facilitiesFlightService)
         {
             _facilitiesFlightService = facilitiesFlightService;
         }

@@ -1,7 +1,7 @@
 using lounga.Data;
 using lounga.Services.FlightService;
 using lounga.Services.AuthServices;
-using lounga.Services.FacilitiesService;
+using lounga.Services.FacilitiesFlightService;
 using lounga.Services.FacilitiesHotelServices;
 using lounga.Services.HotelServices;
 using lounga.Services.RoomServices;
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IFlightService, FlightService>();
-builder.Services.AddScoped<IFacilitiesService, FacilitiesService>();
+builder.Services.AddScoped<IFacilitiesFlightService, FacilitiesFlightService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();

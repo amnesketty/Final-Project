@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lounga.Dto.FacilitiesFlight;
 using lounga.Model;
 
 namespace lounga.Dto.Flight
@@ -23,7 +24,7 @@ namespace lounga.Dto.Flight
         public DateTime DepartureDate {get; set;}
         public DateTime DepartureTime {get; set;}
         public DateTime ArrivalTime {get; set;}
-        //public FacilitiesFlight? FacilitiesFlight {get; set;}
-        //public List<BookingFlight>? BookingFlights {get; set; }   
+        public GetFacilitiesFlightDto? FacilitiesFlight {get; set;}
+        // public List<BookingFlight>? BookingFlights {get; set; }   
     }
 }
