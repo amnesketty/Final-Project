@@ -9,8 +9,8 @@ namespace lounga.Services.BookingFlightService
 {
     public interface IBookingFlightService
     {
-        Task<ServiceResponse<List<GetBookingFlightDto>>> GetAllBookingFlight ();
-        Task<ServiceResponse<GetBookingFlightDto>> GetBookingFlightById (int id);
+        // Task<ServiceResponse<List<GetBookingFlightDto>>> GetAllBookingFlight ();
+        // Task<ServiceResponse<GetBookingFlightDto>> GetBookingFlightById (int id);
         Task<ServiceResponse<GetBookingFlightDto>> AddBookingFlight (AddBookingFlightDto newBookingFlight);
     }
 }

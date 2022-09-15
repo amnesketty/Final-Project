@@ -37,9 +37,10 @@ namespace lounga
             CreateMap<FacilitiesFlight, GetFacilitiesFlightDto>();
             CreateMap<Flight, FindFlightDto>();
             CreateMap<FindFlightDto, Flight>();
-            CreateMap<BookingFlight, AddBookingFlightDto>();
-            CreateMap<AddBookingFlightDto, GetBookingFlightDto>();
-
+            CreateMap<AddBookingFlightDto, BookingFlight>();
+            CreateMap<BookingFlight, GetBookingFlightDto>();
+            CreateMap<AddPassengerDto, Passenger>();
+            CreateMap<Passenger, GetPassengerDto>();
             CreateMap<FacilitiesFlight, AddFacilitiesFlightDto>();
             CreateMap<AddBookingHotelDto, BookingHotel>();
             CreateMap<BookingHotel, GetBookingHotelDto>();

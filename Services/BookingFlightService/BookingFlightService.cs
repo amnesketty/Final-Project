@@ -6,6 +6,7 @@ using AutoMapper;
 using lounga.Data;
 using lounga.Dto.BookingFlight;
 using lounga.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace lounga.Services.BookingFlightService
 {
@@ -27,6 +28,15 @@ namespace lounga.Services.BookingFlightService
             {
                 BookingFlight bookingFlight = _mapper.Map<BookingFlight>(newBookingFlight);
                 bookingFlight.BookingDate = newBookingFlight.BookingDate;
+                var flight = await _context.Flights.FirstOrDefaultAsync(f => f.Id == newBookingFlight.FlightId);
+                bookingFlight.Flight = flight;
+
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == newBookingFlight.UserId);
+                bookingFlight.User = user;
+
+                var facilitiesFlight = await _context.FacilitiesFlights.FirstOrDefaultAsync(ff => ff.Id == newBookingFlight.FacilitiesFlightId);
+                bookingFlight.FacilitiesFlight = facilitiesFlight;
+
                 _context.BookingFlights.Add(bookingFlight);
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<GetBookingFlightDto>(bookingFlight);
@@ -39,16 +49,6 @@ namespace lounga.Services.BookingFlightService
                     response.Message = ex.Message;
                 }
                 return response;
-        }
-
-        public Task<ServiceResponse<List<GetBookingFlightDto>>> GetAllBookingFlight()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ServiceResponse<GetBookingFlightDto>> GetBookingFlightById(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

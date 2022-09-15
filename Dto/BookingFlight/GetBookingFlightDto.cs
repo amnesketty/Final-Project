@@ -15,7 +15,7 @@ namespace lounga.Dto.BookingFlight
         public int AmountPassenger { get; set; }
         public int TotalPrice {get; set;}
         //public User? User {get; set;}
-        public List<Passenger>? Passengers { get; set; }
+        public List<GetPassengerDto>? Passengers { get; set; }
         public GetFlightDto? Flight { get; set; }
     }
 }
