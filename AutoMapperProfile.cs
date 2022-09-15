@@ -32,10 +32,14 @@ namespace lounga
             CreateMap<Flight, AddFlightDto>();
             CreateMap<AddFacilitiesFlightDto, FacilitiesFlight>();
             CreateMap<FacilitiesFlight, AddFacilitiesFlightDto>();
+<<<<<<< HEAD
             CreateMap<AddBookingHotelDto, BookingHotel>();
             CreateMap<BookingHotel, GetBookingHotelDto>();
             CreateMap<AddGuestDto, Guest>();
             CreateMap<Guest, GetGuestDto>();
+=======
+            CreateMap<GetPhotoDto, Photo>();
+>>>>>>> 60644466ad448755b16e6832f723452fc542a450
         }
     }
 }

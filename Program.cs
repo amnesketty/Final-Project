@@ -10,7 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+<<<<<<< HEAD
 using lounga.Services.BookingHotelServices;
+=======
+using lounga.Services.FileService;
+>>>>>>> 60644466ad448755b16e6832f723452fc542a450
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +35,7 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddDbContext<DataContext>(options => 
     //options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     options.UseNpgsql("Host=ec2-34-247-72-29.eu-west-1.compute.amazonaws.com;Database=d4pvpj44rchrgm;Username=tjyggitmlrcyvx;Password=c543c1b9affddc1bfa18e4a47c4d520265e503a4dee3f9f38829ce971ba07cb4"));
-builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -43,14 +47,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFacilitiesService, FacilitiesService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();
+<<<<<<< HEAD
 builder.Services.AddScoped<IBookingHotelService, BookingHotelService>();
 builder.Services.AddScoped<IGuestService, GuestService>();
+=======
+builder.Services.AddScoped<IFileService, FileService>();
+>>>>>>> 60644466ad448755b16e6832f723452fc542a450
 
 var app = builder.Build();
 

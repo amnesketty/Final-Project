@@ -116,6 +116,7 @@ namespace lounga.Services.AuthServices
 
             else 
             {
+                var responDTO = _mapper.Map<UserRegisterDto>(user);
                 response.Data = _mapper.Map<UserProfileDto>(user);
                 response.Data.Token = CreateToken(user);
                 // response.Data.FirstName = user.FirstName;
