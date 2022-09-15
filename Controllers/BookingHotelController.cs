@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.BookingHotels;
+using lounga.Dto.Hotels;
 using lounga.Model;
 using lounga.Services.BookingHotelServices;
 using Microsoft.AspNetCore.Authorization;
@@ -18,8 +19,10 @@ namespace lounga.Controllers
         private readonly IBookingHotelService _BookingHotelService;
         private readonly IGuestService _GuestService;
         private readonly IGetBookedHotelService _GetBookedHotelService;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService)
+        private readonly IFindHotelService _FindHotelService;
+        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IFindHotelService FindHotelService)
         {
+            _FindHotelService = FindHotelService;
             _GetBookedHotelService = GetBookedHotelService;
             _GuestService = GuestService;
             _BookingHotelService = BookingHotelService;
@@ -43,6 +46,13 @@ namespace lounga.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetBookingHotelDto>>>> GetBookedHotels (string date)
         {
             return Ok(await _GetBookedHotelService.GetBookedHotels(date));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("FindHotel")]
+        public async Task<ActionResult<ServiceResponse<List<GetHotelDto>>>> Get(string date, string city)
+        {
+            return Ok(await _FindHotelService.FindHotel(date,city));
         }
     }
 }
