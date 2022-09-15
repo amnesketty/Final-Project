@@ -31,6 +31,7 @@ namespace lounga
             CreateMap<Flight, AddFlightDto>();
             CreateMap<AddFacilitiesFlightDto, FacilitiesFlight>();
             CreateMap<FacilitiesFlight, AddFacilitiesFlightDto>();
+            CreateMap<GetPhotoDto, Photo>();
         }
     }
 }

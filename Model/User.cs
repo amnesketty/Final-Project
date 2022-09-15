@@ -13,7 +13,7 @@ namespace lounga.Model
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
-        public string AvatarImage {get; set; } = "du5w56akk\\image\\upload\\v1662975057\\sample.jpg";
+        public string AvatarImage {get; set; } = "https://res.cloudinary.com/du5w56akk/image/upload/v1662975057/sample.jpg";
         public byte[]? PasswordHash {get; set;}
         public byte[]? PasswordSalt {get; set;}
         public List<BookingHotel>? BookingHotels {get; set;}
