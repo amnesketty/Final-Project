@@ -15,8 +15,10 @@ namespace lounga.Controllers
     {
         private readonly IBookingHotelService _BookingHotelService;
         private readonly IGuestService _GuestService;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService)
+        private readonly IGetBookedHotelService _GetBookedHotelService;
+        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService)
         {
+            _GetBookedHotelService = GetBookedHotelService;
             _GuestService = GuestService;
             _BookingHotelService = BookingHotelService;
             
@@ -32,6 +34,13 @@ namespace lounga.Controllers
         public async Task<ActionResult<ServiceResponse<List<AddGuestDto>>>> AddGuest (AddGuestDto addGuest)
         {
             return Ok(await _GuestService.AddGuest(addGuest));
+        }
+
+        
+        [HttpGet("GetBookingHotel")]
+        public async Task<ActionResult<ServiceResponse<List<GetBookingHotelDto>>>> GetBookedHotels (string date)
+        {
+            return Ok(await _GetBookedHotelService.GetBookedHotels(date));
         }
     }
 }

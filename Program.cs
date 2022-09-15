@@ -55,6 +55,7 @@ builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();
 builder.Services.AddScoped<IBookingHotelService, BookingHotelService>();
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IGetBookedHotelService, GetBookedHotelService>();
 
 var app = builder.Build();
 
