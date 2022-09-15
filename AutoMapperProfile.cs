@@ -11,7 +11,11 @@ using lounga.Dto.FacilitiesFlight;
 using lounga.Dto.Flight;
 using lounga.Dto.User;
 using lounga.Model;
+<<<<<<< HEAD
 using lounga.Dto.BookingFlight;
+=======
+using lounga.Dto.BookingHotels;
+>>>>>>> bf5bf55b6c371f4b17737750407c40dbbe4c3889
 
 namespace lounga
 {
@@ -31,6 +35,7 @@ namespace lounga
             CreateMap<AddFlightDto, Flight>();
             CreateMap<Flight, GetFlightDto>();
             CreateMap<AddFacilitiesFlightDto, FacilitiesFlight>();
+<<<<<<< HEAD
             CreateMap<FacilitiesFlight, GetFacilitiesFlightDto>();
             CreateMap<Flight, GetFlightDto>();
             CreateMap<FacilitiesFlight, GetFacilitiesFlightDto>();
@@ -39,6 +44,14 @@ namespace lounga
             CreateMap<BookingFlight, AddBookingFlightDto>();
             CreateMap<AddBookingFlightDto, GetBookingFlightDto>();
 
+=======
+            CreateMap<FacilitiesFlight, AddFacilitiesFlightDto>();
+            CreateMap<AddBookingHotelDto, BookingHotel>();
+            CreateMap<BookingHotel, GetBookingHotelDto>();
+            CreateMap<AddGuestDto, Guest>();
+            CreateMap<Guest, GetGuestDto>();
+            CreateMap<GetPhotoDto, Photo>();
+>>>>>>> bf5bf55b6c371f4b17737750407c40dbbe4c3889
         }
     }
 }
