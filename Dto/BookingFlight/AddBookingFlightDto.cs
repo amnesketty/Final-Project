@@ -11,5 +11,8 @@ namespace lounga.Dto.BookingFlight
         public int Status { get; set; }
         public int AmountPassenger { get; set; }
         public int TotalPrice {get; set;}
+        public int FlightId {get; set;}
+        public int UserId { get; set; }
+        public int FacilitiesFlightId { get; set; }
     }
 }

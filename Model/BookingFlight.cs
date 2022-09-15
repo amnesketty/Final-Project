@@ -15,5 +15,6 @@ namespace lounga.Model
         public User? User {get; set;}
         public List<Passenger>? Passengers { get; set; }
         public Flight? Flight { get; set; }
+        public FacilitiesFlight? FacilitiesFlight { get; set; }
     }
 }

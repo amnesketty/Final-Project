@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using lounga.Services.BookingHotelServices;
 using lounga.Services.FileService;
+using lounga.Services.BookingFlightService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFacilitiesFlightService, FacilitiesFlightService>();
+builder.Services.AddScoped<IBookingFlightService, BookingFlightService>();
+builder.Services.AddScoped<IPassengerService, PassengerService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();

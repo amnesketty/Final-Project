@@ -12,5 +12,6 @@ namespace lounga.Model
         public string Name { get; set; } = string.Empty;
         public string IdCard { get; set; } = string.Empty;
         public BookingFlight? BookingFlight { get; set; }
+        public int BookingFlightId {get; set;}
     }
 }
