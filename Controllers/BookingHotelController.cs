@@ -5,22 +5,26 @@ using System.Threading.Tasks;
 using lounga.Dto.BookingHotels;
 using lounga.Model;
 using lounga.Services.BookingHotelServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class BookingHotelController : ControllerBase
     {
         private readonly IBookingHotelService _BookingHotelService;
         private readonly IGuestService _GuestService;
         private readonly IGetBookedHotelService _GetBookedHotelService;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService)
+        private readonly IHttpContextAccessor _httpContextAccesor;
+        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IHttpContextAccessor httpContextAccessor)
         {
             _GetBookedHotelService = GetBookedHotelService;
             _GuestService = GuestService;
             _BookingHotelService = BookingHotelService;
+            _httpContextAccesor = httpContextAccessor;
             
         }
 

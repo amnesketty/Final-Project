@@ -22,6 +22,7 @@ namespace lounga
         {
             CreateMap<UserRegisterDto, User>();
             CreateMap<User, UserProfileDto>();
+            CreateMap<User, UserRegisterDto>();
             CreateMap<AddHotelDto, Hotel>();
             CreateMap<Hotel, GetHotelDto>();
             CreateMap<AddRoomDto, Room>();

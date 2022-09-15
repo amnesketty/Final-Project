@@ -5,18 +5,24 @@ using System.Threading.Tasks;
 using lounga.Dto.BookingFlight;
 using lounga.Model;
 using lounga.Services.BookingFlightService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
+    [Authorize]
     public class BookingFlightController : ControllerBase
     {
         private readonly IBookingFlightService _bookingFlightService;  
         private readonly IPassengerService _passengerService;
-        public BookingFlightController(IBookingFlightService bookingFlightService, IPassengerService passengerService)
+        private readonly IGetBookedFlightService _getBookedFlightService;
+        public BookingFlightController(IBookingFlightService bookingFlightService, IPassengerService passengerService, IGetBookedFlightService getBookedFlightService)
         {
             _bookingFlightService = bookingFlightService;
             _passengerService = passengerService;
+            _getBookedFlightService = getBookedFlightService;
         }
 
         [HttpPost("AddBookingFlight")]
@@ -29,6 +35,14 @@ namespace lounga.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetPassengerDto>>>> AddPassenger (AddPassengerDto newPassenger)
         {
             return Ok(await _passengerService.AddPassenger(newPassenger));
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("GetBookingFlight")]
+        public async Task<ActionResult<ServiceResponse<List<GetBookingFlightDto>>>> GetBookedFlights (string date)
+        {
+            return Ok(await _getBookedFlightService.GetBookedFlights(date));
         }
     }
 }
