@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using lounga.Data;
@@ -14,12 +15,17 @@ namespace lounga.Services.BookingHotelServices
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public BookingHotelService(DataContext context, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public BookingHotelService(DataContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _context = context;
             
         }
+
+        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
+            .FindFirstValue(ClaimTypes.NameIdentifier));
         
         public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
         {
@@ -29,7 +35,7 @@ namespace lounga.Services.BookingHotelServices
             // bookingHotel.BookingDate = addBookingHotel.BookingDate;
             bookingHotel.Hotel = hotel;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == addBookingHotel.UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
             bookingHotel.User = user;
 
             var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == addBookingHotel.RoomId);

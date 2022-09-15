@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using lounga.Dto.BookingHotels;
 using lounga.Model;
 using lounga.Services.BookingHotelServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class BookingHotelController : ControllerBase
     {
         private readonly IBookingHotelService _BookingHotelService;
@@ -36,7 +38,7 @@ namespace lounga.Controllers
             return Ok(await _GuestService.AddGuest(addGuest));
         }
 
-        
+        [AllowAnonymous]
         [HttpGet("GetBookingHotel")]
         public async Task<ActionResult<ServiceResponse<List<GetBookingHotelDto>>>> GetBookedHotels (string date)
         {
