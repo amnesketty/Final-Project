@@ -19,13 +19,9 @@ namespace lounga.Controllers
         private readonly IBookingHotelService _BookingHotelService;
         private readonly IGuestService _GuestService;
         private readonly IGetBookedHotelService _GetBookedHotelService;
-<<<<<<< HEAD
         private readonly IFindHotelService _FindHotelService;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IFindHotelService FindHotelService)
-=======
         private readonly IHttpContextAccessor _httpContextAccesor;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IHttpContextAccessor httpContextAccessor)
->>>>>>> 54f3a5c82babd319c2c85877f27cd4d6fe6e1dcc
+        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IHttpContextAccessor httpContextAccessor, IFindHotelService FindHotelService)
         {
             _FindHotelService = FindHotelService;
             _GetBookedHotelService = GetBookedHotelService;
