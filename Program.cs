@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using lounga.Services.BookingHotelServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,8 @@ builder.Services.AddScoped<IFacilitiesService, FacilitiesService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();
+builder.Services.AddScoped<IBookingHotelService, BookingHotelService>();
+builder.Services.AddScoped<IGuestService, GuestService>();
 
 var app = builder.Build();
 

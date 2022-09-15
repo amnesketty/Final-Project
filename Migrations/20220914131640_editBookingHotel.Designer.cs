@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using lounga.Data;
@@ -11,9 +12,10 @@ using lounga.Data;
 namespace lounga.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220914131640_editBookingHotel")]
+    partial class editBookingHotel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -438,7 +440,7 @@ namespace lounga.Migrations
             modelBuilder.Entity("lounga.Model.BookingHotel", b =>
                 {
                     b.HasOne("lounga.Model.Hotel", "Hotel")
-                        .WithMany("BookingHotels")
+                        .WithMany()
                         .HasForeignKey("HotelId");
 
                     b.HasOne("lounga.Model.Room", "Room")
@@ -535,8 +537,6 @@ namespace lounga.Migrations
 
             modelBuilder.Entity("lounga.Model.Hotel", b =>
                 {
-                    b.Navigation("BookingHotels");
-
                     b.Navigation("FacilitiesHotel");
 
                     b.Navigation("Photos");
