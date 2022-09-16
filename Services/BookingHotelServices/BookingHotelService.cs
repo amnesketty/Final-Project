@@ -41,7 +41,11 @@ namespace lounga.Services.BookingHotelServices
 
             var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == addBookingHotel.RoomId);
             bookingHotel.Room = room;
-            
+
+            var random = new Random().Next(100000,999999).ToString();
+            string hl = "HL-";
+            bookingHotel.BookingHotelNo = hl+random;
+
             _context.BookingHotels.Add(bookingHotel);
             await _context.SaveChangesAsync();
 
