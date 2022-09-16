@@ -15,5 +15,6 @@ namespace lounga.Model
         public Room? Room {get; set;}
         public User? User {get; set;}
         public Guest? Guest {get; set;}
+        public string BookingHotelNo { get; set; } = string.Empty;
     }
 }

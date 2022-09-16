@@ -17,6 +17,7 @@ namespace lounga.Dto.BookingFlight
         //public User? User {get; set;}
         public List<GetPassengerDto>? Passengers { get; set; }
         public GetFlightDto? Flight { get; set; }
+        public string BookingFlightNo { get; set; } = string.Empty;
         // public int FlightId {get; set;}
     }
 }

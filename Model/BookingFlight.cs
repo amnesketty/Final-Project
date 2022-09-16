@@ -16,5 +16,6 @@ namespace lounga.Model
         public List<Passenger>? Passengers { get; set; }
         public Flight? Flight { get; set; }
         public FacilitiesFlight? FacilitiesFlight { get; set; }
+        public string BookingFlightNo { get; set; } = string.Empty;
     }
 }
