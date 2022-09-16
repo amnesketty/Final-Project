@@ -9,7 +9,11 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
+<<<<<<< HEAD
     <PackageReference Include="Mailkit" Version="3.4.1" />
+=======
+    <PackageReference Include="MailKit" Version="3.4.1" />
+>>>>>>> 72468e82eb7f1c90517c99f665bf8185febd3a97
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

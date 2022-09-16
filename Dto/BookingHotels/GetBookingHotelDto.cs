@@ -14,6 +14,6 @@ namespace lounga.Dto.BookingHotels
         public int RoomId {get; set;}
         public int UserId {get; set;}
         public int GuestId {get; set;}
-        public string BookingHoteltNo { get; set; } = string.Empty;
+        public string? BookingHotelNo { get; set; }
     }
 }
