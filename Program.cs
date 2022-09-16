@@ -13,6 +13,7 @@ using Swashbuckle.AspNetCore.Filters;
 using lounga.Services.BookingHotelServices;
 using lounga.Services.FileService;
 using lounga.Services.BookingFlightService;
+using lounga.Dto.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailConfiguration"));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFacilitiesFlightService, FacilitiesFlightService>();
@@ -61,6 +63,7 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IGetBookedHotelService, GetBookedHotelService>();
 builder.Services.AddScoped<IFindHotelService, FindHotelService>();
 builder.Services.AddScoped<IGetBookedFlightService, GetBookedFlightService>();
+builder.Services.AddTransient<IMailService, MailService>();
 
 var app = builder.Build();
 

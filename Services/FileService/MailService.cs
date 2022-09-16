@@ -21,13 +21,14 @@ namespace lounga.Services.FileService
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
             Console.WriteLine(_mailSettings.Host);
+            Console.WriteLine(_mailSettings.From);
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.From);
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
             email.Subject = mailRequest.Subject;
             var builder = new BodyBuilder();
             
-            builder.HtmlBody = "Your OTP Code is " + mailRequest.Body;
+            builder.HtmlBody = mailRequest.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
