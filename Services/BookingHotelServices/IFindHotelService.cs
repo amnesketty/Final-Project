@@ -9,6 +9,6 @@ namespace lounga.Services.BookingHotelServices
 {
     public interface IFindHotelService
     {
-        Task<ServiceResponse<List<GetHotelDto>>> FindHotel(string date, string city);
+        Task<ServiceResponse<List<FindHotelDto>>> FindHotel(string date, string city);
     }
 }

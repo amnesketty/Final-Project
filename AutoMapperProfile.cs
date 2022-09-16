@@ -48,6 +48,8 @@ namespace lounga
             CreateMap<AddGuestDto, Guest>();
             CreateMap<Guest, GetGuestDto>();
             CreateMap<GetPhotoDto, Photo>();
+            CreateMap<Hotel, FindHotelDto>();
+            CreateMap<Room, FindRoomDto>();
         }
     }
 }

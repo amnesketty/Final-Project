@@ -16,7 +16,7 @@ namespace lounga.Model
         public List<Photo>? Photos {get; set; }
         public FacilitiesHotel? FacilitiesHotel {get; set;}
         public List<Room>? Rooms {get; set;}
-        public List<BookingHotel> BookingHotels {get; set;}
+        public List<BookingHotel>? BookingHotels {get; set;}
         
     }
 }

@@ -19,11 +19,11 @@ namespace lounga.Controllers
         private readonly IBookingHotelService _BookingHotelService;
         private readonly IGuestService _GuestService;
         private readonly IGetBookedHotelService _GetBookedHotelService;
-        private readonly IFindHotelService _FindHotelService;
         private readonly IHttpContextAccessor _httpContextAccesor;
-        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IHttpContextAccessor httpContextAccessor, IFindHotelService FindHotelService)
+        private readonly IFindHotelService _findHotelService;
+        public BookingHotelController(IBookingHotelService BookingHotelService, IGuestService GuestService, IGetBookedHotelService GetBookedHotelService, IHttpContextAccessor httpContextAccessor, IFindHotelService findHotelService)
         {
-            _FindHotelService = FindHotelService;
+            _findHotelService = findHotelService;
             _GetBookedHotelService = GetBookedHotelService;
             _GuestService = GuestService;
             _BookingHotelService = BookingHotelService;
@@ -52,9 +52,9 @@ namespace lounga.Controllers
 
         [AllowAnonymous]
         [HttpGet("FindHotel")]
-        public async Task<ActionResult<ServiceResponse<List<GetHotelDto>>>> Get(string date, string city)
+        public async Task<ActionResult<ServiceResponse<List<FindHotelDto>>>> FindHotel(string date, string city)
         {
-            return Ok(await _FindHotelService.FindHotel(date,city));
+            return Ok(await _findHotelService.FindHotel(date,city));
         }
     }
 }
