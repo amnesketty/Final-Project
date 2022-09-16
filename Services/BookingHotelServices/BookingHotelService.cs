@@ -25,19 +25,15 @@ namespace lounga.Services.BookingHotelServices
             _mailService = mailService;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
-            _context = context;
-            
+            _context = context;            
         }
-
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
             .FindFirstValue(ClaimTypes.NameIdentifier));
-        
-        public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
+                public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
         {
             var response = new ServiceResponse<GetBookingHotelDto>();
             BookingHotel bookingHotel = _mapper.Map<BookingHotel>(addBookingHotel);
             var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == addBookingHotel.HotelId);
-            // bookingHotel.BookingDate = addBookingHotel.BookingDate;
             bookingHotel.Hotel = hotel;
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
@@ -60,7 +56,6 @@ namespace lounga.Services.BookingHotelServices
             mailRequest.ToEmail = email;
             await _context.SaveChangesAsync();
             await _mailService.SendEmailAsync(mailRequest);
-
             
             response.Data = _mapper.Map<GetBookingHotelDto>(bookingHotel);
             response.Message = "Booking has been created!";

@@ -17,10 +17,8 @@ namespace lounga.Services.RoomServices
         public RoomService(IMapper mapper, DataContext context)
         {
             _context = context;
-            _mapper = mapper;
-            
+            _mapper = mapper;            
         }
-
         public async Task<ServiceResponse<GetRoomDto>> AddRoom(AddRoomDto addRoom)
         {
             var response = new ServiceResponse<GetRoomDto>();

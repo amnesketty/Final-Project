@@ -15,8 +15,6 @@ namespace lounga.Services.HotelServices
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-        
-
         public HotelService(IMapper mapper, DataContext context)
         {
             _mapper = mapper;
@@ -33,7 +31,6 @@ namespace lounga.Services.HotelServices
             response.Message = "Hotel has been added!";
             return response;
         }
-
         public async Task<ServiceResponse<GetHotelDto>> GetHotelById(int id)
         {
             var response = new ServiceResponse<GetHotelDto>();
@@ -45,7 +42,6 @@ namespace lounga.Services.HotelServices
             response.Data = _mapper.Map<GetHotelDto>(hotel);
             return response;
         }
-
         public async Task<ServiceResponse<List<GetHotelDto>>> GetHotelByCity(string city)
         {
             var response = new ServiceResponse<List<GetHotelDto>>();

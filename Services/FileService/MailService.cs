@@ -17,7 +17,6 @@ namespace lounga.Services.FileService
         {
             _mailSettings = mailSettings.Value;
         }
-
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
             Console.WriteLine(_mailSettings.Host);

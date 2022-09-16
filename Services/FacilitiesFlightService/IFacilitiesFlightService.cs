@@ -12,8 +12,5 @@ namespace lounga.Services.FacilitiesFlightService
         Task<ServiceResponse<GetFacilitiesFlightDto>> AddFacilitiesFlight (AddFacilitiesFlightDto newFacilitiesFlight);
         Task<ServiceResponse<UpdateFacilitiesFlightDto>> UpdateFacilitiesFlight (UpdateFacilitiesFlightDto updateFacilitiesFlight);
         Task<ServiceResponse<GetFacilitiesFlightDto>> DeleteFacilitiesFlight (GetFacilitiesFlightDto deleteFlight);
-
-        // Task<ServiceResponse<GetAirlineDto>> GetAirlineById (int id);
-        // Task<ServiceResponse<List<GetAirlineDto>>> DeleteAirline (int id);
     }
 }

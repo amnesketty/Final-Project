@@ -9,8 +9,8 @@ namespace lounga.Model
     {
         public int Id { get; set; }
         public DateTime BookingDate { get; set; }
-        public int TotalRoom { get; set; }
-        public int Price { get; set; }
+        public int TotalRoom { get; set; } = 0;
+        public int Price { get; set; } = 0;
         public Hotel? Hotel {get; set;}
         public Room? Room {get; set;}
         public User? User {get; set;}

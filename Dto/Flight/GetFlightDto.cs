@@ -24,7 +24,6 @@ namespace lounga.Dto.Flight
         public DateTime DepartureDate {get; set;}
         public DateTime DepartureTime {get; set;}
         public DateTime ArrivalTime {get; set;}
-        public GetFacilitiesFlightDto? FacilitiesFlight {get; set;}
-        // public List<BookingFlight>? BookingFlights {get; set; }   
+        public GetFacilitiesFlightDto? FacilitiesFlight {get; set;} 
     }
 }

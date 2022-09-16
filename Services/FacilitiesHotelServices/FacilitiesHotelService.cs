@@ -17,10 +17,8 @@ namespace lounga.Services.FacilitiesHotelServices
         public FacilitiesHotelService(IMapper mapper, DataContext context)
         {
             _context = context;
-            _mapper = mapper;
-            
-        }
-        
+            _mapper = mapper;            
+        }        
         public async Task<ServiceResponse<GetFacilityHotelDto>> AddFacilityHotel(AddFacilityHotelDto addFacilityHotel)
         {
             var response = new ServiceResponse<GetFacilityHotelDto>();

@@ -13,16 +13,13 @@ namespace lounga.Services.BookingFlightService
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-        
         public PassengerService(IMapper mapper, DataContext context)
         {
             _context = context;
-            _mapper = mapper;
-            
+            _mapper = mapper;            
         }
         public async Task<ServiceResponse<GetPassengerDto>> AddPassenger(AddPassengerDto newPassenger)
         {
-           //throw new NotImplementedException();
             ServiceResponse<GetPassengerDto> response = new ServiceResponse<GetPassengerDto>();
             try
             {

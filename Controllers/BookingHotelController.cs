@@ -28,7 +28,6 @@ namespace lounga.Controllers
             _GuestService = GuestService;
             _BookingHotelService = BookingHotelService;
             _httpContextAccesor = httpContextAccessor;
-            
         }
 
         [HttpPost("AddBookingHotel")]

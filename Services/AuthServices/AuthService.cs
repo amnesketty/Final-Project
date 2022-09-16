@@ -77,22 +77,17 @@ namespace lounga.Services.AuthServices
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Username)
             };
-
             SymmetricSecurityKey key = new SymmetricSecurityKey(System.Text.Encoding.UTF8
-                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-            
+                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));            
             SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddHours(1),
                 SigningCredentials = creds
             };
-
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-
             return tokenHandler.WriteToken(token);
         }
 
@@ -107,25 +102,18 @@ namespace lounga.Services.AuthServices
                 response.Success = false;
                 response.Message = "User not found!";
             }
-
             else if (!VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt))
             {
                 response.Success = false;
                 response.Message = "Password incorrect!";
             }
-
             else 
             {
                 var responDTO = _mapper.Map<UserRegisterDto>(user);
                 response.Data = _mapper.Map<UserProfileDto>(user);
                 response.Data.Token = CreateToken(user);
-                // response.Data.FirstName = user.FirstName;
-                // response.Data.LastName = user.LastName;
-                // response.Data.Email = user.Email;
-                // response.Data.Phone = user.Phone;
                 response.Message = "Login success!";
             }
-
             return response;
         }
     }

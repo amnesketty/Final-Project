@@ -18,8 +18,6 @@ namespace lounga.Services.BookingHotelServices
             _mapper = mapper;
             _context = context;
         }
-
-
         public async Task<ServiceResponse<GetGuestDto>> AddGuest(AddGuestDto addGuest)
         {
             var response = new ServiceResponse<GetGuestDto>();

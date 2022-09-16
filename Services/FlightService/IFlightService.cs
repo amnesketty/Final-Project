@@ -9,7 +9,6 @@ namespace lounga.Services.FlightService
 {
     public interface IFlightService
     {
-        //Data Flight
         Task<ServiceResponse<List<GetFlightDto>>> GetAllFlight ();
         Task<ServiceResponse<GetFlightDto>> GetFlightDtoById (int id);
         Task<ServiceResponse<List<GetFlightDto>>> FindFlight (FindFlightDto findFlightDto);

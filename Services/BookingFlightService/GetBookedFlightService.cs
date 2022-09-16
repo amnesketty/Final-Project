@@ -20,7 +20,6 @@ namespace lounga.Services.BookingFlightService
         {
             _mapper = mapper;
             _context = context;
-            
         }
         public async Task<ServiceResponse<List<GetBookingFlightDto>>> GetBookedFlights(string date)
         {
@@ -33,7 +32,6 @@ namespace lounga.Services.BookingFlightService
                 .ToListAsync();
             response.Data = flight.Select(f => _mapper.Map<GetBookingFlightDto>(f)).ToList();
             return response;
-
         }
     }
 }

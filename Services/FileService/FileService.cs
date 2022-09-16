@@ -9,6 +9,7 @@ using lounga.Data;
 using lounga.Dto.File;
 using lounga.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace lounga.Services.FileService
 {
@@ -17,12 +18,13 @@ namespace lounga.Services.FileService
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public FileService(DataContext context, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        private readonly IOptions<CloudStorageSettings> _cloudStorageSettings;
+        public FileService(DataContext context, IHttpContextAccessor httpContextAccessor, IMapper mapper, IOptions<CloudStorageSettings> cloudStorageSettings)
         {
+            _cloudStorageSettings = cloudStorageSettings;
             _mapper = mapper;
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
-            
+            _httpContextAccessor = httpContextAccessor;            
         }
         public async Task<ServiceResponse<GetPhotoDto>> UploadImage()
         {
@@ -33,7 +35,6 @@ namespace lounga.Services.FileService
                 "62gH_RWfkeWLpbonbLyVCX24Qfs");
             Cloudinary cloudinary = new Cloudinary(account);
             cloudinary.Api.Secure = true;
-
             
             int.TryParse(_httpContextAccessor.HttpContext.Request.Form["HotelId"], out int hotelId);
             Hotel hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == hotelId);
@@ -42,15 +43,11 @@ namespace lounga.Services.FileService
             var file = new FileInfo(_httpContextAccessor.HttpContext.Request.Form.Files["Image"].FileName);
             string filename = file.ToString().Substring(0, file.ToString().Length - file.Extension.ToString().Length);
 
-            // try
-            // {
-            //var filesteam = uploadFile.OpenReadStream();
             using (var filestream = uploadFile.OpenReadStream())
             {
                 var uploadUpload = new ImageUploadParams
                 {
                     File = new FileDescription(uploadFile.FileName, filestream),
-                    //Transformation = new Transformation().StartOffset("0").EndOffset("60").Crop("fill")
                     PublicId = $"{DateTime.Now.ToString("yyyy-MM-ddThh-mm-ss")}_{filename}"
                 };
                 var uploadResult = await cloudinary.UploadAsync(uploadUpload);
@@ -68,13 +65,6 @@ namespace lounga.Services.FileService
                 response.Message = "File uploaded successfully!";
                 return response;
             }
-            // }
-            // catch (Exception ex)
-            // {
-            //     response.Success = false;
-            //     response.Message = ex.Message;
-            //     return response;
-            // }
         }
     }
 }

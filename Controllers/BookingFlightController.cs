@@ -39,7 +39,6 @@ namespace lounga.Controllers
             return Ok(await _passengerService.AddPassenger(newPassenger));
         }
 
-
         [AllowAnonymous]
         [HttpGet("GetBookingFlight")]
         public async Task<ActionResult<ServiceResponse<List<GetBookingFlightDto>>>> GetBookedFlights (string date)

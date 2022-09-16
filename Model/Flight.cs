@@ -15,7 +15,7 @@ namespace lounga.Model
         public string SeatLayout {get; set;} = string.Empty;
         public string SeatPitch {get; set;} = string.Empty;
         public int SeatCapacity {get;set;}
-        public int AmountPassenger { get; set; }
+        public int AmountPassenger { get; set; } = 0;
         public int Price { get; set; }
         public string DestinationFrom {get; set;} = string.Empty;
         public string DestinationTo {get; set;} = string.Empty;

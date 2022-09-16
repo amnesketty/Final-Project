@@ -32,8 +32,8 @@ builder.Services.AddSwaggerGen(c => {
     c.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 builder.Services.AddDbContext<DataContext>(options => 
-    //options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-    options.UseNpgsql("Host=ec2-34-247-72-29.eu-west-1.compute.amazonaws.com;Database=d4pvpj44rchrgm;Username=tjyggitmlrcyvx;Password=c543c1b9affddc1bfa18e4a47c4d520265e503a4dee3f9f38829ce971ba07cb4"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    //options.UseNpgsql("Host=ec2-34-247-72-29.eu-west-1.compute.amazonaws.com;Database=d4pvpj44rchrgm;Username=tjyggitmlrcyvx;Password=c543c1b9affddc1bfa18e4a47c4d520265e503a4dee3f9f38829ce971ba07cb4"));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
@@ -48,23 +48,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailConfiguration"));
-builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailConfiguration"));
+builder.Services.Configure<CloudStorageSettings>(builder.Configuration.GetSection("CloudStorageConfiguration"));
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IFacilitiesFlightService, FacilitiesFlightService>();
 builder.Services.AddScoped<IBookingFlightService, BookingFlightService>();
 builder.Services.AddScoped<IPassengerService, PassengerService>();
+builder.Services.AddScoped<IGetBookedFlightService, GetBookedFlightService>();
+
 builder.Services.AddScoped<IHotelService, HotelService>();
-builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IFacilitiesHotelService, FacilitiesHotelService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IFindHotelService, FindHotelService>();
 builder.Services.AddScoped<IBookingHotelService, BookingHotelService>();
 builder.Services.AddScoped<IGuestService, GuestService>();
-builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IGetBookedHotelService, GetBookedHotelService>();
-builder.Services.AddScoped<IFindHotelService, FindHotelService>();
-builder.Services.AddScoped<IGetBookedFlightService, GetBookedFlightService>();
+
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddTransient<IMailService, MailService>();
 
 var app = builder.Build();

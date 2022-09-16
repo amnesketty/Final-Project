@@ -19,7 +19,6 @@ namespace lounga.Services.BookingFlightService
         private readonly DataContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMailService _mailService;
-        
         public BookingFlightService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor, IMailService mailService)
         {
             _context = context;

@@ -19,19 +19,10 @@ namespace lounga.Services.BookingHotelServices
         public GetBookedHotelService(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
-            _context = context;
-            
+            _context = context;            
         }
         public async Task<ServiceResponse<List<GetBookingHotelDto>>> GetBookedHotels(string date)
         {
-            // var response = new ServiceResponse<List<GetBookingHotelDto>>();
-            // var hotel = await _context.BookingHotels
-            //     .Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == date)
-            //     .ToListAsync();
-            // response.Data = hotel.Select(h => _mapper.Map<GetBookingHotelDto>(h)).ToList();
-            // return response;
-
-            //string test = "2022-09-30";
             DateOnly dateOnly = DateOnly.Parse(date);
             var response = new ServiceResponse<List<GetBookingHotelDto>>();
             var hotel = await _context.BookingHotels

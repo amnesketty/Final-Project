@@ -10,7 +10,5 @@ namespace lounga.Dto.Rooms
     {
         public string Type { get; set; } = string.Empty;
         public int Price { get; set; }
-        // public int HotelId {get; set;}
-        // public List<BookingHotel>? BookingHotels {get; set;}
     }
 }

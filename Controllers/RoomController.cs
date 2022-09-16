@@ -17,7 +17,6 @@ namespace lounga.Controllers
         public RoomController(IRoomService roomService)
         {
            _roomService = roomService;
-            
         }
 
         [HttpPost("addroom")]
