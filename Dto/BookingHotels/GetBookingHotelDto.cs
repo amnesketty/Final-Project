@@ -14,6 +14,10 @@ namespace lounga.Dto.BookingHotels
         public int RoomId {get; set;}
         public int UserId {get; set;}
         public int GuestId {get; set;}
+<<<<<<< HEAD
         public string? BookingHoteltNo { get; set; }
+=======
+        public string? BookingHotelNo { get; set; }
+>>>>>>> f6ee03088550494333c054a938d72638715a6654
     }
 }
