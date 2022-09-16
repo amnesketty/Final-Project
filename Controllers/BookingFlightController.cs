@@ -18,11 +18,13 @@ namespace lounga.Controllers
         private readonly IBookingFlightService _bookingFlightService;  
         private readonly IPassengerService _passengerService;
         private readonly IGetBookedFlightService _getBookedFlightService;
-        public BookingFlightController(IBookingFlightService bookingFlightService, IPassengerService passengerService, IGetBookedFlightService getBookedFlightService)
+        private readonly IHttpContextAccessor _httpContextAccesor;
+        public BookingFlightController(IBookingFlightService bookingFlightService, IPassengerService passengerService, IGetBookedFlightService getBookedFlightService, IHttpContextAccessor httpContextAccesor)
         {
             _bookingFlightService = bookingFlightService;
             _passengerService = passengerService;
             _getBookedFlightService = getBookedFlightService;
+            _httpContextAccesor = httpContextAccesor;
         }
 
         [HttpPost("AddBookingFlight")]
