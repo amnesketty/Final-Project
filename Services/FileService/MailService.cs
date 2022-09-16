@@ -27,7 +27,7 @@ namespace lounga.Services.FileService
             email.Subject = mailRequest.Subject;
             var builder = new BodyBuilder();
             
-            builder.HtmlBody = "Your OTP Code is " + mailRequest.Body;
+            builder.HtmlBody = "Hello, Your booking has been confirmed, here your Booking Code is" + mailRequest.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
