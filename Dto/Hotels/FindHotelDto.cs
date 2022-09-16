@@ -19,6 +19,5 @@ namespace lounga.Dto.Hotels
         public GetFacilityHotelDto? FacilitiesHotel {get; set;}
         public List<GetPhotoDto>? Photos {get; set; }
         public List<FindRoomDto>? Rooms {get; set;}    
-        public List<GetBookingHotelDto>? BookingHotels {get; set;}
     }
 }

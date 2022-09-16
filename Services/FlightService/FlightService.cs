@@ -74,10 +74,18 @@ namespace lounga.Services.FlightService
         {
             var response = new ServiceResponse<List<GetFlightDto>>();
             var flight = await _context.Flights
-                .Where(f => f.SeatClass == findFlightDto.SeatClass)
-                .Where(f => f.DestinationFrom == findFlightDto.DestinationFrom)
-                .Where(f => f.DestinationTo == findFlightDto.DestinationTo)
+                .Where(f => f.SeatClass.ToLower() == findFlightDto.SeatClass.ToLower())
+                .Where(f => f.DestinationFrom.ToLower() == findFlightDto.DestinationFrom.ToLower())
+                .Where(f => f.DestinationTo.ToLower() == findFlightDto.DestinationTo.ToLower())
+                .Include(f => f.FacilitiesFlight)
+                .Include(f => f.BookingFlights.Where(b => DateOnly.FromDateTime(b.BookingDate.Date) == DateOnly.FromDateTime(findFlightDto.DepartureDate)))
                 .ToListAsync();
+            
+            foreach (Flight plane in flight)
+            {
+                plane.AmountPassenger = plane.BookingFlights.Count();
+            }
+
             response.Data = flight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
             return response;
         }
