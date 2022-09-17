@@ -29,31 +29,25 @@ namespace lounga.Controllers
             _BookingHotelService = BookingHotelService;
             _httpContextAccesor = httpContextAccessor;
         }
-
         [HttpPost("AddBookingHotel")]
         public async Task<ActionResult<ServiceResponse<List<AddBookingHotelDto>>>> AddBookingHotel (AddBookingHotelDto addBookingHotel)
         {
             return Ok(await _BookingHotelService.AddBookingHotel(addBookingHotel));
         }
-
         [HttpPost("AddGuest")]
         public async Task<ActionResult<ServiceResponse<List<AddGuestDto>>>> AddGuest (AddGuestDto addGuest)
         {
             return Ok(await _GuestService.AddGuest(addGuest));
         }
-
-        [AllowAnonymous]
         [HttpGet("GetBookingHotel")]
         public async Task<ActionResult<ServiceResponse<List<GetBookingHotelDto>>>> GetBookedHotels (string date)
         {
             return Ok(await _GetBookedHotelService.GetBookedHotels(date));
         }
-
-        [AllowAnonymous]
-        [HttpGet("FindHotel")]
-        public async Task<ActionResult<ServiceResponse<List<FindHotelDto>>>> FindHotel(string date, string city)
+        [HttpPost("FindHotel")]
+        public async Task<ActionResult<ServiceResponse<List<FindHotelDto>>>> FindHotel(SearchHotelDto searchHotelDto)
         {
-            return Ok(await _findHotelService.FindHotel(date,city));
+            return Ok(await _findHotelService.FindHotel(searchHotelDto));
         }
     }
 }

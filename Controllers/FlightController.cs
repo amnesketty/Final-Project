@@ -36,12 +36,5 @@ namespace lounga.Controllers
         {
             return Ok(await _flightService.GetAllFlight());
         }
-
-        [HttpPost("FindFlight")]
-        public async Task<ActionResult<ServiceResponse<List<GetFlightDto>>>> FindFlight (FindFlightDto findFlightDto)
-        {
-            return Ok(await _flightService.FindFlight(findFlightDto));
-        }
-
     }
 }

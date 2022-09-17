@@ -22,14 +22,14 @@ namespace lounga.Services.BookingHotelServices
             _mapper = mapper;
             _context = context;
         }
-        public async Task<ServiceResponse<List<FindHotelDto>>> FindHotel(string date, string city)
+        public async Task<ServiceResponse<List<FindHotelDto>>> FindHotel(SearchHotelDto searchHotelDto)
         {
-            DateOnly dateOnly = DateOnly.Parse(date);
+            DateOnly dateOnly = DateOnly.FromDateTime(searchHotelDto.BookingDate);
             var response = new ServiceResponse<List<FindHotelDto>>();
             try
             {
                 var hotels = await _context.Hotels
-                    .Where(h => h.City.ToLower() == city.ToLower())
+                    .Where(h => h.City.ToLower() == searchHotelDto.City.ToLower())
                     .Include(r => r.Rooms)
                         .ThenInclude(r => r.BookingHotels.Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == dateOnly))
                     .ToListAsync();

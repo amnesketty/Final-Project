@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lounga.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class FacilitiesFlightController : ControllerBase
     {
         private readonly IFacilitiesFlightService _facilitiesFlightService;
