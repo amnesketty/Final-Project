@@ -19,39 +19,64 @@ namespace lounga.Services.HotelServices
         {
             _mapper = mapper;
             _context = context;
-        }
-        
+        }        
         public async Task<ServiceResponse<GetHotelDto>> AddHotel(AddHotelDto addHotel)
         {
             var response = new ServiceResponse<GetHotelDto>();
-            Hotel hotel = _mapper.Map<Hotel>(addHotel);
-            _context.Hotels.Add(hotel);
-            await _context.SaveChangesAsync();
-            response.Data =  _mapper.Map<GetHotelDto>(hotel);
-            response.Message = "Hotel has been added!";
+            try
+            {
+                Hotel hotel = _mapper.Map<Hotel>(addHotel);
+                _context.Hotels.Add(hotel);
+                await _context.SaveChangesAsync();
+                response.Data =  _mapper.Map<GetHotelDto>(hotel);
+                response.Message = "Hotel has been added!";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
         public async Task<ServiceResponse<GetHotelDto>> GetHotelById(int id)
         {
             var response = new ServiceResponse<GetHotelDto>();
-            var hotel = await _context.Hotels
-                .Include(h => h.Photos)
-                .Include(h => h.FacilitiesHotel)
-                .Include(h => h.Rooms)
-                .FirstOrDefaultAsync(h => h.Id == id);
-            response.Data = _mapper.Map<GetHotelDto>(hotel);
+            try
+            {
+                var hotel = await _context.Hotels
+                    .Include(h => h.Photos)
+                    .Include(h => h.FacilitiesHotel)
+                    .Include(h => h.Rooms)
+                    .FirstOrDefaultAsync(h => h.Id == id);
+                response.Data = _mapper.Map<GetHotelDto>(hotel);
+                response.Message = "Data successfully retrieved!";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
         public async Task<ServiceResponse<List<GetHotelDto>>> GetHotelByCity(string city)
         {
             var response = new ServiceResponse<List<GetHotelDto>>();
-            var hotel = await _context.Hotels
-                .Where(h => h.City.ToLower() == city.ToLower())
-                .Include(h => h.Photos)
-                .Include(h => h.FacilitiesHotel)
-                .Include(h => h.Rooms)
-                .ToListAsync();
-            response.Data = hotel.Select(h => _mapper.Map<GetHotelDto>(h)).ToList();
+            try
+            {
+                var hotel = await _context.Hotels
+                    .Where(h => h.City.ToLower() == city.ToLower())
+                    .Include(h => h.Photos)
+                    .Include(h => h.FacilitiesHotel)
+                    .Include(h => h.Rooms)
+                    .ToListAsync();
+                response.Data = hotel.Select(h => _mapper.Map<GetHotelDto>(h)).ToList();
+                response.Message = "Data Successfully retrieved!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }

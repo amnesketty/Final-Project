@@ -23,7 +23,6 @@ namespace lounga.Services.FlightService
 
         public async Task<ServiceResponse<GetFlightDto>> AddFlight(AddFlightDto newAirline)
         {
-            //throw new NotImplementedException();
             ServiceResponse<GetFlightDto> response = new ServiceResponse<GetFlightDto>();
             try
             {
@@ -32,33 +31,47 @@ namespace lounga.Services.FlightService
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<GetFlightDto>(flight);
                 response.Message = "Data Flight succesfully added";
-                return response;
-                }
-                catch (Exception ex)
-                {
-                    response.Success = false;
-                    response.Message = ex.Message;
-                }
-                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
-
-
         public async Task<ServiceResponse<List<GetFlightDto>>> GetAllFlight()
         {
             var response = new ServiceResponse<List<GetFlightDto>>();
-            var dbFlight = await _context.Flights
+            try
+            {
+                var dbFlight = await _context.Flights
                 .Include(f => f.FacilitiesFlight)              
                 .ToListAsync();
-            response.Data = dbFlight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
+                response.Data = dbFlight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
+                response.Message = "Data successfully retrieved!";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
         public async Task<ServiceResponse<GetFlightDto>> GetFlightDtoById(int id)
         {
             var response = new ServiceResponse<GetFlightDto>();
-            var flight = await _context.Flights
+            try {
+                var flight = await _context.Flights
                 .Include(f => f.FacilitiesFlight)
                 .FirstOrDefaultAsync(f => f.Id == id);
-            response.Data = _mapper.Map<GetFlightDto>(flight);
+                response.Data = _mapper.Map<GetFlightDto>(flight);
+                response.Message = "Data successfully retrieved!";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
         public Task<ServiceResponse<UpdateFlightDto>> UpdateFlight(UpdateFlightDto newUpdateFlight)
@@ -73,20 +86,27 @@ namespace lounga.Services.FlightService
         public async Task<ServiceResponse<List<GetFlightDto>>> FindFlight (FindFlightDto findFlightDto)
         {
             var response = new ServiceResponse<List<GetFlightDto>>();
-            var flight = await _context.Flights
-                .Where(f => f.SeatClass.ToLower() == findFlightDto.SeatClass.ToLower())
-                .Where(f => f.DestinationFrom.ToLower() == findFlightDto.DestinationFrom.ToLower())
-                .Where(f => f.DestinationTo.ToLower() == findFlightDto.DestinationTo.ToLower())
-                .Include(f => f.FacilitiesFlight)
-                .Include(f => f.BookingFlights.Where(b => DateOnly.FromDateTime(b.BookingDate.Date) == DateOnly.FromDateTime(findFlightDto.DepartureDate)))
-                .ToListAsync();
-            
-            foreach (Flight plane in flight)
+            try
             {
-                plane.AmountPassenger = plane.BookingFlights.Count();
+                var flight = await _context.Flights
+                    .Where(f => f.SeatClass.ToLower() == findFlightDto.SeatClass.ToLower())
+                    .Where(f => f.DestinationFrom.ToLower() == findFlightDto.DestinationFrom.ToLower())
+                    .Where(f => f.DestinationTo.ToLower() == findFlightDto.DestinationTo.ToLower())
+                    .Include(f => f.FacilitiesFlight)
+                    .Include(f => f.BookingFlights.Where(b => DateOnly.FromDateTime(b.BookingDate.Date) == DateOnly.FromDateTime(findFlightDto.DepartureDate)))
+                    .ToListAsync();                
+                foreach (Flight plane in flight)
+                {
+                    plane.AmountPassenger = plane.BookingFlights.Count();
+                }
+                response.Data = flight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
+                response.Message = "Data successfully retrieved!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
             }
-
-            response.Data = flight.Select(f => _mapper.Map<GetFlightDto>(f)).ToList();
             return response;
         }
     }

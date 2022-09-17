@@ -32,13 +32,13 @@ namespace lounga.Services.FacilitiesFlightService
                 response.Data = _mapper.Map<GetFacilitiesFlightDto>(facilitiesFlight);
                 response.Message = "Facilities Flight succesfully added";
                 return response;
-                }
-                catch (Exception ex)
-                {
-                    response.Success = false;
-                    response.Message = ex.Message;
-                }
-                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
         public Task<ServiceResponse<GetFacilitiesFlightDto>> DeleteFacilitiesFlight(GetFacilitiesFlightDto deleteFlight)

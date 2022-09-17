@@ -28,14 +28,13 @@ namespace lounga.Services.BookingFlightService
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<GetPassengerDto>(passenger);
                 response.Message = "Data Passenger succesfully added";
-                return response;
-                }
-                catch (Exception ex)
-                {
-                    response.Success = false;
-                    response.Message = ex.Message;
-                }
-                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

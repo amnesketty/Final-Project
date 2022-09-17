@@ -61,14 +61,13 @@ namespace lounga.Services.BookingFlightService
 
                 response.Data = _mapper.Map<GetBookingFlightDto>(bookingFlight);
                 response.Message = "Data Booking succesfully added";
-                return response;
-                }
-                catch (Exception ex)
-                {
-                    response.Success = false;
-                    response.Message = ex.Message;
-                }
-                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

@@ -33,26 +33,65 @@ namespace lounga.Services.AuthServices
             }
             return false;
         }
-
         public async Task<ServiceResponse<int>> Register(UserRegisterDto userRegisterDto)
         {
             ServiceResponse<int> response = new ServiceResponse<int>();
-            if (await IsRegistered(userRegisterDto.Username))
+            try
+            {
+                if (await IsRegistered(userRegisterDto.Username))
+                {
+                    response.Success = false;
+                    response.Message = "Username already exist!";
+                    return response;
+                }
+                CreatePasswordHash (userRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                User user = _mapper.Map<User>(userRegisterDto);
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                response.Message = "Account registered successfully";
+            }
+            catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = "Username already exist!";
-                return response;
+                response.Message = ex.Message;
             }
-            CreatePasswordHash (userRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            User user = _mapper.Map<User>(userRegisterDto);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            response.Message = "Account registered successfully";
             return response;
         }
+        public async Task<ServiceResponse<UserProfileDto>> Login(UserLoginDto userLoginDto)
+        {
+            var response = new ServiceResponse<UserProfileDto>();
+            try
+            {
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(item => item.Username.ToLower() == userLoginDto.Username.ToLower());
 
+                if (user == null)    
+                {
+                    response.Success = false;
+                    response.Message = "User not found!";
+                }
+                else if (!VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt))
+                {
+                    response.Success = false;
+                    response.Message = "Password incorrect!";
+                }
+                else 
+                {
+                    var responDTO = _mapper.Map<UserRegisterDto>(user);
+                    response.Data = _mapper.Map<UserProfileDto>(user);
+                    response.Data.Token = CreateToken(user);
+                    response.Message = "Login success!";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
         private void CreatePasswordHash (string Password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -89,32 +128,6 @@ namespace lounga.Services.AuthServices
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
-        }
-
-        public async Task<ServiceResponse<UserProfileDto>> Login(UserLoginDto userLoginDto)
-        {
-            var response = new ServiceResponse<UserProfileDto>();
-            var user = await _context.Users
-                .FirstOrDefaultAsync(item => item.Username.ToLower() == userLoginDto.Username.ToLower());
-
-            if (user == null)    
-            {
-                response.Success = false;
-                response.Message = "User not found!";
-            }
-            else if (!VerifyPasswordHash(userLoginDto.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                response.Success = false;
-                response.Message = "Password incorrect!";
-            }
-            else 
-            {
-                var responDTO = _mapper.Map<UserRegisterDto>(user);
-                response.Data = _mapper.Map<UserProfileDto>(user);
-                response.Data.Token = CreateToken(user);
-                response.Message = "Login success!";
-            }
-            return response;
         }
     }
 }

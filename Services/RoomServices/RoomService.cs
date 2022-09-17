@@ -22,14 +22,22 @@ namespace lounga.Services.RoomServices
         public async Task<ServiceResponse<GetRoomDto>> AddRoom(AddRoomDto addRoom)
         {
             var response = new ServiceResponse<GetRoomDto>();
-            var hotel = await _context.Hotels
-                .FirstOrDefaultAsync(h => h.Id == addRoom.HotelId);
-            Room room = _mapper.Map<Room>(addRoom);
-            room.Hotel = hotel;
-            _context.Rooms.Add(room);
-            await _context.SaveChangesAsync();
-            response.Data =  _mapper.Map<GetRoomDto>(room);
-            response.Message = "Room has been added!";
+            try
+            {
+                var hotel = await _context.Hotels
+                    .FirstOrDefaultAsync(h => h.Id == addRoom.HotelId);
+                Room room = _mapper.Map<Room>(addRoom);
+                room.Hotel = hotel;
+                _context.Rooms.Add(room);
+                await _context.SaveChangesAsync();
+                response.Data =  _mapper.Map<GetRoomDto>(room);
+                response.Message = "Room has been added!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }

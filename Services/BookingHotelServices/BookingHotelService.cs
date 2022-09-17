@@ -29,36 +29,44 @@ namespace lounga.Services.BookingHotelServices
         }
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
             .FindFirstValue(ClaimTypes.NameIdentifier));
-                public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
+        public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
         {
             var response = new ServiceResponse<GetBookingHotelDto>();
-            BookingHotel bookingHotel = _mapper.Map<BookingHotel>(addBookingHotel);
-            var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == addBookingHotel.HotelId);
-            bookingHotel.Hotel = hotel;
+            try
+            {
+                BookingHotel bookingHotel = _mapper.Map<BookingHotel>(addBookingHotel);
+                var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == addBookingHotel.HotelId);
+                bookingHotel.Hotel = hotel;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
-            var email = user?.Email;
-            bookingHotel.User = user;
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
+                var email = user?.Email;
+                bookingHotel.User = user;
 
-            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == addBookingHotel.RoomId);
-            bookingHotel.Room = room;
+                var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == addBookingHotel.RoomId);
+                bookingHotel.Room = room;
 
-            var random = new Random().Next(100000,999999).ToString();
-            string hl = "HL-";
-            var bookingNo = hl+random;
-            bookingHotel.BookingHotelNo = bookingNo;
+                var random = new Random().Next(100000,999999).ToString();
+                string hl = "HL-";
+                var bookingNo = hl+random;
+                bookingHotel.BookingHotelNo = bookingNo;
 
-            _context.BookingHotels.Add(bookingHotel);
+                _context.BookingHotels.Add(bookingHotel);
 
-            var mailRequest = new MailRequest();
-            mailRequest.Body = "Your Hotel Booking Number is " + bookingNo;
-            mailRequest.Subject = "Lounga Hotel Booking";
-            mailRequest.ToEmail = email;
-            await _context.SaveChangesAsync();
-            await _mailService.SendEmailAsync(mailRequest);
-            
-            response.Data = _mapper.Map<GetBookingHotelDto>(bookingHotel);
-            response.Message = "Booking has been created!";
+                var mailRequest = new MailRequest();
+                mailRequest.Body = "Your Hotel Booking Number is " + bookingNo;
+                mailRequest.Subject = "Lounga Hotel Booking";
+                mailRequest.ToEmail = email;
+                await _context.SaveChangesAsync();
+                await _mailService.SendEmailAsync(mailRequest);
+                
+                response.Data = _mapper.Map<GetBookingHotelDto>(bookingHotel);
+                response.Message = "Booking has been created!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }

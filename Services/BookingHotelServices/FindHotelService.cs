@@ -26,12 +26,20 @@ namespace lounga.Services.BookingHotelServices
         {
             DateOnly dateOnly = DateOnly.Parse(date);
             var response = new ServiceResponse<List<FindHotelDto>>();
-            var hotels = await _context.Hotels
-                .Where(h => h.City.ToLower() == city.ToLower())
-                .Include(r => r.Rooms)
-                    .ThenInclude(r => r.BookingHotels.Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == dateOnly))
-                .ToListAsync();
-            response.Data = hotels.Select(h => _mapper.Map<FindHotelDto>(h)).ToList();
+            try
+            {
+                var hotels = await _context.Hotels
+                    .Where(h => h.City.ToLower() == city.ToLower())
+                    .Include(r => r.Rooms)
+                        .ThenInclude(r => r.BookingHotels.Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == dateOnly))
+                    .ToListAsync();
+                response.Data = hotels.Select(h => _mapper.Map<FindHotelDto>(h)).ToList();
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }

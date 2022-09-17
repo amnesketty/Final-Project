@@ -19,8 +19,6 @@ namespace lounga.Services.FileService
         }
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
-            Console.WriteLine(_mailSettings.Host);
-            Console.WriteLine(_mailSettings.From);
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.From);
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));

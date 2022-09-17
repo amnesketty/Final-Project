@@ -21,12 +21,20 @@ namespace lounga.Services.BookingHotelServices
         public async Task<ServiceResponse<GetGuestDto>> AddGuest(AddGuestDto addGuest)
         {
             var response = new ServiceResponse<GetGuestDto>();
-            Guest guest = _mapper.Map<Guest>(addGuest);
-            _context.Guests.Add(guest);
-            await _context.SaveChangesAsync();
-            
-            response.Data = _mapper.Map<GetGuestDto>(guest);
-            response.Message = "Guest has been created!";
+            try
+            {
+                Guest guest = _mapper.Map<Guest>(addGuest);
+                _context.Guests.Add(guest);
+                await _context.SaveChangesAsync();
+                
+                response.Data = _mapper.Map<GetGuestDto>(guest);
+                response.Message = "Guest has been created!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }

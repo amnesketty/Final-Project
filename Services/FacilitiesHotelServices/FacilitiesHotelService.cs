@@ -22,11 +22,19 @@ namespace lounga.Services.FacilitiesHotelServices
         public async Task<ServiceResponse<GetFacilityHotelDto>> AddFacilityHotel(AddFacilityHotelDto addFacilityHotel)
         {
             var response = new ServiceResponse<GetFacilityHotelDto>();
-            FacilitiesHotel facilitiesHotel = _mapper.Map<FacilitiesHotel>(addFacilityHotel);
-            _context.FacilitiesHotels.Add(facilitiesHotel);
-            await _context.SaveChangesAsync();
-            response.Data = _mapper.Map<GetFacilityHotelDto>(facilitiesHotel);
-            response.Message = "Hotel facilities have been added!";
+            try
+            {
+                FacilitiesHotel facilitiesHotel = _mapper.Map<FacilitiesHotel>(addFacilityHotel);
+                _context.FacilitiesHotels.Add(facilitiesHotel);
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<GetFacilityHotelDto>(facilitiesHotel);
+                response.Message = "Hotel facilities have been added!";
+            }            
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
     }
