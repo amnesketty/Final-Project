@@ -8,7 +8,6 @@ namespace lounga.Dto.FacilitiesFlight
 {
     public class AddFacilitiesFlightDto
     {
-        public int Id {get; set;}
         public int Baggage {get; set;}
         public int CabinBaggage {get; set;}
         public bool Wifi {get; set;} = true;

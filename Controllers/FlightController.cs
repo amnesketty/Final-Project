@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lounga.Dto.FacilitiesFlight;
 using lounga.Dto.Flight;
 using lounga.Model;
+using lounga.Services.FacilitiesFlightService;
 using lounga.Services.FlightService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,8 +16,10 @@ namespace lounga.Controllers
     public class FlightController : ControllerBase
     {
         private readonly IFlightService _flightService;
-        public FlightController(IFlightService flightService)
+        private readonly IFacilitiesFlightService _facilitiesFlightService;
+        public FlightController(IFlightService flightService, IFacilitiesFlightService facilitiesFlightService)
         {
+            _facilitiesFlightService = facilitiesFlightService;
             _flightService = flightService;
         }
 
@@ -35,6 +39,12 @@ namespace lounga.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetFlightDto>>>> GetAllFlight()
         {
             return Ok(await _flightService.GetAllFlight());
+        }
+
+        [HttpPost("AddFacilitiesFlight")]
+        public async Task<ActionResult<ServiceResponse<List<AddFacilitiesFlightDto>>>> AddFacilitiesFlight (AddFacilitiesFlightDto newFacilitiesFlight)
+        {
+            return Ok(await _facilitiesFlightService.AddFacilitiesFlight(newFacilitiesFlight));
         }
     }
 }
