@@ -8,6 +8,7 @@ namespace lounga.Dto.Rooms
 {
     public class FindRoomDto
     {
+        public int id {get; set;}
         public string Type { get; set; } = string.Empty;
         public int Price { get; set; }
         public List<GetBookingHotelDto>? BookingHotels {get; set;}
