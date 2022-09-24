@@ -122,7 +122,7 @@ namespace lounga.Services.AuthServices
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddHours(1),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = creds
             };
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
