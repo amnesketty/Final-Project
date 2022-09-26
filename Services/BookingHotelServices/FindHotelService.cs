@@ -32,6 +32,8 @@ namespace lounga.Services.BookingHotelServices
                     .Where(h => h.City.ToLower() == searchHotelDto.City.ToLower())
                     .Include(r => r.Rooms)
                         .ThenInclude(r => r.BookingHotels.Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == dateOnly))
+                    .Include(f => f.FacilitiesHotel)
+                    .Include(p => p.Photos)
                     .ToListAsync();
                 response.Data = hotels.Select(h => _mapper.Map<FindHotelDto>(h)).ToList();
             }
