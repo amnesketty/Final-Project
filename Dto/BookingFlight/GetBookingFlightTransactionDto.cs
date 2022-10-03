@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace lounga.Dto.BookingFlight
 {
-    public class AddBookingFlightDto
+    public class GetBookingFlightTransactionDto
     {
+        public int Id {get; set;}
         public DateTime BookingDate {get; set;}
+        public int Status { get; set; }
         public int AmountPassenger { get; set; }
         public int TotalPrice {get; set;}
-        public int FlightId {get; set;}
+        public string BookingFlightNo { get; set; } = string.Empty;  
     }
 }

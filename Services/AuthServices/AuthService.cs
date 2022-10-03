@@ -18,12 +18,13 @@ namespace lounga.Services.AuthServices
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-
-        public AuthService(DataContext context, IConfiguration configuration, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AuthService(DataContext context, IConfiguration configuration, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _configuration = configuration;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<bool> IsRegistered(string username)
         {
@@ -128,6 +129,26 @@ namespace lounga.Services.AuthServices
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
+            .FindFirstValue(ClaimTypes.NameIdentifier));
+        public async Task<ServiceResponse<UserTransactionDto>> GetUserTransaction()
+        {
+            ServiceResponse<UserTransactionDto> response = new ServiceResponse<UserTransactionDto>();
+            try
+            {
+                var user = await _context.Users
+                    .Include(u => u.BookingFlights)
+                    .Include(u => u.BookingHotels)
+                    .FirstOrDefaultAsync(u => u.Id == GetUserId());
+                response.Data = _mapper.Map<UserTransactionDto>(user);
+                response.Message = "Data successfully retrieved!";
+            } catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }
