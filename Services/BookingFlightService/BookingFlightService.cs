@@ -38,12 +38,9 @@ namespace lounga.Services.BookingFlightService
                 var flight = await _context.Flights.FirstOrDefaultAsync(f => f.Id == newBookingFlight.FlightId);
                 bookingFlight.Flight = flight;
 
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == newBookingFlight.UserId);
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
                 bookingFlight.User = user;
                 var email = user?.Email;
-
-                var facilitiesFlight = await _context.FacilitiesFlights.FirstOrDefaultAsync(ff => ff.Id == newBookingFlight.FacilitiesFlightId);
-                bookingFlight.FacilitiesFlight = facilitiesFlight;
 
                 var random = new Random().Next(100000,999999).ToString();
                 string fl = "FL-";

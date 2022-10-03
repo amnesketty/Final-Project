@@ -66,7 +66,7 @@ builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IGetBookedHotelService, GetBookedHotelService>();
 
 builder.Services.AddScoped<IFileService, FileService>();
-builder.Services.AddTransient<IMailService, MailService>();
+builder.Services.AddScoped<IMailService, MailService>();
 
 var app = builder.Build();
 

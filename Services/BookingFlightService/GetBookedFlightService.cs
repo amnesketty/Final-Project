@@ -28,7 +28,6 @@ namespace lounga.Services.BookingFlightService
                 var flight = await _context.BookingFlights
                 .Where(b => (DateOnly.FromDateTime(b.BookingDate.Date)) == dateOnly)
                 .Include(b => b.Flight)
-                .Include(b => b.FacilitiesFlight)
                 .ToListAsync();
                 response.Data = flight.Select(f => _mapper.Map<GetBookingFlightDto>(f)).ToList();
                 response.Message = "Data successfully retrieved!";

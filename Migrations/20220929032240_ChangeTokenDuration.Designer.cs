@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using lounga.Data;
@@ -11,9 +12,10 @@ using lounga.Data;
 namespace lounga.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220929032240_ChangeTokenDuration")]
+    partial class ChangeTokenDuration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +42,9 @@ namespace lounga.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("FacilitiesFlightId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("FlightId")
                         .HasColumnType("integer");
 
@@ -53,6 +58,8 @@ namespace lounga.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacilitiesFlightId");
 
                     b.HasIndex("FlightId");
 
@@ -430,6 +437,10 @@ namespace lounga.Migrations
 
             modelBuilder.Entity("lounga.Model.BookingFlight", b =>
                 {
+                    b.HasOne("lounga.Model.FacilitiesFlight", "FacilitiesFlight")
+                        .WithMany()
+                        .HasForeignKey("FacilitiesFlightId");
+
                     b.HasOne("lounga.Model.Flight", "Flight")
                         .WithMany("BookingFlights")
                         .HasForeignKey("FlightId");
@@ -437,6 +448,8 @@ namespace lounga.Migrations
                     b.HasOne("lounga.Model.User", "User")
                         .WithMany("BookingFlights")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("FacilitiesFlight");
 
                     b.Navigation("Flight");
 
