@@ -12,5 +12,6 @@ namespace lounga.Dto.User
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string Token { get; set; } = string.Empty;
+        public string AvatarImage { get; set; } = string.Empty;
     }
 }
