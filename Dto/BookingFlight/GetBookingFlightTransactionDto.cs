@@ -9,6 +9,8 @@ namespace lounga.Dto.BookingFlight
     {
         public int Id {get; set;}
         public DateTime BookingDate {get; set;}
+        public string DestinationFrom {get; set;} = string.Empty;
+        public string DestinationTo {get; set;} = string.Empty;
         public int Status { get; set; }
         public int AmountPassenger { get; set; }
         public int TotalPrice {get; set;}

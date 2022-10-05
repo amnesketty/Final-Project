@@ -9,6 +9,8 @@ namespace lounga.Model
     {
         public int Id {get; set;}
         public DateTime BookingDate {get; set;}
+        public string DestinationFrom {get; set;} = string.Empty;
+        public string DestinationTo {get; set;} = string.Empty;
         public int Status { get; set; } = 1;
         public int AmountPassenger { get; set; } = 1;
         public int TotalPrice {get; set;} = 0;

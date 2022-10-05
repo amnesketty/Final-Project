@@ -9,6 +9,7 @@ namespace lounga.Dto.BookingHotels
     {
         public int Id { get; set; }
         public DateTime BookingDate { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int TotalRoom { get; set; } = 0;
         public int Price { get; set; } = 0;
         public string BookingHotelNo { get; set; } = string.Empty;
