@@ -19,7 +19,6 @@ namespace lounga.Model
         public int Price { get; set; }
         public string DestinationFrom {get; set;} = string.Empty;
         public string DestinationTo {get; set;} = string.Empty;
-        public DateTime DepartureDate {get; set;}
         public DateTime DepartureTime {get; set;}
         public DateTime ArrivalTime {get; set;}
         public FacilitiesFlight? FacilitiesFlight {get; set;}
