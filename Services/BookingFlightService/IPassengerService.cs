@@ -10,5 +10,6 @@ namespace lounga.Services.BookingFlightService
     public interface IPassengerService
     {
         Task<ServiceResponse<GetPassengerDto>> AddPassenger (AddPassengerDto newPassenger);
+        Task<ServiceResponse<List<GetPassengerDto>>> AddListPassenger (List<AddPassengerDto> newPassenger);
     }
 }

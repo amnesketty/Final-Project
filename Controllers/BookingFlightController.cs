@@ -40,6 +40,11 @@ namespace lounga.Controllers
         {
             return Ok(await _passengerService.AddPassenger(newPassenger));
         }
+        [HttpPost("AddListPassenger")]
+        public async Task<ActionResult<ServiceResponse<List<GetPassengerDto>>>> AddListPassenger (List<AddPassengerDto> newPassenger)
+        {
+            return Ok(await _passengerService.AddListPassenger(newPassenger));
+        }
         [HttpGet("GetBookingFlight")]
         public async Task<ActionResult<ServiceResponse<List<GetBookingFlightDto>>>> GetBookedFlights (string date)
         {

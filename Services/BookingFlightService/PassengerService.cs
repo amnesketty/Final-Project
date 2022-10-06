@@ -36,5 +36,24 @@ namespace lounga.Services.BookingFlightService
             }
             return response;
         }
+
+        public async Task<ServiceResponse<List<GetPassengerDto>>> AddListPassenger(List<AddPassengerDto> newPassenger)
+        {
+            ServiceResponse<List<GetPassengerDto>> response = new ServiceResponse<List<GetPassengerDto>>();
+            try
+            {
+                List<Passenger> passengers = newPassenger.Select(p => _mapper.Map<Passenger>(p)).ToList();
+                _context.Passengers.AddRange(passengers);
+                await _context.SaveChangesAsync();
+                response.Data = passengers.Select(p => _mapper.Map<GetPassengerDto>(p)).ToList();
+                response.Message = "Data Passenger succesfully added";
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
     }
 }
