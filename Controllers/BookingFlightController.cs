@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.BookingFlight;
+using lounga.Dto.Data;
 using lounga.Dto.Flight;
 using lounga.Model;
 using lounga.Services.BookingFlightService;
@@ -41,7 +42,7 @@ namespace lounga.Controllers
             return Ok(await _passengerService.AddPassenger(newPassenger));
         }
         [HttpPost("AddListPassenger")]
-        public async Task<ActionResult<ServiceResponse<List<GetPassengerDto>>>> AddListPassenger (List<AddPassengerDto> newPassenger)
+        public async Task<ActionResult<ServiceResponse<List<GetPassengerDto>>>> AddListPassenger (RequestData<AddPassengerDto> newPassenger)
         {
             return Ok(await _passengerService.AddListPassenger(newPassenger));
         }

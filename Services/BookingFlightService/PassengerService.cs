@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using lounga.Data;
 using lounga.Dto.BookingFlight;
+using lounga.Dto.Data;
 using lounga.Model;
 
 namespace lounga.Services.BookingFlightService
@@ -37,12 +38,12 @@ namespace lounga.Services.BookingFlightService
             return response;
         }
 
-        public async Task<ServiceResponse<List<GetPassengerDto>>> AddListPassenger(List<AddPassengerDto> newPassenger)
+        public async Task<ServiceResponse<List<GetPassengerDto>>> AddListPassenger(RequestData<AddPassengerDto> newPassenger)
         {
             ServiceResponse<List<GetPassengerDto>> response = new ServiceResponse<List<GetPassengerDto>>();
             try
             {
-                List<Passenger> passengers = newPassenger.Select(p => _mapper.Map<Passenger>(p)).ToList();
+                List<Passenger> passengers = newPassenger.data.Select(p => _mapper.Map<Passenger>(p)).ToList();
                 _context.Passengers.AddRange(passengers);
                 await _context.SaveChangesAsync();
                 response.Data = passengers.Select(p => _mapper.Map<GetPassengerDto>(p)).ToList();
