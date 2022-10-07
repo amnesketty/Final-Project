@@ -21,7 +21,6 @@ namespace lounga.Dto.Flight
         public int Price { get; set; }
         public string DestinationFrom {get; set;} = string.Empty;
         public string DestinationTo {get; set;} = string.Empty;
-        public DateTime DepartureDate {get; set;}
         public DateTime DepartureTime {get; set;}
         public DateTime ArrivalTime {get; set;}
         public GetFacilitiesFlightDto? FacilitiesFlight {get; set;} 
