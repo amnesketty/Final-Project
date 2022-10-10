@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.User;
 using lounga.Services.AuthServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,7 +31,15 @@ namespace lounga.Controllers
             };
             var response = await _authService.Login(userLoginDto);
             UserProfileDto user = response.Data;
+            HttpContext.Session.SetString("Token", user.Token);
             return View(user);
+        }
+        [Authorize]
+        public async Task<IActionResult> GetUserTransaction ()
+        {
+            var response = await _authService.GetUserTransaction();
+            UserTransactionDto userTransactionDto = response.Data;
+            return View(userTransactionDto);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

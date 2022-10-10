@@ -1,0 +1,15 @@
+@model lounga.Dto.User.UserTransactionDto
+@{
+    ViewData["Title"] = "GetUserTransaction";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <p>
+        @Html.DisplayNameFor(Model => Model.Username)
+    </p>
+    <p>
+        @Html.DisplayFor(Model => Model.Username)
+    </p>
+</div>
