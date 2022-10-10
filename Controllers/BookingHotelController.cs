@@ -44,6 +44,8 @@ namespace lounga.Controllers
         {
             return Ok(await _GetBookedHotelService.GetBookedHotels(date));
         }
+
+        [AllowAnonymous]
         [HttpPost("FindHotel")]
         public async Task<ActionResult<ServiceResponse<List<FindHotelDto>>>> FindHotel(SearchHotelDto searchHotelDto)
         {

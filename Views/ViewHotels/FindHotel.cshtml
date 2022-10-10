@@ -1,0 +1,17 @@
+@model IEnumerable<lounga.Dto.Hotels.FindHotelDto>
+@{
+    ViewData["Title"] = "FindHotel";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    @foreach (var item in Model){
+        <p> 
+            @Html.DisplayNameFor(modelItem => item.Name)
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+    }
+</div>
