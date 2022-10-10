@@ -1,0 +1,18 @@
+
+@model IEnumerable<lounga.Dto.Flight.GetFlightDto>
+@{
+    ViewData["Title"] = "GetAllFlight";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    @foreach (var item in Model){
+        <p> 
+            @Html.DisplayNameFor(modelItem => item.Airline)
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Airline)
+        </p>
+    }
+</div>
