@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.Hotels;
+using lounga.Services.BookingHotelServices;
 using lounga.Services.FacilitiesHotelServices;
 using lounga.Services.HotelServices;
 using lounga.Services.RoomServices;
@@ -17,15 +18,13 @@ namespace lounga.Controllers
     {
         private readonly ILogger<ViewHotelsController> _logger;
         private readonly IHotelService _hotelService;
-        private readonly IRoomService _roomService;
-        private readonly IFacilitiesHotelService _FacilitiesHotelService;
+        private readonly IFindHotelService _findHotelService;
 
-        public ViewHotelsController(ILogger<ViewHotelsController> logger, IHotelService hotelService, IRoomService roomService, IFacilitiesHotelService facilitiesHotelService)
+        public ViewHotelsController(ILogger<ViewHotelsController> logger, IHotelService hotelService, IFindHotelService findHotelService)
         {
             _logger = logger;
             _hotelService = hotelService;
-            _roomService = roomService;
-            _FacilitiesHotelService = facilitiesHotelService;
+            _findHotelService = findHotelService;
         }
 
         public async Task<IActionResult> GetHotel(int id)
@@ -33,6 +32,13 @@ namespace lounga.Controllers
             var response = await _hotelService.GetHotelById(id);
             GetHotelDto hotelDto = response.Data;
             return View(hotelDto);
+        }
+
+        public async Task<IActionResult> FindHotel(SearchHotelDto searchHotelDto)
+        {
+            var response = await _findHotelService.FindHotel(searchHotelDto);
+            List<FindHotelDto> findHotelDto = response.Data;
+            return View(findHotelDto);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
