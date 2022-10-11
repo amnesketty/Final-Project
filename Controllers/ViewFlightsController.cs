@@ -51,6 +51,24 @@ namespace lounga.Controllers
             return View(getFlightbyId);
         }
 
+        public IActionResult BookingFlight()
+        {
+            return View();
+        }
+
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> BookingFlight([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] BookingFlight flight)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         _context.Add(movie);
+        //         await _context.SaveChangesAsync();
+        //         return RedirectToAction(nameof(Index));
+        //     }
+        //     return View(movie);
+        // }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
