@@ -1,30 +1,116 @@
-@model lounga.Dto.BookingFlight.GetPassengerDto
+@model lounga.Dto.Web.WebBookingFlightDto
 @{
     ViewData["Title"] = "BookingFlight";
 }
 
-<h1>Booking</h1>
+<h1>Detail of Flight</h1>
 
 @* <h4>Movie</h4>
 <hr /> *@
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Airline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.Airline[0])
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DepartureTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.DepartureTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.ArrivalTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.ArrivalTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DestinationFrom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationFrom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DestinationTo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationTo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.SeatClass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatClass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Aircraft)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.Aircraft)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.AircraftsType)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.CabinBaggage)
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.CabinBaggage)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.Baggage)
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.Baggage)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatLayout)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatPitch)
+        </dd>        
+    </dl>
+</div>
+
+<br>
+
+<h1>Detail of Passenger</h1>
+<hr>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="addPassengerDto.Title" class="control-label"></label>
+                <input asp-for="addPassengerDto.Title" class="form-control" />
+                <span asp-validation-for="addPassengerDto.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="addPassengerDto.Name" class="control-label"></label>
+                <input asp-for="addPassengerDto.Name" class="form-control" />
+                <span asp-validation-for="addPassengerDto.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCard" class="control-label"></label>
-                <input asp-for="IdCard" class="form-control" />
-                <span asp-validation-for="IdCard" class="text-danger"></span>
+                <label asp-for="addPassengerDto.IdCard" class="control-label"></label>
+                <input asp-for="addPassengerDto.IdCard" class="form-control" />
+                <span asp-validation-for="addPassengerDto.IdCard" class="text-danger"></span>
             </div>
             @* <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -41,6 +127,9 @@
 <div>
     <a asp-action="GetAllFlight">Back to List</a>
 </div>
+
+<br>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

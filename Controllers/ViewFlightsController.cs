@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using lounga.Dto.BookingFlight;
 using lounga.Dto.Flight;
+using lounga.Dto.Web;
 using lounga.Model;
 using lounga.Services.FacilitiesFlightService;
 using lounga.Services.FlightService;
@@ -56,18 +58,33 @@ namespace lounga.Controllers
             return View();
         }
 
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> BookingFlight([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] BookingFlight flight)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         _context.Add(movie);
-        //         await _context.SaveChangesAsync();
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     return View(movie);
-        // }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BookingFlight([Bind("Title, Name, IdCard")] AddPassengerDto addPassengerDto, int id)
+        {
+            
+            // WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto
+            // {
+            //     getFlightDto = getFlightDto,
+            //     // addPassengerDto = addPassengerDto
+            // };
+            WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto{
+                    addPassengerDto = addPassengerDto,
+            };
+            var response = await _flightService.GetFlightDtoById(id);
+            GetFlightDto getFlightbyId = response.Data;
+            return View(getFlightbyId);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("BookFlight", webBookingFlightDto);
+                // var response = await _authService.Login(userLoginDto);
+                // UserProfileDto user = response.Data;
+                // HttpContext.Session.SetString("Token", user.Token);
+                // return RedirectToAction("Main", "ViewHome");
+            }
+            return RedirectToAction(nameof(BookingFlight));
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
