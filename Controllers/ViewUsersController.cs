@@ -22,20 +22,44 @@ namespace lounga.Controllers
             _authService = authService;
         }
 
-        public async Task<IActionResult> GetUser (String username, String password)
+        public IActionResult Login()
         {
-            UserLoginDto userLoginDto = new UserLoginDto
-            {
-                Username = username,
-                Password = password
-            };
-            var response = await _authService.Login(userLoginDto);
-            UserProfileDto user = response.Data;
-            HttpContext.Session.SetString("Token", user.Token);
-            return View(user);
+            return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("Username, Password")] UserLoginDto userLoginDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _authService.Login(userLoginDto);
+                UserProfileDto user = response.Data;
+                HttpContext.Session.SetString("Token", user.Token);
+                return RedirectToAction(nameof(HistoryTransaction));
+            }
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("FirstName, LastName, Username, Email, Phone, Password")] UserRegisterDto userRegisterDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _authService.Register(userRegisterDto);
+                int user = response.Data;
+                return RedirectToAction(nameof(Login));
+            }
+            return View();
+        }
+
         [Authorize]
-        public async Task<IActionResult> GetUserTransaction ()
+        public async Task<IActionResult> HistoryTransaction ()
         {
             var response = await _authService.GetUserTransaction();
             UserTransactionDto userTransactionDto = response.Data;
