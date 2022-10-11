@@ -37,10 +37,6 @@ namespace lounga.Controllers
             if (ModelState.IsValid)
             {
                 return RedirectToAction("FindFlight", "ViewFlights", findFlightDto);
-                // var response = await _authService.Login(userLoginDto);
-                // UserProfileDto user = response.Data;
-                // HttpContext.Session.SetString("Token", user.Token);
-                // return RedirectToAction("Main", "ViewHome");
             }
             return RedirectToAction(nameof(Main));
         }
@@ -53,10 +49,6 @@ namespace lounga.Controllers
             if (ModelState.IsValid)
             {
                 return RedirectToAction("FindHotel", "ViewHotels", searchHotelDto);
-                // var response = await _authService.Login(userLoginDto);
-                // UserProfileDto user = response.Data;
-                // HttpContext.Session.SetString("Token", user.Token);
-                // return RedirectToAction("Main", "ViewHome");
             }
             return RedirectToAction(nameof(Main));
         }

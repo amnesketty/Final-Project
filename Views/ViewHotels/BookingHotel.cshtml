@@ -1,4 +1,5 @@
-@model lounga.Dto.BookingHotels.AddGuestDto
+@* @model lounga.Dto.BookingHotels.AddGuestDto *@
+@model lounga.Dto.Web.WebGuestHotelDto
 @{
     ViewData["Title"] = "BookingHotel";
 }
@@ -6,23 +7,42 @@
 <h1>Booking Summary</h1>
 
 <div>
-    <form asp-action="Booking Hotel">
+    <form asp-action="BookingHotel">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
         <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="bookingDate" class="form-control" type="hidden" value="@Model.bookingDate"/>
+        </div> 
+        <div class="form-group">
+            <input asp-for="name" class="form-control" type="hidden" value="@Model.name"/>
+        </div> 
+        <div class="form-group">
+            <input asp-for="totalRoom" class="form-control" type="hidden" value="@Model.totalRoom"/>
+        </div> 
+        <div class="form-group">
+            <input asp-for="price" class="form-control" type="hidden" value="@Model.price"/>
+        </div> 
+        <div class="form-group">
+            <input asp-for="hotelId" class="form-control" type="hidden" value="@Model.hotelId"/>
+        </div> 
+        <div class="form-group">
+            <input asp-for="roomId" class="form-control" type="hidden" value="@Model.roomId"/>
+        </div> 
+        <div class="form-group">
+            <label asp-for="guestName" class="control-label"></label>
+            <input asp-for="guestName" class="form-control" />
+            <span asp-validation-for="guestName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <label asp-for="email" class="control-label"></label>
+            <input asp-for="email" class="form-control" />
+            <span asp-validation-for="email" class="text-danger"></span>
         </div>   
         <div class="form-group">
-            <label asp-for="Phone" class="control-label"></label>
-            <input asp-for="Phone" class="form-control" />
-            <span asp-validation-for="Phone" class="text-danger"></span>
-        </div> 
+            <label asp-for="phone" class="control-label"></label>
+            <input asp-for="phone" class="form-control" />
+            <span asp-validation-for="phone" class="text-danger"></span>
+        </div>
         <div class="form-group">
                 <input type="submit" value="Book Hotel" class="btn btn-primary"/>
         </div>

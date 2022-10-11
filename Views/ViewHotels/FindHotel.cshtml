@@ -2,8 +2,7 @@
 @model lounga.Dto.Web.WebFindHotelDto
 @{
     ViewData["Title"] = "FindHotel";
-    var findFlight = Model.findHotelDtos;
-    var searchHotel = Model.searchHotelDto;
+    
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -30,9 +29,6 @@
         <tbody>
             @foreach (var item in Model.findHotelDtos){
                 <tr>
-                    @using (Html.BeginForm("DetailHotel", "ViewHotels", "webBookingHotelDto", FormMethod.Post, antiforgery: true,
-                        new WebBookingHotelDto{searchHotelDto = Model.searchHotelDto, findHotelDto = item}))
-                    {
                         <td>
                             @Html.DisplayFor(modelItem => item.City)
                         </td>
@@ -49,21 +45,9 @@
                             @Html.DisplayFor(modelItem => item.Phone)
                         </td>
                         <td>
-                            <a asp-action="DetailHotel" asp-route-id="@item.id">Detail Hotel</a>
+                            @Html.ActionLink("DetailHotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
+                                totalRoom = Model.searchHotelDto.TotalRoom, hotelId = item.id})
                         </td>
-                        <td>
-                            <a asp-action="DetailHotelFind" asp-route-findHotelDto="@item">Detail Hotel Find</a>
-                        </td>
-                        
-                        <td>
-                            <a asp-action="DetailHotelSearch" asp-route-searchHotelDto="@Model.searchHotelDto">Detail Hotel Search</a>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <input type="submit" value="Post Comment" class="btn btn-primary" />
-                            </div>
-                        </td>
-                    }
                 </tr>
             }
         </tbody>
