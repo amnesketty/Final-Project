@@ -29,6 +29,7 @@ namespace lounga.Services.BookingHotelServices
         }
         private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User
             .FindFirstValue(ClaimTypes.NameIdentifier));
+
         public async Task<ServiceResponse<GetBookingHotelDto>> AddBookingHotel(AddBookingHotelDto addBookingHotel)
         {
             var response = new ServiceResponse<GetBookingHotelDto>();

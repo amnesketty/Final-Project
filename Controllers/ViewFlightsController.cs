@@ -33,7 +33,20 @@ namespace lounga.Controllers
             return View(getFlightDtos);
         }
 
-        
+        public async Task<IActionResult>FindFlight (String SeatClass, String AmountPassenger, String DestinationFrom, String DestinationTo, String DepartureDate)
+        {
+            FindFlightDto request = new FindFlightDto
+            {
+                SeatClass = SeatClass,
+                AmountPassenger = int.Parse(AmountPassenger),
+                DestinationFrom = DestinationFrom,
+                DestinationTo = DestinationTo,
+                DepartureDate = DateTime.Parse(DepartureDate)
+            };
+            var response = await _flightService.FindFlight(request);
+            List<GetFlightDto> findFlightDtos = response.Data;
+            return View(findFlightDtos);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
