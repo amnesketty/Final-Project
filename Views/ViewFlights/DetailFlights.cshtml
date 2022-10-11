@@ -1,0 +1,91 @@
+@model lounga.Dto.Flight.GetFlightDto
+
+@{
+    ViewData["Title"] = "DetailFlights";
+}
+
+<h1>Detail of Flight</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.Airline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.Airline)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.DepartureTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.DepartureTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.ArrivalTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.ArrivalTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.DestinationFrom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.DestinationFrom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.DestinationTo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.DestinationTo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.SeatClass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.SeatClass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelitem => modelitem.Aircraft)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.Aircraft)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.AircraftsType)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayNameFor(modelitem => modelitem.FacilitiesFlight.CabinBaggage)
+            @Html.DisplayFor(modelitem => modelitem.FacilitiesFlight.CabinBaggage)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayNameFor(modelitem => modelitem.FacilitiesFlight.Baggage)
+            @Html.DisplayFor(modelitem => modelitem.FacilitiesFlight.Baggage)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.SeatLayout)
+        </dd>
+        <dt class = "col-sm-2">
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelitem => modelitem.SeatPitch)
+        </dd>        
+    </dl>
+</div>
+<div>
+    <a asp-action="GetAllFlight">Back to List</a>
+</div>
