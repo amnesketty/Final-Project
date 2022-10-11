@@ -1,0 +1,39 @@
+@model lounga.Dto.Hotels.SearchHotelDto
+@{
+    ViewData["Title"] = "Main";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form asp-action="SearchHotel">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="BookingDate" class="control-label"></label>
+            <input asp-for="BookingDate" class="form-control" />
+            <span asp-validation-for="BookingDate" class="text-danger"></span>
+        </div>   
+        <div class="form-group">
+            <label asp-for="TotalRoom" class="control-label"></label>
+            <input asp-for="TotalRoom" class="form-control" />
+            <span asp-validation-for="TotalRoom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Duration" class="control-label"></label>
+            <input asp-for="Duration" class="form-control" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>   
+        <div class="form-group">
+                <input type="submit" value="SearchHotel" class="btn btn-primary"/>
+        </div>
+    </form>
+
+    @* <a asp-controller="ViewFlights" asp-action="FindFlight">Find Flight</a>
+    <a asp-controller="ViewHotels" asp-action="FindHotel">Find Hotel</a> *@
+    <a asp-action="HistoryTransaction">History Transaction</a>
+</div> 

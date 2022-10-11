@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.User;
 using lounga.Services.AuthServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,16 +22,40 @@ namespace lounga.Controllers
             _authService = authService;
         }
 
-        public async Task<IActionResult> GetUser (String username, String password)
+        public IActionResult Login()
         {
-            UserLoginDto userLoginDto = new UserLoginDto
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("Username, Password")] UserLoginDto userLoginDto)
+        {
+            if (ModelState.IsValid)
             {
-                Username = username,
-                Password = password
-            };
-            var response = await _authService.Login(userLoginDto);
-            UserProfileDto user = response.Data;
-            return View(user);
+                var response = await _authService.Login(userLoginDto);
+                UserProfileDto user = response.Data;
+                HttpContext.Session.SetString("Token", user.Token);
+                return RedirectToAction("Main", "ViewHome");
+            }
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("FirstName, LastName, Username, Email, Phone, Password")] UserRegisterDto userRegisterDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _authService.Register(userRegisterDto);
+                int user = response.Data;
+                return RedirectToAction(nameof(Login));
+            }
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

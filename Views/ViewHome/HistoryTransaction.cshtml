@@ -1,0 +1,16 @@
+@model lounga.Dto.User.UserTransactionDto
+@{
+    ViewData["Title"] = "HistoryTransaction";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <p>
+        @Html.DisplayNameFor(Model => Model.Username)
+    </p>
+    <p>
+        @Html.DisplayFor(Model => Model.Username)
+    </p>
+    <a asp-action="Main">Back to Main Page</a>
+</div>
