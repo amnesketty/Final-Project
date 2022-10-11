@@ -7,16 +7,13 @@
 
 <div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Photos)
-        </dt>
-        <dd class = "col-sm-10">
-            @foreach (var Photos in Model.Photos)
+    <p style= "">
+        @foreach (var Photos in Model.Photos)
             {
                 <img src = "@Html.DisplayFor(model => Photos.Image)" width="200" height="300">
             }
-        </dd>
+    </p>
+    <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
@@ -32,20 +29,6 @@
     </dl>
     <hr />
     <h4>Room(s)</h4>
-    @* <d1 class = "row">
-        @foreach (var Room in Model.Rooms)
-        {
-            <dt class = "col-sm-2">
-                @Html.DisplayFor(model => Room.Type)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => Room.Price)
-            </dd>
-            <dd class = "col-sm-10">
-                <a asp-action="Select Room" asp-route-id="@Room.id">Select Room</a>
-            </dd>
-        }
-    </d1> *@
     @foreach (var Room in Model.Rooms)
     {
         <table class = "table">
@@ -57,7 +40,7 @@
                     @Html.DisplayFor(model => Room.Price)
                 </tbody>
                 <tbody>
-                    <a asp-action="Select Room" asp-route-id="@Room.id">Select Room</a>
+                    <a asp-action="BookingHotel" asp-route-id="@Room.id">Select Room</a>
                 </tbody>
             </tbody>
         </table>

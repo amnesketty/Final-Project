@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using lounga.Dto.BookingHotels;
 
 namespace lounga.Controllers
 {
@@ -21,12 +22,16 @@ namespace lounga.Controllers
         private readonly ILogger<ViewHotelsController> _logger;
         private readonly IHotelService _hotelService;
         private readonly IFindHotelService _findHotelService;
+        private readonly IBookingHotelService _bookingHotelService;
+        private readonly IGuestService _guestService;
 
-        public ViewHotelsController(ILogger<ViewHotelsController> logger, IHotelService hotelService, IFindHotelService findHotelService)
+        public ViewHotelsController(ILogger<ViewHotelsController> logger, IHotelService hotelService, IFindHotelService findHotelService, IBookingHotelService bookingHotelService, IGuestService guestService)
         {
             _logger = logger;
             _hotelService = hotelService;
             _findHotelService = findHotelService;
+            _bookingHotelService = bookingHotelService;
+            _guestService = guestService;
         }
 
         public async Task<IActionResult> GetHotel(int id)
@@ -52,6 +57,13 @@ namespace lounga.Controllers
             GetHotelDto hotelDto = response.Data;
             return View(hotelDto);
 
+        }
+
+        public async Task<IActionResult> BookingHotel(AddGuestDto addGuest)
+        {
+            var response = await _guestService.AddGuest(addGuest);
+            GetGuestDto guestDto = response.Data;
+            return View(addGuest);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
