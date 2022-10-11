@@ -9,7 +9,7 @@ namespace lounga.Dto.Web
 {
     public class SearchDto
     {
-        FindFlightDto? findFlightDto{get; set;}
-        SearchHotelDto? searchHotelDto{get; set;}
+        public FindFlightDto findFlightDto{get; set;}
+        public SearchHotelDto searchHotelDto{get; set;}
     }
 }
