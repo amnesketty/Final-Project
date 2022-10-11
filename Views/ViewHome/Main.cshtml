@@ -1,4 +1,4 @@
-@model lounga.Dto.Hotels.SearchHotelDto
+@model lounga.Dto.Web.SearchDto
 @{
     ViewData["Title"] = "Main";
 }
@@ -9,27 +9,60 @@
     <form asp-action="SearchHotel">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="City" class="control-label"></label>
-            <input asp-for="City" class="form-control" />
-            <span asp-validation-for="City" class="text-danger"></span>
+            <label asp-for="searchHotelDto.City" class="control-label"></label>
+            <input asp-for="searchHotelDto.City" class="form-control" />
+            <span asp-validation-for="searchHotelDto.City" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="BookingDate" class="control-label"></label>
-            <input asp-for="BookingDate" class="form-control" />
-            <span asp-validation-for="BookingDate" class="text-danger"></span>
+            <label asp-for="searchHotelDto.BookingDate" class="control-label"></label>
+            <input asp-for="searchHotelDto.BookingDate" class="form-control" />
+            <span asp-validation-for="searchHotelDto.BookingDate" class="text-danger"></span>
         </div>   
         <div class="form-group">
-            <label asp-for="TotalRoom" class="control-label"></label>
-            <input asp-for="TotalRoom" class="form-control" />
-            <span asp-validation-for="TotalRoom" class="text-danger"></span>
+            <label asp-for="searchHotelDto.TotalRoom" class="control-label"></label>
+            <input asp-for="searchHotelDto.TotalRoom" class="form-control" />
+            <span asp-validation-for="searchHotelDto.TotalRoom" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Duration" class="control-label"></label>
-            <input asp-for="Duration" class="form-control" />
-            <span asp-validation-for="Duration" class="text-danger"></span>
+            <label asp-for="searchHotelDto.Duration" class="control-label"></label>
+            <input asp-for="searchHotelDto.Duration" class="form-control" />
+            <span asp-validation-for="searchHotelDto.Duration" class="text-danger"></span>
         </div>   
         <div class="form-group">
                 <input type="submit" value="SearchHotel" class="btn btn-primary"/>
+        </div>
+    </form>
+    <br>
+        <form asp-action="SearchFlight">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="findFlightDto.DestinationFrom" class="control-label"></label>
+            <input asp-for="findFlightDto.DestinationFrom" class="form-control" />
+            <span asp-validation-for="findFlightDto.DestinationFrom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="findFlightDto.DestinationTo" class="control-label"></label>
+            <input asp-for="findFlightDto.DestinationTo" class="form-control" />
+            <span asp-validation-for="findFlightDto.DestinationTo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="findFlightDto.SeatClass" class="control-label"></label>
+            <input asp-for="findFlightDto.SeatClass" class="form-control" />
+            <span asp-validation-for="findFlightDto.SeatClass" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="findFlightDto.AmountPassenger" class="control-label"></label>
+            <input asp-for="findFlightDto.AmountPassenger" class="form-control" />
+            <span asp-validation-for="findFlightDto.AmountPassenger" class="text-danger"></span>
+        </div> 
+        <div class="form-group">
+            <label asp-for="findFlightDto.DepartureDate" class="control-label"></label>
+            <input asp-for="findFlightDto.DepartureDate" class="form-control" />
+            <span asp-validation-for="findFlightDto.DepartureDate" class="text-danger"></span>
+        </div>   
+
+        <div class="form-group">
+                <input type="submit" value="SearchFlight" class="btn btn-primary"/>
         </div>
     </form>
 
