@@ -32,7 +32,7 @@ namespace lounga.Controllers
             List<GetFlightDto> getFlightDtos = response.Data;
             return View(getFlightDtos);
         }
-
+        
         public async Task<IActionResult>FindFlight (String SeatClass, String AmountPassenger, String DestinationFrom, String DestinationTo, String DepartureDate)
         {
             FindFlightDto request = new FindFlightDto

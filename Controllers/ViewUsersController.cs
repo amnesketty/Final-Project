@@ -36,7 +36,7 @@ namespace lounga.Controllers
                 var response = await _authService.Login(userLoginDto);
                 UserProfileDto user = response.Data;
                 HttpContext.Session.SetString("Token", user.Token);
-                return RedirectToAction(nameof(HistoryTransaction));
+                return RedirectToAction("Main", "ViewHome");
             }
             return View();
         }
@@ -56,14 +56,6 @@ namespace lounga.Controllers
                 return RedirectToAction(nameof(Login));
             }
             return View();
-        }
-
-        [Authorize]
-        public async Task<IActionResult> HistoryTransaction ()
-        {
-            var response = await _authService.GetUserTransaction();
-            UserTransactionDto userTransactionDto = response.Data;
-            return View(userTransactionDto);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
