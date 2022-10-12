@@ -21,9 +21,17 @@ body {
 /* coba */
 /* sidebar menu */
 
+.table
+{
+  background-color: pink;
+ width: 900pt;
+ margin-left: 10%;
+ margin-right: 100%;
+}
+
 .sidenav {
   height: 100%; /* tinggi penuh menyesuaikan dengan layar device */
-  width: 250px; /* lebar sidebar */
+  width:180px; /* lebar sidebar */
   position: fixed; /* posisi tetap ketika halaman di scroll */
   z-index: 1; /* posisi paling atas dari semua konten */
   top: 0; /* posisi paling atas pada layar device */
