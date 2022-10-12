@@ -1,61 +1,74 @@
 @model lounga.Dto.User.UserRegisterDto
 @{
     ViewData["Title"] = "Register";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, " />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
 
-<div>
-    <form asp-action="Register">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="FirstName" class="control-label"></label>
-            <input asp-for="FirstName" class="form-control" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
+<body class="body-landing">
+    <div class = "card-register">
+        <div>
+            <img src="https://res.cloudinary.com/du5w56akk/image/upload/v1665547476/logo-lounga_f4ce7k.png"
+                alt="Lounga.png" height="120px" width="120px" style="margin-left:36%;margin-right:36%;">
         </div>
-        <div class="form-group">
-            <label asp-for="LastName" class="control-label"></label>
-            <input asp-for="LastName" class="form-control" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div> 
-        <div class="form-group">
-            <label asp-for="Username" class="control-label"></label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+        <h1 style="text-align:center; color:#E67E22; margin-bottom:20px">
+            <b>REGISTER</b>
+        </h1>
+        <div class = "auth-form">
+            <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class = "input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input class="input-field" type="text" placeholder="First Name" name="FirstName">
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class = "input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input class="input-field" type="text" placeholder="Last Name" name="LastName">
+                    <span asp-validation-for="LastName"></span>
+                </div>
+                <div class = "input-container">
+                    <i class="fa fa-user icon"></i>
+                    <input class="input-field" type="text" placeholder="Username" name="Username">
+                    <span asp-validation-for="Username"></span>
+                </div>
+                <div class = "input-container">
+                    <i class="fa fa-envelope icon"></i>
+                    <input class="input-field" type="text" placeholder="Email" name="Email">
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class = "input-container">
+                    <i class="fa fa-phone icon"></i>
+                    <input class="input-field" type="text" placeholder="Phone" name="Phone">
+                    <span asp-validation-for="Phone"></span>
+                </div> 
+                <div class = "input-container">
+                    <i class="fa fa-key icon"></i>
+                    <input class="input-field" type="password" placeholder="Password" name="Password">
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="REGISTER" class="btn btn-lounga"/>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+        <div>
+            <p style="text-align:center; color:#E67E22;">Already have an account?
+                <a asp-action="Login" style="color: white;">Login Now</a>
+            </p>
         </div>
-        <div class="form-group">
-            <label asp-for="Phone" class="control-label"></label>
-            <input asp-for="Phone" class="form-control" />
-            <span asp-validation-for="Phone" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password" class="control-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>  
-        <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary"/>
-        </div>
-    </form>
-
-    <div>
-        <p>Already have an account? </p>
-        <a asp-action="Login">Login</a>
     </div>
-
-    @* <form method="post" asp-controller="ViewUsers" asp-action="GetUser">
-        Username <input type="text" name="username"/>
-        <br>
-        Password <input type="password" name="password"/>
-        <br>
-        <input type="submit" value="login"/>
-    </form> *@
-</div>
+</body>
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
