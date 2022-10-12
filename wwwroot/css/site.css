@@ -20,14 +20,32 @@ body {
 
 /* coba */
 /* sidebar menu */
-
-.table
-{
-  background-color: pink;
- width: 900pt;
- margin-left: 10%;
- margin-right: 100%;
+.button {
+  background-color: #E67E22;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 0px;
+  cursor: pointer;
+  border-radius: 5%;
 }
+
+.findflightheader {
+  border-radius: 4px;
+  padding: 15px;
+  background: #E67E22;
+  color: black;
+  font-size: 20px;
+  margin-bottom:5px;
+  color: #f1f1f1;
+  flex: 1;
+  -ms-flex: 1;
+  }
 
 .sidenav {
   height: 100%; /* tinggi penuh menyesuaikan dengan layar device */

@@ -6,65 +6,87 @@
 <h1>@ViewData["Title"]</h1>
 </div> *@
 <div >
-<h1>List Of Flight</h1>
-
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-            @Html.DisplayNameFor(modelitem => modelitem.getFlightDtos.FirstOrDefault().Airline)
-            </th>
-            <th>
-            @Html.DisplayNameFor(modelitem => modelitem.getFlightDtos.FirstOrDefault().DepartureTime)
-            </th>
-            <th>
-            @Html.DisplayNameFor(modelitem => modelitem.getFlightDtos.FirstOrDefault().DestinationFrom)
-            </th>
-            <th>
-            @Html.DisplayNameFor(modelitem => modelitem.getFlightDtos.FirstOrDefault().DestinationTo)
-            </th>
-            <th>
-            @Html.DisplayNameFor(modelitem => modelitem.getFlightDtos.FirstOrDefault().Price)
-            </th>
-        </tr>
-    </thead>
-</tbody>
-    @foreach (var item in Model.getFlightDtos){
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Airline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Select Flight", "BookingFlight", 
-                new {departureDate = Model.findFlightDto.DepartureDate, amountPassenger = Model.findFlightDto.AmountPassenger, flightId = item.Id})
-            </td>
-            @* <td>
-                <a asp-action="BookingFlight" asp-route-id="@item.Id">Select Flight</a> 
-                <a asp-action="DetailFlights" asp-route-id="@item.Id">Details</a>
-            </td> *@
-        </tr>
-    }
-</table>
-<div class="sidenav">
-  <a href="#"><i class="fa-light fa-square-user"></i>My Profile</a>
-  <a href="#">My Order</a>
-  <a href="#">Find Ticket</a>
-  <a href="#">Logout</a>
-</div> 
-
-
+@* <header>List Of Flight in @Model.findFlightDto.DestinationFrom | @Model.findFlightDto.DestinationTo </header> *@
+<div class="findflightheader">
+    <dl class="row">
+        <dt class="col-sm-2">
+        <h6>Airline Name</h6>
+        </dt>
+        <dt class="col-sm-2">
+        <h6>Destination From </h6>
+        </dt>
+        <dt class="col-sm-1">
+        </dt>
+        <dt class="col-sm-2">
+        <h6>Destination To</h6>
+        </dt>
+        <dt class="col-sm-2">
+        <h6>Seat Class</h6>
+        </dt>
+        <dt class="col-sm-2">
+        <h6>Facilities</h6>
+        </dt>
+        <dt class="col-sm-1">
+        <h6>Price</h6>
+        </dt>
+    </dl>
 </div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+@foreach (var item in Model.getFlightDtos){
+    <div class="card">
+        <dl class = "row">
+            <dt class = "col-sm-0">
+                <br>
+                <dt class="col-sm-2">
+                <h4 style="text-align:center " ><b>@Html.DisplayFor(modelItem => item.Airline)</b></h4>
+                <i class="material-icons"  style="color: #E67E22; margin-left:70px; font-size:40px" >flight</i>
+
+            </dt>
+            <dd class = "col-sm-2">
+                <div class="container" >
+                    <p>@Html.DisplayFor(modelItem => item.DepartureTime)</p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.DestinationFrom)
+
+                    </p>
+                </div>
+            </dd>
+            <dd class="col-sm-1">
+                <div>
+                    <i class="material-icons"  style="color: grey; margin-left:10px; font-size:40px" >arrow_right_alt</i>
+                </div>
+            </dd>
+            <dd class = "col-sm-2">
+                <div class="container" style="align-content: center;" >
+                    <p>@Html.DisplayFor(modelItem => item.ArrivalTime)</p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.DestinationTo)
+
+                    </p>
+                </div>
+            </dd>
+            <dd class = "col-sm-2">
+                <div class="container" >
+                    <p>@Html.DisplayFor(modelItem => item.SeatClass)</p>
+
+                </div>
+            </dd>
+             <dd class="col-sm-1">
+                <div>
+                    <i class="material-icons"  style="color: grey; margin-right:10px; font-size:30px" >luggage</i>
+                    <i class="material-icons"  style="color: grey; margin-right:10px; font-size:30px" >wifi</i>
+                    <i class="material-icons"  style="color: grey; margin-right:10px; font-size:30px" >restaurant</i>
+                </div>
+            <dd class = "col-sm-2" style="color: #E67E22;">
+                <p>IDR @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                <p style="color: grey;">/Pax</p>
+                @Html.ActionLink("Select", "BookingFlight", 
+                new {departureDate = Model.findFlightDto.DepartureDate, amountPassenger = Model.findFlightDto.AmountPassenger, flightId = item.Id}, new { @class = "button" })
+            </dd>
+        </dl>
+    </div>
+    <br>
+}
