@@ -5,51 +5,56 @@
     
 }
 
-<h1>@ViewData["Title"]</h1>
+<style>
+.button {
+  background-color: #E67E22;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
 
-<div>
-    <table class = "table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(modelItem => modelItem.findHotelDtos.FirstOrDefault().Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(modelItem => modelItem.findHotelDtos.FirstOrDefault().Rating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(modelItem => modelItem.findHotelDtos.FirstOrDefault().Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(modelItem => modelItem.findHotelDtos.FirstOrDefault().Phone)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.findHotelDtos){
-                <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Rating)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Phone)
-                        </td>
-                        <td>
-                            @Html.ActionLink("DetailHotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
-                                totalRoom = Model.searchHotelDto.TotalRoom, hotelId = item.id})
-                        </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<h3>List of Hotels in @Model.searchHotelDto.City</h3>
+<br>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+@foreach (var item in Model.findHotelDtos)
+{
+    <div class="card">
+        <dl class = "row">
+            <dt class = "col-sm-2">
+                <img src="@Html.DisplayFor(modelItem => item.Photos[0].Image)" width="200" height="250">
+            </dt>
+            <dd class = "col-sm-7">
+                <div class="container" >
+                    <h4><b>@Html.DisplayFor(modelItem => item.Name)</b></h4>
+                    <p>@Html.DisplayFor(modelItem => item.Phone)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Address)</p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                        <i class="material-icons" style="color: yellow;">star</i>
+                    </p>
+                </div>
+            </dd>
+            <dd class = "col-sm-3">
+                <br>
+                <p>
+                    Start from Rp 
+                    @Html.DisplayFor(modelItem => item.Rooms[0].Price)
+                    /room/night
+                </p>
+                @Html.ActionLink("DetailHotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
+                                totalRoom = Model.searchHotelDto.TotalRoom, hotelId = item.id}, new { @class = "button" })
+            </dd>
+        </dl>
+    </div>
+    <br>
+}

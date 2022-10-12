@@ -1,52 +1,7 @@
-@* @model lounga.Dto.Hotels.GetHotelDto *@
 @model lounga.Dto.Web.WebDetailHotelDto
 @{
     ViewData["Title"] = "DetailHotel";
 }
-
-@* <h1>@Html.DisplayFor(model => model.Name)</h1>
-
-<div>
-    <hr />
-    <p style= "">
-        @foreach (var Photos in Model.Photos)
-            {
-                <img src = "@Html.DisplayFor(model => Photos.Image)" width="200" height="300">
-            }
-    </p>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-    </dl>
-    <hr />
-    <h4>Room(s)</h4>
-    @foreach (var Room in Model.Rooms)
-    {
-        <table class = "table">
-            <tbody>
-                <tbody>
-                    @Html.DisplayFor(model => Room.Type)
-                </tbody>
-                <tbody>
-                    @Html.DisplayFor(model => Room.Price)
-                </tbody>
-                <tbody>
-                    <a asp-action="BookingHotel" asp-route-id="@Room.id">Select Room</a>
-                </tbody>
-            </tbody>
-        </table>
-    }
-</div> *@
 
 <h1>@Html.DisplayFor(model => model.getHotelDto.Name)</h1>
 
@@ -87,7 +42,6 @@
                 <tbody>
                     @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
                         totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id})
-                    @* <a asp-action="BookingHotel" asp-route-id="@Room.id">Select Room</a> *@
                 </tbody>
             </tbody>
         </table>
