@@ -1,0 +1,73 @@
+.body-landing {
+    background-image: url('https://res.cloudinary.com/du5w56akk/image/upload/v1665556117/Landing_aespgy.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.card-register {
+    border-radius: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    height: 94%;
+    width: 30%;
+    background-color: black;
+    padding: 1%;
+    position: fixed;
+    bottom: 3%;
+    left: 35%;
+    opacity: 85%;
+}
+
+.card-login {
+    border-radius: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    height: 60%;
+    width: 30%;
+    background-color: black;
+    padding: 1%;
+    position: fixed;
+    bottom: 20%;
+    left: 35%;
+    opacity: 85%;
+}
+
+.auth-form {
+    margin: 0px 30px;
+    color: white;
+}
+
+/* Style the input container */
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+    padding: 15px;
+    background: #E67E22;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+/* Set a style for the submit button */
+.btn-lounga {
+    background-color: #E67E22;
+    color: white;
+    margin-top: 15px;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 26;
+    font-weight: bold;
+}
