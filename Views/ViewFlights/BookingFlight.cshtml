@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Airline)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(modelitem => modelitem.getFlightDto.Airline[0])
+            @Html.DisplayFor(modelitem => modelitem.getFlightDto.Airline)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DepartureTime)
@@ -93,7 +93,7 @@
 
 <h1>Detail of Passenger</h1>
 <hr>
-<div class="row">
+@* <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -112,17 +112,33 @@
                 <input asp-for="addPassengerDto.IdCard" class="form-control" />
                 <span asp-validation-for="addPassengerDto.IdCard" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div> *@
             <div class="form-group">
                 <input type="submit" value="BookingFlight" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+</div> *@
+
+@using (Html.BeginForm("BookingFlight","ViewFlights", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.bookingDate)
+    @Html.HiddenFor(m => m.destinationFrom)
+    @Html.HiddenFor(m => m.destinationTo)
+    @Html.HiddenFor(m => m.amountPassenger)
+    @Html.HiddenFor(m => m.totalPrice)
+    @Html.HiddenFor(m => m.flightId)
+    for (var i=0; i < @Model.amountPassenger; i++)
+    {
+        <label> Passenger @(i+1) : </label><br>
+        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Title)<br>
+        @Html.TextBoxFor(m=>m.addPassengerDtos[i].Title, new {htmlAttributes = new {@type = "text"}})<br>
+        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Name)<br>
+        @Html.TextBoxFor(m=>m.addPassengerDtos[i].Name, new {htmlAttributes = new {@type = "text"}})<br>
+        @Html.DisplayNameFor(m => m.addPassengerDtos[i].IdCard)<br>
+        @Html.TextBoxFor(m=>m.addPassengerDtos[i].IdCard, new {htmlAttributes = new {@type = "text"}})<br>
+    }
+    <input class="btn btn-primary" type="submit" value="Book Now"/>
+}
 
 <div>
     <a asp-action="GetAllFlight">Back to List</a>

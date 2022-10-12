@@ -4,11 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.BookingFlight;
+using lounga.Dto.Data;
 using lounga.Dto.Flight;
 using lounga.Dto.Web;
 using lounga.Model;
+using lounga.Services.BookingFlightService;
 using lounga.Services.FacilitiesFlightService;
 using lounga.Services.FlightService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -20,13 +23,19 @@ namespace lounga.Controllers
         private readonly ILogger<ViewFlightsController> _logger;
         private readonly IFacilitiesFlightService _facilitiesFlightService;
         private readonly IFlightService _flightService;
+        private readonly IFlightService _findFlightService;
+        private readonly IBookingFlightService _bookingFlightService;
+        private readonly IPassengerService _passengerService;
    
        
-        public ViewFlightsController(ILogger<ViewFlightsController> logger, IFlightService flightService, IFacilitiesFlightService facilitiesFlightService)
+        public ViewFlightsController(ILogger<ViewFlightsController> logger, IFlightService flightService, IFacilitiesFlightService facilitiesFlightService, IFlightService findFlightService, IBookingFlightService bookingFlightService,IPassengerService passengerService)
         {
             _logger = logger;
             _facilitiesFlightService = facilitiesFlightService;
             _flightService = flightService;
+            _findFlightService = findFlightService;
+            _bookingFlightService = bookingFlightService;
+            _passengerService = passengerService;
           ;
         }
 
@@ -36,53 +45,85 @@ namespace lounga.Controllers
             List<GetFlightDto> getFlightDtos = response.Data;
             return View(getFlightDtos);
         }
-
-        public async Task<IActionResult>FindFlight (FindFlightDto request)
+        [Authorize]
+        public async Task<IActionResult> FindFlight(FindFlightDto findFlightDto)
         {
-            var response = await _flightService.FindFlight(request);
-            List<GetFlightDto> findFlightDtos = response.Data;
-            return View(findFlightDtos);
+            var response = await _findFlightService.FindFlight(findFlightDto);
+            List<GetFlightDto> getFlightDtos = response.Data;
+            WebFindFlightDto webFindFlightDto = new WebFindFlightDto
+            {
+                findFlightDto = findFlightDto,
+                getFlightDtos = getFlightDtos,
+            };
+            return View(webFindFlightDto);
         }
 
-
-        public async Task<IActionResult> DetailFlights(int id)
+        public async Task<IActionResult> DetailFlights(DateTime departureDate, int amountPassenger, int flightId)
         {
 
-            var response = await _flightService.GetFlightDtoById(id);
+            var response = await _flightService.GetFlightDtoById(flightId);
             GetFlightDto getFlightbyId = response.Data;
             return View(getFlightbyId);
         }
-
-        public IActionResult BookingFlight()
+        [Authorize]
+        public async Task<IActionResult> BookingFlight(DateTime departureDate, int amountPassenger, int flightId)
         {
-            return View();
+            var response = await _flightService.GetFlightDtoById(flightId);
+            WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto
+            {
+                bookingDate = departureDate,
+                destinationFrom = response.Data.DestinationFrom,
+                destinationTo = response.Data.DestinationTo,
+                amountPassenger = amountPassenger,
+                totalPrice = amountPassenger*response.Data.Price,
+                flightId = flightId,
+                getFlightDto = response.Data,
+            };
+            return View(webBookingFlightDto);
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BookingFlight([Bind("Title, Name, IdCard")] AddPassengerDto addPassengerDto, int id)
+        public async Task<IActionResult> BookingFlight( WebBookingFlightDto webBookingFlightDto)
         {
-            
-            // WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto
-            // {
-            //     getFlightDto = getFlightDto,
-            //     // addPassengerDto = addPassengerDto
-            // };
-            WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto{
-                    addPassengerDto = addPassengerDto,
-            };
-            var response = await _flightService.GetFlightDtoById(id);
-            GetFlightDto getFlightbyId = response.Data;
-            return View(getFlightbyId);
-            if (ModelState.IsValid)
+            Console.WriteLine(webBookingFlightDto.bookingDate.ToUniversalTime().ToString());
+            Console.WriteLine(webBookingFlightDto.addPassengerDtos[0].Name);
+            AddBookingFlightDto addBookingFlightDto = new AddBookingFlightDto 
             {
-                return RedirectToAction("BookFlight", webBookingFlightDto);
-                // var response = await _authService.Login(userLoginDto);
-                // UserProfileDto user = response.Data;
-                // HttpContext.Session.SetString("Token", user.Token);
-                // return RedirectToAction("Main", "ViewHome");
+                BookingDate= webBookingFlightDto.bookingDate.ToUniversalTime(),
+                DestinationFrom = webBookingFlightDto.destinationFrom,
+                DestinationTo = webBookingFlightDto.destinationTo,
+                AmountPassenger = webBookingFlightDto.amountPassenger,
+                TotalPrice = webBookingFlightDto.totalPrice,
+                FlightId = webBookingFlightDto.flightId,
+            };
+            var responseAddBookingFlight = await _bookingFlightService.AddBookingFlight(addBookingFlightDto);
+            int bookingFlightId = responseAddBookingFlight.Data.Id;
+            List<AddPassengerDto> addPassengerDtos = new List<AddPassengerDto>();
+            foreach( AddPassengerDto addPassengerDto in webBookingFlightDto.addPassengerDtos)
+            {
+                addPassengerDto.BookingFlightId = bookingFlightId;
+                addPassengerDtos.Add(addPassengerDto);
             }
-            return RedirectToAction(nameof(BookingFlight));
+            RequestData<AddPassengerDto> data = new RequestData<AddPassengerDto>
+            {
+                data = addPassengerDtos
+            };
+            var responseAddPassenger = await _passengerService.AddListPassenger(data);
+
+            // WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto{
+            //         addPassengerDto = addPassengerDto,
+            // };
+            // var response = await _flightService.GetFlightDtoById(id);
+            // GetFlightDto getFlightbyId = response.Data;
+            // return View(getFlightbyId);
+            // if (ModelState.IsValid)
+            // {
+            //     return RedirectToAction("BookFlight", webBookingFlightDto);
+
+            // }
+            return RedirectToAction("Main", "ViewHome");
         }
 
 
