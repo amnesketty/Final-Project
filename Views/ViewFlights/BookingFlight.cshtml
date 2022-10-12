@@ -2,14 +2,15 @@
 @{
     ViewData["Title"] = "BookingFlight";
 }
-
-<h1>Detail of Flight</h1>
-
-@* <h4>Movie</h4>
-<hr /> *@
+<head>
+    <link rel="stylesheet" href="~/css/detail-flight.css" asp-append-version="true" />
+</head>
 
 <div>
-    <hr />
+    <dl class="detailflightheader container">
+        <p>DETAIL OF FLIGHT</p>
+    </dl>
+<div>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Airline)
@@ -17,42 +18,50 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.Airline)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DepartureTime)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.DepartureTime)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.ArrivalTime)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.ArrivalTime)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DestinationFrom)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationFrom)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.DestinationTo)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationTo)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Price)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.Price)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.SeatClass)
         </dt>
+        
         <dd class = "col-sm-10">
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatClass)
         </dd>
+        <hr>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(modelitem => modelitem.getFlightDto.Aircraft)
         </dt>
@@ -87,6 +96,7 @@
             @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatPitch)
         </dd>        
     </dl>
+    <hr>
 </div>
 
 <br>
