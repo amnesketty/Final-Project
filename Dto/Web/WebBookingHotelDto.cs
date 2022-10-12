@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace lounga.Dto.Web
 {
-    public class WebGuestHotelDto
+    public class WebBookingHotelDto
     {
         public DateTime bookingDate {get; set;}
         public string name {get; set; } = string.Empty;

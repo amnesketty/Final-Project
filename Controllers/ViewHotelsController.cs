@@ -72,7 +72,7 @@ namespace lounga.Controllers
         [Authorize]
         public IActionResult BookingHotel(DateTime bookingDate, string name, int totalRoom, int price, int hotelId, int roomId)
         {
-            WebGuestHotelDto webGuestHotelDto = new WebGuestHotelDto
+            WebBookingHotelDto webBookingHotelDto = new WebBookingHotelDto
             {
                 bookingDate = bookingDate,
                 name = name,
@@ -81,36 +81,32 @@ namespace lounga.Controllers
                 hotelId = hotelId,
                 roomId = roomId
             };
-            return View(webGuestHotelDto);
+            return View(webBookingHotelDto);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> BookingHotel([Bind("bookingDate, name, totalRoom, price, hotelId, roomId, guestName, email, phone")] WebGuestHotelDto webGuestHotelDto)
+        public async Task<IActionResult> BookingHotel([Bind("bookingDate, name, totalRoom, price, hotelId, roomId, guestName, email, phone")] WebBookingHotelDto webBookingHotelDto)
         {
-            Console.WriteLine(webGuestHotelDto.name);
-            Console.WriteLine(webGuestHotelDto.guestName);
-            Console.WriteLine(webGuestHotelDto.bookingDate.ToString());
-            Console.WriteLine(webGuestHotelDto.bookingDate.ToUniversalTime().ToString());
             if (ModelState.IsValid)
             {
                 AddBookingHotelDto addBookingHotelDto = new AddBookingHotelDto
                 {
-                    BookingDate = webGuestHotelDto.bookingDate.ToUniversalTime(),
-                    Name = webGuestHotelDto.name,
-                    TotalRoom = webGuestHotelDto.totalRoom,
-                    Price = webGuestHotelDto.price,
-                    HotelId = webGuestHotelDto.hotelId,
-                    RoomId = webGuestHotelDto.roomId
+                    BookingDate = webBookingHotelDto.bookingDate.ToUniversalTime(),
+                    Name = webBookingHotelDto.name,
+                    TotalRoom = webBookingHotelDto.totalRoom,
+                    Price = webBookingHotelDto.price,
+                    HotelId = webBookingHotelDto.hotelId,
+                    RoomId = webBookingHotelDto.roomId
                 };
                 var responseAddBookingHotel = await _bookingHotelService.AddBookingHotel(addBookingHotelDto);
                 int bookingHotelId = responseAddBookingHotel.Data.Id;
                 AddGuestDto addGuestDto = new AddGuestDto
                 {
-                    Name = webGuestHotelDto.guestName,
-                    Email = webGuestHotelDto.email,
-                    Phone = webGuestHotelDto.phone,
+                    Name = webBookingHotelDto.guestName,
+                    Email = webBookingHotelDto.email,
+                    Phone = webBookingHotelDto.phone,
                     BookingHotelId = bookingHotelId
                 };
                 var responseAddGuest = await _guestService.AddGuest(addGuestDto);
