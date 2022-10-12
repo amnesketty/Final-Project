@@ -41,8 +41,7 @@ namespace lounga.Controllers
             GetHotelDto hotelDto = response.Data;
             return View(hotelDto);
         }
-        
-        
+
         public async Task<IActionResult> FindHotel(SearchHotelDto searchHotelDto)
         {
             var response = await _findHotelService.FindHotel(searchHotelDto);
@@ -52,54 +51,68 @@ namespace lounga.Controllers
                 searchHotelDto = searchHotelDto,
                 findHotelDtos = findHotelDto
             };
-            //return View(findHotelDto);
             return View(webFindHotelDto);
         }
 
-        // public async Task<IActionResult> DetailHotel(int id)
-        // {
-        //     var response = await _hotelService.GetHotelById(id);
-        //     GetHotelDto hotelDto = response.Data;
-        //     return View(hotelDto);
-        // }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DetailHotel([Bind("SearchHotelDto, FindHotelDto")]WebBookingHotelDto webBookingHotelDto)
+        [Authorize]
+        public async Task<IActionResult> DetailHotel(DateTime bookingDate, int totalRoom, int hotelId)
         {
-            Console.WriteLine(webBookingHotelDto.searchHotelDto.City);
+            var response = await _hotelService.GetHotelById(hotelId);
+            WebDetailHotelDto webBookingHotelDto = new WebDetailHotelDto
+            {
+                bookingDate = bookingDate,
+                name = response.Data.Name,
+                totalRoom = totalRoom,
+                hotelId = hotelId,
+                getHotelDto = response.Data
+            };
+            return View(webBookingHotelDto);
+        }
+    
+        [Authorize]
+        public IActionResult BookingHotel(DateTime bookingDate, string name, int totalRoom, int price, int hotelId, int roomId)
+        {
+            WebBookingHotelDto webBookingHotelDto = new WebBookingHotelDto
+            {
+                bookingDate = bookingDate,
+                name = name,
+                totalRoom = totalRoom,
+                price = price,
+                hotelId = hotelId,
+                roomId = roomId
+            };
             return View(webBookingHotelDto);
         }
 
-        public String DetailHotelFind(FindHotelDto findHotelDto)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> BookingHotel([Bind("bookingDate, name, totalRoom, price, hotelId, roomId, guestName, email, phone")] WebBookingHotelDto webBookingHotelDto)
         {
-            return findHotelDto.Name;
-        }
-
-        public String DetailHotelSearch(SearchHotelDto searchHotelDto)
-        {
-            return searchHotelDto.City;
-        }
-        // public IActionResult DetailHotel(WebBookingHotelDto webBookingHotelDto)
-        // {
-        //     if (webBookingHotelDto.findHotelDto.Name != null)
-        //     {
-        //         Console.WriteLine(webBookingHotelDto.findHotelDto.Name);
-        //     }
-        //     Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        //     // WebBookingHotelDto webBookingHotelDto = new WebBookingHotelDto
-        //     // {
-        //     //     findHotelDto = findHotelDto,
-        //     //     searchHotelDto = searchHotelDto
-        //     // };
-        //     return View(webBookingHotelDto);
-        // }
-
-        public async Task<IActionResult> BookingHotel(AddGuestDto addGuest)
-        {
-            var response = await _guestService.AddGuest(addGuest);
-            //var responseAddBookingHotel = await _bookingHotelService.AddBookingHotel()
-            GetGuestDto guestDto = response.Data;
-            return View(addGuest);
+            if (ModelState.IsValid)
+            {
+                AddBookingHotelDto addBookingHotelDto = new AddBookingHotelDto
+                {
+                    BookingDate = webBookingHotelDto.bookingDate.ToUniversalTime(),
+                    Name = webBookingHotelDto.name,
+                    TotalRoom = webBookingHotelDto.totalRoom,
+                    Price = webBookingHotelDto.price,
+                    HotelId = webBookingHotelDto.hotelId,
+                    RoomId = webBookingHotelDto.roomId
+                };
+                var responseAddBookingHotel = await _bookingHotelService.AddBookingHotel(addBookingHotelDto);
+                int bookingHotelId = responseAddBookingHotel.Data.Id;
+                AddGuestDto addGuestDto = new AddGuestDto
+                {
+                    Name = webBookingHotelDto.guestName,
+                    Email = webBookingHotelDto.email,
+                    Phone = webBookingHotelDto.phone,
+                    BookingHotelId = bookingHotelId
+                };
+                var responseAddGuest = await _guestService.AddGuest(addGuestDto);
+                return RedirectToAction("Main", "ViewHome");
+            }
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

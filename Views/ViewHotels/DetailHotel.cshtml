@@ -1,5 +1,5 @@
 @* @model lounga.Dto.Hotels.GetHotelDto *@
-@model lounga.Dto.Web.WebBookingHotelDto
+@model lounga.Dto.Web.WebDetailHotelDto
 @{
     ViewData["Title"] = "DetailHotel";
 }
@@ -48,33 +48,33 @@
     }
 </div> *@
 
-<h1>@Html.DisplayFor(model => model.findHotelDto.Name)</h1>
+<h1>@Html.DisplayFor(model => model.getHotelDto.Name)</h1>
 
 <div>
     <hr />
     <p style= "">
-        @foreach (var Photos in Model.findHotelDto.Photos)
+        @foreach (var Photos in Model.getHotelDto.Photos)
             {
                 <img src = "@Html.DisplayFor(model => Photos.Image)" width="200" height="300">
             }
     </p>
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.findHotelDto.Address)
+            @Html.DisplayNameFor(model => model.getHotelDto.Address)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.findHotelDto.Address)
+            @Html.DisplayFor(model => model.getHotelDto.Address)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.findHotelDto.Phone)
+            @Html.DisplayNameFor(model => model.getHotelDto.Phone)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.findHotelDto.Phone)
+            @Html.DisplayFor(model => model.getHotelDto.Phone)
         </dd>
     </dl>
     <hr />
     <h4>Room(s)</h4>
-    @foreach (var Room in Model.findHotelDto.Rooms)
+    @foreach (var Room in Model.getHotelDto.Rooms)
     {
         <table class = "table">
             <tbody>
@@ -85,7 +85,9 @@
                     @Html.DisplayFor(model => Room.Price)
                 </tbody>
                 <tbody>
-                    <a asp-action="BookingHotel" asp-route-id="@Room.id">Select Room</a>
+                    @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
+                        totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id})
+                    @* <a asp-action="BookingHotel" asp-route-id="@Room.id">Select Room</a> *@
                 </tbody>
             </tbody>
         </table>
