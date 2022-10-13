@@ -1,6 +1,7 @@
 @model lounga.Dto.Web.WebDetailHotelDto
 @{
     ViewData["Title"] = "DetailHotel";
+    var uniqueTipe = Model.getHotelDto.Rooms.Select(r => r.Type).Distinct().ToList();
 }
 
 <style>
@@ -190,24 +191,28 @@
             </div>
         <hr />
         <h4>Room(s)</h4>
-        @foreach (var Room in Model.getHotelDto!.Rooms!)
+        @for (int i = 0; i < uniqueTipe.Count(); i++)
         {
-        <div class="ctnr">
-            <dl class = "row">
-                <dt class = "col-sm-4" style="display:flex;align-items:center;">
-                    @Html.DisplayFor(model => Room.Type)
-                </dt>
-                <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
-                    Rp @Html.DisplayFor(model => Room.Price)
-                </dd>
-                <dd class = "col-sm-3" style="display:flex;align-items:center;">
-                    @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
-                                totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id}, new { @class = "button" })
-                </dd>
-            </dl>
-        </div>
-        <br>
+            var Room = Model.getHotelDto!.Rooms!.FirstOrDefault(r => r.Type == uniqueTipe[i]);
+            
+            <div class="ctnr">
+                <dl class = "row">
+                    <dt class = "col-sm-4" style="display:flex;align-items:center;">
+                        @Html.DisplayFor(model => Room.Type)
+                    </dt>
+                    <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
+                        Rp @Html.DisplayFor(model => Room.Price)
+                    </dd>
+                    <dd class = "col-sm-3" style="display:flex;align-items:center;">
+                        @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
+                                    totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id}, new { @class = "button" })
+                    </dd>
+                </dl>
+            </div>
+            <br>
+            
         }
+        
     </div>
 </body>
 
