@@ -46,6 +46,11 @@
   padding-bottom: 5px;
 }
 
+.all { 
+    display:flex;    
+    justify-content:space-between; 
+}
+
 </style>
 
 <script>
@@ -101,16 +106,88 @@
         </dl>
         <hr />
         <h4>Facilities</h4>
-            @if (Model.getHotelDto.FacilitiesHotel.Gym == true)
-            {
-                <mat-icon style= "color: red"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
-            }
-            else if (Model.getHotelDto.FacilitiesHotel.Gym == false)
-            {
-                <mat-icon style= "color: green"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
-            }
+            <div class="all">
+                @if (Model.getHotelDto.FacilitiesHotel.AirConditioner == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.AirConditioner == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
+                }
+                
+                @if (Model.getHotelDto.FacilitiesHotel.Television == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Television == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
+                }
 
+                @if (Model.getHotelDto.FacilitiesHotel.Wifi == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Wifi == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
+                }
 
+                @if (Model.getHotelDto.FacilitiesHotel.Restaurant == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Restaurant == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Spa == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Spa == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
+                }
+                
+                @if (Model.getHotelDto.FacilitiesHotel.Pool == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Pool == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Playground == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Playground == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Gym == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Gym == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Parking == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Parking == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+                }
+            </div>
         <hr />
         <h4>Room(s)</h4>
         @foreach (var Room in Model.getHotelDto!.Rooms!)
