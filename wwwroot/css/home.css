@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    /* font-family: "Open Sans"; */
+    background: #F3f3f3;
+    /* color: #ecf0f1; */
+    line-height: 1.618em;
+}
+.wrapper {
+    max-width: 40rem;
+    width: 100%;
+    margin: 0 auto;
+}
+.tabs {
+    position: relative;
+    margin: 4rem 0;
+    background: #E67E22;
+    height: 28rem;
+}
+.tabs::before,
+.tabs::after {
+    content: "";
+    display: table;
+}
+.tabs::after {
+    clear: both;
+}
+.tab {
+    float: left;
+}
+.tab-switch {
+    display: none;
+}
+.tab-label {
+    position: relative;
+    display: block;
+    line-height: 2.75em;
+    height: 3em;
+    padding: 0 1.618em;
+    /* background: #d2451b; */
+    background: #E67E22;
+    /* border-right: 0.125rem solid #d2451b; */
+    color: #fff;
+    cursor: pointer;
+    top: 0;
+    transition: all 0.25s;
+}
+.tab-label:hover {
+    top: -0.25rem;
+    transition: top 0.25s;
+}
+.tab-content {
+    height: 25.5rem;
+    width: 40rem;
+    position: absolute;
+    z-index: 1;
+    top: 2.75em;
+    left: 0;
+    padding: 1.618rem;
+    background: #fff;
+    color: #2c3e50;
+    border-bottom: 0.25rem solid #bdc3c7;
+    opacity: 0;
+    transition: all 0.35s;
+}
+.tab-switch:checked + .tab-label {
+    background: #fff;
+    color: #2c3e50;
+    border-bottom: 0;
+    border-right: 0.125rem solid #fff;
+    transition: all 0.35s;
+    z-index: 1;
+    top: -0.0625rem;
+}
+.tab-switch:checked + label + .tab-content {
+    z-index: 2;
+    opacity: 1;
+    transition: all 0.35s;
+}
+
+/* form content */
+.column {
+    float: left;
+    width: 50%;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the input container */
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+    padding-top: 10px;
+    background: white;
+    color: #E67E22;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+/* Set a style for the submit button */
+.btn-lounga {
+    background-color: #E67E22;
+    color: white;
+    margin-top: 25px;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 26;
+    font-weight: bold;
+}
