@@ -44,6 +44,15 @@ namespace lounga.Controllers
             }
             return View();
         }
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetString("Token") != null)
+            {
+                HttpContext.Session.Remove("Token");
+                return RedirectToAction(nameof(Login));
+            }
+            return RedirectToAction(nameof(Login));
+        }
 
         public IActionResult Register()
         {
