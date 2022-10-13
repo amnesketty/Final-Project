@@ -38,9 +38,8 @@ namespace lounga.Controllers
                 {
                     UserProfileDto user = response.Data;
                     HttpContext.Session.SetString("Token", user.Token);
-                    return RedirectToAction("Main", "ViewHome");
+                    return RedirectToAction("Main", "ViewHome");                    
                 }
-                return View();
             }
             return View();
         }
