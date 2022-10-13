@@ -60,11 +60,7 @@
                     <p style="color: grey;">IDR  <span style="color:#E67E22;">@Html.DisplayFor(modelitem => modelitem.getFlightDto.Price)/Person</span></p>
         </div>
 </div>
-
 <br>
-
-
-
 <div class="ctr0dp">
     <div class="ctrdp">
             <h3 style="color: whitesmoke;">Booking Summary</h3>
@@ -102,7 +98,15 @@
         
         <div class="ctr2dp">
         @Html.DisplayNameFor(m => m.addPassengerDtos[i].Title)<br>
-        @Html.TextBoxFor(m=>m.addPassengerDtos[i].Title, new {@type = "text", @class="textboxdp"})<br>
+        @* @Html.TextBoxFor(m=>m.addPassengerDtos[i].Title, new {@type = "text", @class="textboxdp"})<br> *@
+        @Html.DropDownListFor(m => m.addPassengerDtos[i].Title,                 
+                  new List<SelectListItem> { 
+                       new SelectListItem { Value = "Mr." , Text = "Mr." },
+                       new SelectListItem { Value = "Ms." , Text = "Ms." },
+                       new SelectListItem { Value = "Mrs." , Text = "Mrs." }
+                    },
+                  new { @class="myselect"})
+
         </div>
         <div class="ctr2dp">
         @Html.DisplayNameFor(m => m.addPassengerDtos[i].Name)<br>
