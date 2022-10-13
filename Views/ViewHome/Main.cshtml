@@ -7,8 +7,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, " />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"/>
@@ -17,11 +15,11 @@
     <script>
     function changeHotelImage()
     {
-        document.getElementById("body1").style.backgroundColor = "yellow";
+        document.getElementById("body1").style.backgroundImage = "url(https://res.cloudinary.com/du5w56akk/image/upload/v1665639961/hotel_ejgmrb.jpg)";
     }
     function changeFlightImage()
     {
-        document.getElementById("body1").style.backgroundColor = "gray";
+        document.getElementById("body1").style.backgroundImage = "url(https://res.cloudinary.com/du5w56akk/image/upload/v1665639967/flight_cq5nx2.jpg)";
     }
     </script>
 </head>
@@ -37,43 +35,35 @@
             <div class="tab-content">
                 <form asp-action="SearchHotel">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label style="margin-bottom: 0.5rem;">City</label>
-                        <div class = "input-container">
-                            <i class="fa-solid fa-location-dot icon" style="font-size: 25px;"></i>
-                            <input asp-for="searchHotelDto.City" class="input-field" />
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label style="margin-bottom: 0.5rem;">Check-In</label>
-                        <div class = "input-container">
-                            <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
-                            <input asp-for="searchHotelDto.BookingDate" class="input-field" />
-                        </div>
+                    <label style="margin-bottom: 0.5rem;">City</label>
+                    <div class = "input-container">
+                        <i class="fa-solid fa-location-dot icon" style="font-size: 25px;"></i>
+                        <input asp-for="searchHotelDto.City" class="input-field" />
                     </div>
+
+                    <label style="margin-bottom: 0.5rem;">Check-In</label>
+                    <div class = "input-container">
+                        <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
+                        <input asp-for="searchHotelDto.BookingDate" class="input-field" />
+                    </div>
+
                     <div class = "row">
                         <div class = "column">
-                            <div class="form-group">
-                                <label style="margin-bottom: 0.5rem;">Total Room</label>
-                                <div class = "input-container">
-                                    <i class="fa fa-bed icon" style="font-size: 25px;"></i>
-                                    <input asp-for="searchHotelDto.TotalRoom" class="input-field" />
-                                </div>
+                            <label style="margin-bottom: 0.5rem;">Total Room</label>
+                            <div class = "input-container">
+                                <i class="fa fa-bed icon" style="font-size: 25px;"></i>
+                                <input asp-for="searchHotelDto.TotalRoom" class="input-field" />
                             </div>
                         </div>
                         <div class = "column">
-                            <div class="form-group">
-                                <label style="margin-bottom: 0.5rem;">Duration</label>
-                                <div class = "input-container">
-                                    <i class="fas fa-clock icon" style="font-size: 25px;"></i>
-                                    <input asp-for="searchHotelDto.Duration" class="input-field" />
-                                </div>
-                            </div> 
+                            <label style="margin-bottom: 0.5rem;">Duration</label>
+                            <div class = "input-container">
+                                <i class="fas fa-clock icon" style="font-size: 25px;"></i>
+                                <input asp-for="searchHotelDto.Duration" class="input-field" />
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                            <input type="submit" value="SearchHotel" class="btn btn-lounga"/>
-                    </div>
+                    <input type="submit" value="SearchHotel" class="btn btn-lounga"/>
                 </form>
             </div>
         </div>
@@ -116,13 +106,11 @@
                     </div>
 
                     <div class = "row">
-                        <div class="form-group">
-                            <label style="margin-bottom: 0.5rem;">Departure Date</label>
-                            <div class = "input-container">
-                                <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
-                                <input asp-for="findFlightDto.DepartureDate" class="input-field" />
-                            </div>
-                        </div> 
+                        <label style="margin-bottom: 0.5rem;">Departure Date</label>
+                        <div class = "input-container">
+                            <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
+                            <input asp-for="findFlightDto.DepartureDate" class="input-field" />
+                        </div>
                     </div>
 
                     <div class = "row">
@@ -145,9 +133,7 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="form-group">
-                            <input type="submit" value="SearchFlight" class="btn btn-lounga"/>
-                    </div>
+                    <input type="submit" value="SearchFlight" class="btn btn-lounga"/>
                 </form>
             </div>
         </div>

@@ -127,3 +127,8 @@ body {
     font-size: 26;
     font-weight: bold;
 }
+
+#body1 {
+    background-image:url(https://res.cloudinary.com/du5w56akk/image/upload/v1665639961/hotel_ejgmrb.jpg);
+    background-size: cover;
+}
