@@ -3,70 +3,142 @@
     ViewData["Title"] = "Main";
 }
 
-<h1>@ViewData["Title"]</h1>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, " />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"/>
 
-<div>
-    <form asp-action="SearchHotel">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="searchHotelDto.City" class="control-label"></label>
-            <input asp-for="searchHotelDto.City" class="form-control" />
-            <span asp-validation-for="searchHotelDto.City" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="searchHotelDto.BookingDate" class="control-label"></label>
-            <input asp-for="searchHotelDto.BookingDate" class="form-control" />
-            <span asp-validation-for="searchHotelDto.BookingDate" class="text-danger"></span>
-        </div>   
-        <div class="form-group">
-            <label asp-for="searchHotelDto.TotalRoom" class="control-label"></label>
-            <input asp-for="searchHotelDto.TotalRoom" class="form-control" />
-            <span asp-validation-for="searchHotelDto.TotalRoom" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="searchHotelDto.Duration" class="control-label"></label>
-            <input asp-for="searchHotelDto.Duration" class="form-control" />
-            <span asp-validation-for="searchHotelDto.Duration" class="text-danger"></span>
-        </div>   
-        <div class="form-group">
-                <input type="submit" value="SearchHotel" class="btn btn-primary"/>
-        </div>
-    </form>
-    <br>
-        <form asp-action="SearchFlight">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="findFlightDto.DestinationFrom" class="control-label"></label>
-            <input asp-for="findFlightDto.DestinationFrom" class="form-control" />
-            <span asp-validation-for="findFlightDto.DestinationFrom" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="findFlightDto.DestinationTo" class="control-label"></label>
-            <input asp-for="findFlightDto.DestinationTo" class="form-control" />
-            <span asp-validation-for="findFlightDto.DestinationTo" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="findFlightDto.SeatClass" class="control-label"></label>
-            <input asp-for="findFlightDto.SeatClass" class="form-control" />
-            <span asp-validation-for="findFlightDto.SeatClass" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="findFlightDto.AmountPassenger" class="control-label"></label>
-            <input asp-for="findFlightDto.AmountPassenger" class="form-control" />
-            <span asp-validation-for="findFlightDto.AmountPassenger" class="text-danger"></span>
-        </div> 
-        <div class="form-group">
-            <label asp-for="findFlightDto.DepartureDate" class="control-label"></label>
-            <input asp-for="findFlightDto.DepartureDate" class="form-control" />
-            <span asp-validation-for="findFlightDto.DepartureDate" class="text-danger"></span>
-        </div>   
+    <script>
+    function changeHotelImage()
+    {
+        document.getElementById("body1").style.backgroundImage = "url(https://res.cloudinary.com/du5w56akk/image/upload/o_30,q_100/v1665639961/hotel_ejgmrb.jpg)";
+    }
+    function changeFlightImage()
+    {
+        document.getElementById("body1").style.backgroundImage = "url(https://res.cloudinary.com/du5w56akk/image/upload/o_30,q_100/v1665642050/plane_e1gohe.jpg)";
+    }
+    </script>
+</head>
+<body id="body1">
+<div class="wrapper">
+    <div class="tabs">
+        <div class="tab">
+            <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch" onclick="changeHotelImage()">
+            <label for="tab-1" class="tab-label">
+                <i class='fa fa-building'></i>   
+                <b>Find Your Hotel</b>
+            </label>
+            <div class="tab-content">
+                <form asp-action="SearchHotel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label style="margin-bottom: 0.5rem;">City</label>
+                    <div class = "input-container">
+                        <i class="fa-solid fa-location-dot icon" style="font-size: 25px;"></i>
+                        <input asp-for="searchHotelDto.City" class="input-field" />
+                    </div>
 
-        <div class="form-group">
-                <input type="submit" value="SearchFlight" class="btn btn-primary"/>
-        </div>
-    </form>
+                    <label style="margin-bottom: 0.5rem;">Check-In</label>
+                    <div class = "input-container">
+                        <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
+                        <input asp-for="searchHotelDto.BookingDate" class="input-field" />
+                    </div>
 
-    @* <a asp-controller="ViewFlights" asp-action="FindFlight">Find Flight</a>
-    <a asp-controller="ViewHotels" asp-action="FindHotel">Find Hotel</a> *@
-    <a asp-action="HistoryTransaction">History Transaction</a>
-</div> 
+                    <div class = "row">
+                        <div class = "column">
+                            <label style="margin-bottom: 0.5rem;">Total Room</label>
+                            <div class = "input-container">
+                                <i class="fa fa-bed icon" style="font-size: 25px;"></i>
+                                <input asp-for="searchHotelDto.TotalRoom" class="input-field" />
+                            </div>
+                        </div>
+                        <div class = "column">
+                            <label style="margin-bottom: 0.5rem;">Duration</label>
+                            <div class = "input-container">
+                                <i class="fas fa-clock icon" style="font-size: 25px;"></i>
+                                <input asp-for="searchHotelDto.Duration" class="input-field" />
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="SearchHotel" class="btn btn-lounga"/>
+                </form>
+            </div>
+        </div>
+        <div class="tab">
+            <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" onclick="changeFlightImage()">
+            <label for="tab-2" class="tab-label">
+                <i class='fa fa-plane'></i>  
+                <b>Find Your Flight</b>
+            </label>
+            <div class="tab-content">
+                <form asp-action="SearchFlight">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="column">
+                            <label style="margin-bottom: 0.5rem;">From</label>
+                            <div class = "input-container">
+                            <i class="fas fa-plane-departure icon" style="font-size: 25px;"></i>
+                            <select class="input-field" name="findFlightDto.DestinationFrom" id="=findFlightDto.DestinationFrom">
+                                <option value="Yogyakarta (YIA)">Yogyakarta (YIA)</option>
+                                <option value="Medan (KNO)">Medan (KNO)</option>
+                                <option value="Jakarta (CGK)">Jakarta (CGK)</option>
+                                <option value="Semarang (SRG)">Semarang (SRG)</option>
+                                <option value="Makassar (UPG)">Makassar (UPG)</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label style="margin-bottom: 0.5rem;">To</label>
+                            <div class = "input-container">
+                            <i class="fas fa-plane-arrival icon" style="font-size: 25px;"></i>
+                            <select class="input-field" name="findFlightDto.DestinationTo" id="findFlightDto.DestinationTo">
+                                <option value="Yogyakarta (YIA)">Yogyakarta (YIA)</option>
+                                <option value="Medan (KNO)">Medan (KNO)</option>
+                                <option value="Jakarta (CGK)">Jakarta (CGK)</option>
+                                <option value="Semarang (SRG)">Semarang (SRG)</option>
+                                <option value="Makassar (UPG)">Makassar (UPG)</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                        <label style="margin-bottom: 0.5rem;">Departure Date</label>
+                        <div class = "input-container">
+                            <i class="fa fa-calendar icon" style="font-size: 25px;"></i>
+                            <input asp-for="findFlightDto.DepartureDate" class="input-field" />
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                        <div class = "column">
+                            <label style="margin-bottom: 0.5rem;">Seat Class</label>
+                            <div class = "input-container">
+                                <i class="fas fa-couch icon" style="font-size: 25px;"></i>
+                                <select class="input-field" name="findFlightDto.SeatClass" id="findFlightDto.SeatClass">
+                                    <option value="Economy">Economy</option>
+                                    <option value="Business">Business</option>
+                                    <option value="First Class">First Class</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class = "column">
+                            <label style="margin-bottom: 0.5rem;">Amount Passenger</label>
+                            <div class="input-container">
+                                <i class="fas fa-group icon" style="font-size: 25px;"></i>
+                                <input asp-for="findFlightDto.AmountPassenger" class="input-field" />
+                            </div> 
+                        </div>
+                    </div>
+                    <input type="submit" value="SearchFlight" class="btn btn-lounga"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
