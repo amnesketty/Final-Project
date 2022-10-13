@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "BookingHotel";
 }
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="~/css/BookingHotel.css" asp-append-version="true" />
@@ -45,7 +51,7 @@
                         <input asp-for="totalRoom" class="form-control" type="hidden" value="@Model.totalRoom"/>
                     </div> 
                     <div class="form-group">
-                        <input asp-for="price" class="form-control" type="hidden" value="@Model.price * @Model.totalRoom"/>
+                        <input asp-for="price" class="form-control" type="hidden" value="@Model.price"/>
                     </div> 
                     <div class="form-group">
                         <input asp-for="hotelId" class="form-control" type="hidden" value="@Model.hotelId"/>
@@ -81,6 +87,41 @@
                     </div>
                 </form>
             </div>
+            
+
+            @* <div class="modal">
+                    <h2>Modal Example</h2>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Open modal
+                    </button>
+                    <p class="text-center">klik ini muncul pop up <a data-toggle="modal" data-target="#myModal" href="#exampleModal">Klik Disini</a></p>
+
+
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Success</h4>
+                                    <a asp-action="Main" asp-controller="ViewHome">
+                                        <button type="button" class="close">&times;</button>
+                                    </a>
+                                </div>
+                                <div class="modal-body">
+                                    Booking has been created!
+                                </div>
+                                <div class="modal-footer">
+                                    <a asp-action="Main" asp-controller="ViewHome">
+                                        <button type="button" class="btn btn-danger" >Close</button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div> *@
+
         </dd>
     </div>
 </div>

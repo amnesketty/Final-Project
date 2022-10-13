@@ -28,6 +28,7 @@
     padding-left: 15px;
     padding-bottom: 5px;
     border-radius: 7px;
+    width: 960px;
     background-color: #E67E22;
   }
   
@@ -42,3 +43,11 @@
     grid-template-columns: auto 1fr;
     align-items: center;
   }
+  
+.ctrnotfound
+{
+    margin-right: 10cm;
+    padding-right: 50%;
+    padding-left: 45%;
+    padding-top: 100px;
+}
