@@ -38,9 +38,12 @@ namespace lounga.Controllers
                 {
                     UserProfileDto user = response.Data;
                     HttpContext.Session.SetString("Token", user.Token);
+                    ViewData["loginStatus"] = response.Message;
                     return RedirectToAction("Main", "ViewHome");
-                }
-                return View();
+                }               
+                ViewData["loginStatus"] = response.Message;
+                return View();                   
+                
             }
             return View();
         }
@@ -68,10 +71,23 @@ namespace lounga.Controllers
                 if (response.Success == true)
                 {
                     int user = response.Data;
+                    ViewData["registerStatus"] = response.Message;
                     return RedirectToAction(nameof(Login));
                 }
+                ViewData["registerStatus"] = response.Message;
                 return View();
             }
+            return View();
+        }
+        public async Task<IActionResult> Profile()
+        {
+            var responseUser = await _authService.Profile();
+            //UserProfileDto userProfileDto = responseUser.Data;
+            ViewData["userProfileDto"] = responseUser.Data;
+            var responseTransaction = await _authService.GetUserTransaction();
+            ViewData["userTransactionDto"] = responseTransaction.Data;
+            //UserTransactionDto userTransactionDto = responseTransaction.Data;
+            
             return View();
         }
 

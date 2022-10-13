@@ -150,5 +150,21 @@ namespace lounga.Services.AuthServices
             }
             return response;
         }
+
+        public async Task<ServiceResponse<UserProfileDto>> Profile()
+        {
+            ServiceResponse<UserProfileDto> response = new ServiceResponse<UserProfileDto>();
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());   
+                response.Data = _mapper.Map<UserProfileDto>(user);
+                response.Message = "Data successfully retrieved!";
+            } catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
     }
 }
