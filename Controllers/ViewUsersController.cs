@@ -34,9 +34,13 @@ namespace lounga.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _authService.Login(userLoginDto);
-                UserProfileDto user = response.Data;
-                HttpContext.Session.SetString("Token", user.Token);
-                return RedirectToAction("Main", "ViewHome");
+                if (response.Success == true)
+                {
+                    UserProfileDto user = response.Data;
+                    HttpContext.Session.SetString("Token", user.Token);
+                    return RedirectToAction("Main", "ViewHome");
+                }
+                return View();
             }
             return View();
         }
@@ -52,8 +56,12 @@ namespace lounga.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _authService.Register(userRegisterDto);
-                int user = response.Data;
-                return RedirectToAction(nameof(Login));
+                if (response.Success == true)
+                {
+                    int user = response.Data;
+                    return RedirectToAction(nameof(Login));
+                }
+                return View();
             }
             return View();
         }
