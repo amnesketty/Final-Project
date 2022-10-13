@@ -15,46 +15,76 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   margin: 4px 2px;
   cursor: pointer;
 }
-</style>
 
-<h3>List of Hotels in @Model.searchHotelDto.City</h3>
+.ctnr {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: whitesmoke;
+  box-shadow: 0 5px 5px rgba(0,0,0,.1);
+}
+
+.ctr1 {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: #E67E22;
+  @* box-shadow: 0 5px 5px rgba(0,0,0,.1); *@
+}
+
+.ctr {
+  padding-right: 150px;
+  padding-left: 150px;
+}
+</style>
 <br>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-@foreach (var item in Model.findHotelDtos)
-{
-    <div class="card">
-        <dl class = "row">
-            <dt class = "col-sm-2">
-                <img src="@Html.DisplayFor(modelItem => item.Photos[0].Image)" width="200" height="250">
-            </dt>
-            <dd class = "col-sm-7">
-                <div class="container" >
-                    <h4><b>@Html.DisplayFor(modelItem => item.Name)</b></h4>
-                    <p>@Html.DisplayFor(modelItem => item.Phone)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Address)</p>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Rating)
-                        <i class="material-icons" style="color: yellow; font-size:100px;">star</i>
-                    </p>
-                </div>
-            </dd>
-            <dd class = "col-sm-3">
-                <br>
-                <p>
-                    Start from Rp 
-                    @Html.DisplayFor(modelItem => item.Rooms[0].Price)
-                    /room/night
-                </p>
-                @Html.ActionLink("DetailHotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
-                                totalRoom = Model.searchHotelDto.TotalRoom, hotelId = item.id}, new { @class = "button" })
-            </dd>
-        </dl>
+<body>
+    <div >
+    <div class = "ctr">
+        <div class = "ctr1">
+            <h3 style="text-align: center; color: white;">List of Hotels</h3>
+            <h6 style="text-align: center; color: white;">Hotel in  @Model.searchHotelDto.City | @Model.searchHotelDto.BookingDate</h6>
+        </div>
+        @foreach (var item in Model.findHotelDtos)
+        {
+            <div class="ctnr">
+                <dl class = "row">
+                    <dt class = "col-sm-2">
+                        <img src="@Html.DisplayFor(modelItem => item.Photos[0].Image)" width="150" height="200">
+                    </dt>
+                    <dd class = "col-sm-7">
+                        <div class="container" >
+                            <h4><b>@Html.DisplayFor(modelItem => item.Name)</b></h4>
+                            <p>@Html.DisplayFor(modelItem => item.Phone)</p>
+                            <p>@Html.DisplayFor(modelItem => item.Address)</p>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Rating)
+                                <i class="material-icons" style="color: yellow;">star</i>
+                            </p>
+                        </div>
+                    </dd>
+                    <dd class = "col-sm-3">
+                        <br>
+                        <p>
+                            Start from Rp 
+                            @Html.DisplayFor(modelItem => item.Rooms[0].Price)
+                            /room/night
+                        </p>
+                        @Html.ActionLink("Detail Hotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
+                                        totalRoom = Model.searchHotelDto.TotalRoom, hotelId = item.id}, new { @class = "button" })
+                    </dd>
+                </dl>
+            </div>
+            <br>
+        }
     </div>
-    <br>
-}
+    
+
+</body>

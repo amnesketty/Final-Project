@@ -3,47 +3,107 @@
     ViewData["Title"] = "DetailHotel";
 }
 
-<h1>@Html.DisplayFor(model => model.getHotelDto.Name)</h1>
+<style>
+.button {
+  background-color: #E67E22;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
-<div>
-    <hr />
-    <p style= "">
-        @foreach (var Photos in Model.getHotelDto.Photos)
-            {
-                <img src = "@Html.DisplayFor(model => Photos.Image)" width="200" height="300">
-            }
-    </p>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.getHotelDto.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.getHotelDto.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.getHotelDto.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.getHotelDto.Phone)
-        </dd>
-    </dl>
-    <hr />
-    <h4>Room(s)</h4>
-    @foreach (var Room in Model.getHotelDto.Rooms)
-    {
-        <table class = "table">
-            <tbody>
-                <tbody>
+.ctnr {
+  padding-top: 5px;
+  padding-left: 15px;
+  background-color: whitesmoke;
+  box-shadow: 0 5px 5px rgba(0,0,0,.1);
+}
+
+.ctr {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: #E67E22;
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/LATEST-VERSION">
+<body >
+    <div class = "container" style="padding-left:180px ;padding-right:180px">
+        <br>
+        <div class = "ctr">
+            <h1 style="color: white;">@Html.DisplayFor(model => model.getHotelDto!.Name)</h1>
+        </div>
+        
+        <hr/>
+        <marquee behavior="alternate" scrollamount="9">
+            @foreach (var Photos in Model.getHotelDto!.Photos!)
+                {
+                    <img src = "@Html.DisplayFor(model => Photos.Image)" width="400" height="300">
+                }
+        </marquee>
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.getHotelDto!.Rating)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.getHotelDto!.Rating)
+                <i class="material-icons" style="color: yellow;">star</i>
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.getHotelDto!.Address)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.getHotelDto!.Address)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.getHotelDto!.Phone)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.getHotelDto!.Phone)
+            </dd>
+        </dl>
+        <hr />
+        <h4>Facilities</h4>
+        
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.airConditioner === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.television === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.wifi === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.restaurant === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.spa === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.pool === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.playground === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.gym === true" style="color: #E67E22"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
+            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.parking === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+
+        <hr />
+        <h4>Room(s)</h4>
+        @foreach (var Room in Model.getHotelDto!.Rooms!)
+        {
+        <div class="ctnr">
+            <dl class = "row">
+                <dt class = "col-sm-4" style="display:flex;align-items:center;">
                     @Html.DisplayFor(model => Room.Type)
-                </tbody>
-                <tbody>
-                    @Html.DisplayFor(model => Room.Price)
-                </tbody>
-                <tbody>
+                </dt>
+                <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
+                    Rp @Html.DisplayFor(model => Room.Price)
+                </dd>
+                <dd class = "col-sm-3" style="display:flex;align-items:center;">
                     @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
-                        totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id})
-                </tbody>
-            </tbody>
-        </table>
-    }
-</div>
+                                totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id}, new { @class = "button" })
+                </dd>
+            </dl>
+        </div>
+        <br>
+        }
+    </div>
+</body>
+
+
+
