@@ -2,6 +2,11 @@
 @{
     ViewData["Title"] = "FindFlight";
 }
+<head>
+    <link rel="stylesheet" href="~/css/find-flight.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
 <header>
 <div class="findflightheader">
     <dl class="row">
@@ -80,8 +85,9 @@
                 </div>
             <dd class = "col-sm-2" style="color: #E67E22;">
                 <p>IDR @Html.DisplayFor(modelItem => item.Price)
+                    <span style="color: grey;">/Pax </span>
                     </p>
-                <p style="color: grey;">/Pax</p>
+
                 @Html.ActionLink("Select", "BookingFlight", 
                 new {departureDate = Model.findFlightDto.DepartureDate, amountPassenger = Model.findFlightDto.AmountPassenger, flightId = item.Id}, new { @class = "button" })
             </dd>

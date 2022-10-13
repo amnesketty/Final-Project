@@ -1,0 +1,85 @@
+
+/* coba */
+/* sidebar menu */
+.button {
+background-color: #E67E22;
+border: none;
+color: white;
+padding: 10px 25px;
+vertical-align: middle;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+ margin: 2px 0px;
+cursor: pointer;
+border-radius: 5%;
+}
+
+.findflightheader {
+border-radius: 4px;
+padding: 15px;
+background: #E67E22;
+color: black;
+font-size: 20px;
+margin-bottom:5px;
+color: #f1f1f1;
+flex: 1;
+-ms-flex: 1;
+}
+
+.sidenav {
+height: 100%; /* tinggi penuh menyesuaikan dengan layar device */
+width:180px; /* lebar sidebar */
+position: fixed; /* posisi tetap ketika halaman di scroll */
+z-index: 1; /* posisi paling atas dari semua konten */
+top: 0; /* posisi paling atas pada layar device */
+left: 0;
+background-color: #111;
+overflow-x: hidden; /* tidak bisa scroll kesamping */
+padding-top: 300px;}
+
+/* link sidebar */
+.sidenav a {
+padding: 6px 8px 6px 16px;
+text-decoration: none;
+font-size: 25px;
+color: #818181;
+display: block;
+}
+
+/* link sidebar berubah warna ketika mouse melewati text */
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+/* halaman kiri sidebar */
+.main {
+margin-left: 160px; /* lebar sama dengan sidebar */
+padding: 0px 10px;
+}
+
+/* merubah jarak dan ukuran tulisan ketika tinggi layar kurang dari 450px */
+@media screen and (max-height: 450px) {
+.sidenav {padding-top: 15px;}
+.sidenav a {font-size: 20px;}
+}
+
+.card {
+width: 100%;
+height: auto;
+grid-column: span 20;
+margin: 0 0;
+border-radius: 10px;
+position: relative;
+box-shadow: 0 5px 5px rgba(0,0,0,.1);
+}
+.icon {
+width: 80px;
+height: 80px;
+margin: 20px;
+position: relative;
+font-size: 30px;
+color: #ffffff;
+}
+
