@@ -16,5 +16,6 @@ namespace lounga.Dto.Web
         public string guestName {get; set;} = string.Empty;
         public string email {get; set; } = string.Empty;
         public string phone {get; set; } = string.Empty;
+        public string typeRoom { get; set; } = string.Empty;
     }
 }

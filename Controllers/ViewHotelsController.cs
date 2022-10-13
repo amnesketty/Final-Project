@@ -70,7 +70,7 @@ namespace lounga.Controllers
         }
     
         // [Authorize]
-        public IActionResult BookingHotel(DateTime bookingDate, string name, int totalRoom, int price, int hotelId, int roomId)
+        public IActionResult BookingHotel(DateTime bookingDate, string name, int totalRoom, int price, int hotelId, int roomId, string typeRoom)
         {
             WebBookingHotelDto webBookingHotelDto = new WebBookingHotelDto
             {
@@ -79,7 +79,8 @@ namespace lounga.Controllers
                 totalRoom = totalRoom,
                 price = price,
                 hotelId = hotelId,
-                roomId = roomId
+                roomId = roomId,
+                typeRoom = typeRoom
             };
             return View(webBookingHotelDto);
         }
@@ -87,7 +88,7 @@ namespace lounga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // [Authorize]
-        public async Task<IActionResult> BookingHotel([Bind("bookingDate, name, totalRoom, price, hotelId, roomId, guestName, email, phone")] WebBookingHotelDto webBookingHotelDto)
+        public async Task<IActionResult> BookingHotel([Bind("bookingDate, name, totalRoom, price, hotelId, roomId, typeRoom, guestName, email, phone")] WebBookingHotelDto webBookingHotelDto)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +100,7 @@ namespace lounga.Controllers
                     Price = webBookingHotelDto.price,
                     HotelId = webBookingHotelDto.hotelId,
                     RoomId = webBookingHotelDto.roomId
+                    
                 };
                 var responseAddBookingHotel = await _bookingHotelService.AddBookingHotel(addBookingHotelDto);
                 int bookingHotelId = responseAddBookingHotel.Data.Id;

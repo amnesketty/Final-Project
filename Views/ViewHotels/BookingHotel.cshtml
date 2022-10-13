@@ -9,6 +9,7 @@
 .button {
   background-color: #E67E22;
   border: none;
+  border-radius: 7px;
   color: white;
   padding: 15px 32px;
   vertical-align: middle;
@@ -23,7 +24,10 @@
 .ctr {
   padding-top: 15px;
   padding-left: 15px;
+  padding-right: 15px;
   padding-bottom: 5px;
+  height: 500px;
+  border-radius: 7px;
   background-color: #E67E22;
 }
 
@@ -32,77 +36,104 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 5px;
+  border-radius: 7px;
   background-color: whitesmoke;
+  height: 457px;
 }
 
 .ctr0 {
-  padding-right: 200px;
-  padding-left: 200px;
+  @* padding-right: 200px;
+  padding-left: 200px; *@
+  padding-top: 30px;
+  width: 1320px;
   padding-bottom: 5px;
 }
+
+.container {
+  display: grid;
+  padding-left: 0px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
 </style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <div class = "ctr0">
-    @* <h1>Booking Summary</h1> *@
-    <div>
-        <div class= "ctr">
-            <h3 style="color: white;">Booking Summary</h3>
-            <p style="color: white;">Hotel</p>
-            <p style="color: white;">@Html.DisplayFor(model => model.name)</p>
-            <p style="color: white;">Check-in @Model.bookingDate.Date | Check-out @Model.bookingDate.AddDays(1)</p>
-            <p style="color: white;">@Model.totalRoom Room(s)</p>
-        </div>
-        <br>
-        <p><b>Contact's Details</b></p>
-        <div class = "ctr2">
-            <form asp-action="BookingHotel">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                
-                <div class="form-group">
-                    <input asp-for="bookingDate" class="form-control" type="hidden" value="@Model.bookingDate"/>
-                </div> 
-                <div class="form-group">
-                    <input asp-for="name" class="form-control" type="hidden" value="@Model.name"/>
-                </div> 
-                <div class="form-group">
-                    <input asp-for="totalRoom" class="form-control" type="hidden" value="@Model.totalRoom"/>
-                </div> 
-                <div class="form-group">
-                    <input asp-for="price" class="form-control" type="hidden" value="@Model.price"/>
-                </div> 
-                <div class="form-group">
-                    <input asp-for="hotelId" class="form-control" type="hidden" value="@Model.hotelId"/>
-                </div> 
-                <div class="form-group">
-                    <input asp-for="roomId" class="form-control" type="hidden" value="@Model.roomId"/>
-                </div> 
-                <p>Name</p>
-                <div class="form-group">
-                    <input asp-for="guestName" class="form-control" />
-                    <span asp-validation-for="guestName" class="text-danger"></span>
+    <div class ="row">
+        <dd class = "col-sm-6">
+            <div class= "ctr">
+                <h2 style="color: white;">Booking Summary</h2>
+                <br>
+                <div class="container">
+                    <div style="color: black; font-size: 35px"><b>HOTEL &nbsp; </b> 
+                    </div>
+                    <i class="material-icons" style="color: black; font-size: 50px">hotel</i>
                 </div>
                 <br>
-                <div class = "row">
-                    <dd class = "col-sm-6">
-                        <p>Email</p>
-                        <div class="form-group">
-                            <input asp-for="email" class="form-control" />
-                            <span asp-validation-for="email" class="text-danger"></span>
-                         </div>  
-                    </dd>
-                    <dd class = "col-sm-6">
-                        <p>Phone</p>
-                        <div class="form-group">
-                            <input asp-for="phone" class="form-control" />
-                            <span asp-validation-for="phone" class="text-danger"></span>
-                        </div> 
-                    </dd>
-                </div>
+                <p style="color: white; font-size: 30px"><b>@Html.DisplayFor(model => model.name)</b></p>
+                <p style="color: white; font-size: 20px"><b>Check-in: @Model.bookingDate.ToShortDateString() | Check-out: @Model.bookingDate.AddDays(1).ToShortDateString()</b></p>
+                <p style="color: white; font-size: 20px"><b>@Model.totalRoom @Model.typeRoom</b></p>
                 <br>
-                <div class="form-group">
-                        <input type="submit" value="Book Hotel" class="button"/>
-                </div>
-            </form>
-        </div>
-        
+                <br>
+                <br>
+                <br>
+                <hr>
+                <p style="color: white; font-size: 20px" align ="right"><b>Total price for @Model.totalRoom Room(s): IDR @(Model.totalRoom*@Model.price)</b></p>
+            </div>
+        </dd>
+        <dd class = "col-sm-6">
+            <p><b>Contact's Details</b></p>
+            <div class = "ctr2">
+                <form asp-action="BookingHotel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="form-group">
+                        <input asp-for="bookingDate" class="form-control" type="hidden" value="@Model.bookingDate"/>
+                    </div> 
+                    <div class="form-group">
+                        <input asp-for="name" class="form-control" type="hidden" value="@Model.name"/>
+                    </div> 
+                    <div class="form-group">
+                        <input asp-for="totalRoom" class="form-control" type="hidden" value="@Model.totalRoom"/>
+                    </div> 
+                    <div class="form-group">
+                        <input asp-for="price" class="form-control" type="hidden" value="@Model.price * @Model.totalRoom"/>
+                    </div> 
+                    <div class="form-group">
+                        <input asp-for="hotelId" class="form-control" type="hidden" value="@Model.hotelId"/>
+                    </div> 
+                    <div class="form-group">
+                        <input asp-for="roomId" class="form-control" type="hidden" value="@Model.roomId"/>
+                    </div> 
+                    <p><b>Name</b></p>
+                    <div class="form-group">
+                        <input asp-for="guestName" class="form-control" />
+                        <span asp-validation-for="guestName" class="text-danger"></span>
+                    </div>
+                    <br>
+                    <div class = "row">
+                        <dd class = "col-sm-6">
+                            <p><b>Email</b></p>
+                            <div class="form-group">
+                                <input asp-for="email" class="form-control" />
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>  
+                        </dd>
+                        <dd class = "col-sm-6">
+                            <p><b>Phone</b></p>
+                            <div class="form-group">
+                                <input asp-for="phone" class="form-control" />
+                                <span asp-validation-for="phone" class="text-danger"></span>
+                            </div> 
+                        </dd>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                            <input type="submit" value="Book Hotel" class="button"/>
+                    </div>
+                </form>
+            </div>
+        </dd>
     </div>
 </div>

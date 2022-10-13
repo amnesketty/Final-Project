@@ -10,10 +10,11 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb" style="background-color: #d9d9d9;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb" style="background-color: whitesmoke;">
             <div class="container-fluid">
-                @* <a class="navbar-brand" asp-area="" asp-controller="ViewHome" asp-action="Home" style="color: white;">Lounga</a> *@
-                <input type="image" src = "https://res.cloudinary.com/du5w56akk/image/upload/c_scale,w_250/v1665547476/logo-lounga_f4ce7k.png" width="70" height="70" asp-area="" asp-controller="ViewHome" asp-action="Home">
+                <a class="navbar-brand" asp-area="" asp-controller="ViewHome" asp-action="Main">
+                    <img src="https://res.cloudinary.com/du5w56akk/image/upload/c_scale,w_250/v1665547476/logo-lounga_f4ce7k.png" width="70" height="70">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,14 +22,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Login" style="color: #E67E22; font-size:20px">Home</a></b>
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="Main" style="color: #E67E22; font-size:20px">Home</a></b>
+                        </li>
+                        <li class="nav-item">
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="HistoryTransaction" style="color: #E67E22; font-size:20px">My Order</a></b>
+                        </li>
+                        <li class="nav-item">
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="HistoryTransaction" style="color: #E67E22; font-size:20px">My Profile</a></b>
                         </li>
                         <li class="nav-item">
                             <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Register" style="color: #E67E22; font-size:20px">Register</a></b>
                         </li>
-                        <li class="nav-item">
-                            <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Register" style="color: #E67E22; font-size:20px">Register</a></b>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -39,8 +44,7 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - Lounga - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -48,6 +52,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false) *@
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 @model lounga.Dto.Web.WebDetailHotelDto
 @{
     ViewData["Title"] = "DetailHotel";
+    var uniqueTipe = Model.getHotelDto.Rooms.Select(r => r.Type).Distinct().ToList();
 }
 
 <style>
@@ -31,11 +32,44 @@
   padding-bottom: 5px;
   background-color: #E67E22;
 }
+
+.container {
+  display: grid;
+  padding-left: 0px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.ctr0 {
+  padding-right: 200px;
+  padding-left: 200px;
+  width: 1320px;
+  padding-bottom: 5px;
+}
+
+.all { 
+    display:flex;    
+    justify-content:space-between; 
+}
+
 </style>
+
+<script>
+    var airConditioner = model.getHotelDto!.FacilitiesHotel.airConditioner
+
+    var gym = model.getHotelDto!.FacilitiesHotel.gym
+    if gym === true {
+        return <mat-icon style="color: green"></mat-icon>
+    }
+    else {
+        return <mat-icon style="color: red"></mat-icon>
+    }
+
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/LATEST-VERSION">
 <body >
-    <div class = "container" style="padding-left:180px ;padding-right:180px">
+    <div class = "ctr0">
         <br>
         <div class = "ctr">
             <h1 style="color: white;">@Html.DisplayFor(model => model.getHotelDto!.Name)</h1>
@@ -53,8 +87,10 @@
                 @Html.DisplayNameFor(model => model.getHotelDto!.Rating)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.getHotelDto!.Rating)
-                <i class="material-icons" style="color: yellow;">star</i>
+                <div class="container">
+                <div style="color: black;">@Html.DisplayFor(model => model.getHotelDto!.Rating) &nbsp;
+                </div>
+                <i class="material-icons" style="color: orange;">star</i>
             </dd>
             <dt class = "col-sm-2">
                 @Html.DisplayNameFor(model => model.getHotelDto!.Address)
@@ -71,37 +107,112 @@
         </dl>
         <hr />
         <h4>Facilities</h4>
-        
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.airConditioner === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.television === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.wifi === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.restaurant === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.spa === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.pool === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.playground === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.gym === true" style="color: #E67E22"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
-            <mat-icon *ngIf="model.getHotelDto!.FacilitiesHotel.parking === true" style="color: #E67E22;"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+            <div class="all">
+                @if (Model.getHotelDto.FacilitiesHotel.AirConditioner == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.AirConditioner == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">air</i></mat-icon>
+                }
+                
+                @if (Model.getHotelDto.FacilitiesHotel.Television == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Television == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">tv</i></mat-icon>
+                }
 
+                @if (Model.getHotelDto.FacilitiesHotel.Wifi == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Wifi == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">wifi</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Restaurant == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Restaurant == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">restaurant</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Spa == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Spa == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">spa</i></mat-icon>
+                }
+                
+                @if (Model.getHotelDto.FacilitiesHotel.Pool == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Pool == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">pool</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Playground == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Playground == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">landscape</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Gym == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Gym == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">sports</i></mat-icon>
+                }
+
+                @if (Model.getHotelDto.FacilitiesHotel.Parking == true)
+                {
+                    <mat-icon style= "color: #E67E22"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+                }
+                else if (Model.getHotelDto.FacilitiesHotel.Parking == false)
+                {
+                    <mat-icon style= "color: lightgrey"><i class="material-icons" style="font-size: 45px">place</i></mat-icon>
+                }
+            </div>
         <hr />
         <h4>Room(s)</h4>
-        @foreach (var Room in Model.getHotelDto!.Rooms!)
+        @for (int i = 0; i < uniqueTipe.Count(); i++)
         {
-        <div class="ctnr">
-            <dl class = "row">
-                <dt class = "col-sm-4" style="display:flex;align-items:center;">
-                    @Html.DisplayFor(model => Room.Type)
-                </dt>
-                <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
-                    Rp @Html.DisplayFor(model => Room.Price)
-                </dd>
-                <dd class = "col-sm-3" style="display:flex;align-items:center;">
-                    @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
-                                totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id}, new { @class = "button" })
-                </dd>
-            </dl>
-        </div>
-        <br>
+            var Room = Model.getHotelDto!.Rooms!.FirstOrDefault(r => r.Type == uniqueTipe[i]);
+            
+            <div class="ctnr">
+                <dl class = "row">
+                    <dt class = "col-sm-4" style="display:flex;align-items:center;">
+                        @Html.DisplayFor(model => Room.Type)
+                    </dt>
+                    <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
+                        Rp @Html.DisplayFor(model => Room.Price)
+                    </dd>
+                    <dd class = "col-sm-3" style="display:flex;align-items:center;">
+                        @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
+                                    totalRoom = Model.totalRoom, price = Room.Price, hotelId = Model.hotelId, roomId = Room.id, typeRoom = Room.Type}, new { @class = "button" })
+                    </dd>
+                </dl>
+            </div>
+            <br>
+            
         }
+        
     </div>
 </body>
 
