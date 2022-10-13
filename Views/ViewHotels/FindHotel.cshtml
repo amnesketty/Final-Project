@@ -17,6 +17,13 @@
             <h6 style="text-align: center; color: white;">Hotel in  @Model.searchHotelDto.City | @Model.searchHotelDto.BookingDate.ToShortDateString() | @Model.searchHotelDto.TotalRoom Room(s) | @Model.searchHotelDto.Duration Night(s)</h6>
         </div>
         <br>
+
+    @if(Model.findHotelDtos.Count == 0) {
+    <div class="ctrnotfound">
+     @* <p>NOT <span>FOUND</span></p>  *@
+    <i class="material-icons"  style="color: #E67E22; font-size:100px " >search_off</i>
+    </div>
+}
         @foreach (var item in Model.findHotelDtos)
         {
             <div class="ctnr">

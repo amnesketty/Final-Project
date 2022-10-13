@@ -166,8 +166,8 @@
   /* sidenav detail flight */
   .sidenav {
     border-radius: 2%;
-    width: 430px;
-    height: 515px;
+    width: 440px;
+    height: 500px;
     position: fixed;
     z-index: 3;
     top: 112px;

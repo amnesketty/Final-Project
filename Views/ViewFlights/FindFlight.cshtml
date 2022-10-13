@@ -39,6 +39,14 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+@if(Model.getFlightDtos.Count == 0) {
+    <div class="ctrnotfound">
+    <i class="material-icons"  style="color: #E67E22; font-size:100px " >search_off</i>
+        <p style="text-align: center; margin-left:20px; color:#E67E22; "><b>NOT</b></p>
+        <p style="text-align: center; margin-left:10px; color:#E67E22; "><b>FOUND</b></p>
+    </div>
+}
+
 @foreach (var item in Model.getFlightDtos){
     <div class="card">
         <dl class = "row">
