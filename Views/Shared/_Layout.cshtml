@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MvcMovie.styles.css" asp-append-version="true" />
-    
 </head>
 <body>
     <header>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb" style="color: green; background-color: green"> *@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb" style="background-color: #d9d9d9;">
             <div class="container-fluid">
                 @* <a class="navbar-brand" asp-area="" asp-controller="ViewHome" asp-action="Home" style="color: white;">Lounga</a> *@
-                @* <img src="https://res.cloudinary.com/du5w56akk/image/upload/c_scale,w_250/v1665547476/logo-lounga_f4ce7k.png" width="70" height="70" asp-controller="ViewHome" asp-action="Home"> *@
                 <input type="image" src = "https://res.cloudinary.com/du5w56akk/image/upload/c_scale,w_250/v1665547476/logo-lounga_f4ce7k.png" width="70" height="70" asp-area="" asp-controller="ViewHome" asp-action="Home">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +22,9 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Login" style="color: #E67E22; font-size:20px">Home</a></b>
+                        </li>
+                        <li class="nav-item">
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Register" style="color: #E67E22; font-size:20px">Register</a></b>
                         </li>
                         <li class="nav-item">
                             <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Register" style="color: #E67E22; font-size:20px">Register</a></b>
