@@ -24,34 +24,44 @@
   padding-top: 15px;
   padding-left: 15px;
   padding-bottom: 5px;
-  background-color: whitesmoke;
-  box-shadow: 0 5px 5px rgba(0,0,0,.1);
+  border-radius: 10px;
+  position: relative;
+  background-color: white;
+  box-shadow: 0 10px 10px rgba(0,0,0,.1);
 }
 
 .ctr1 {
   padding-top: 15px;
   padding-left: 15px;
   padding-bottom: 5px;
+  border-radius: 7px;
   background-color: #E67E22;
-  @* box-shadow: 0 5px 5px rgba(0,0,0,.1); *@
 }
 
 .ctr {
   padding-right: 150px;
-  padding-left: 150px;
+  padding-left: 175px;
+}
+
+.container {
+  display: grid;
+  padding-left: 0px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
 }
 </style>
 <br>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-<body>
+<body style= "background-color: whitesmoke">
     <div >
     <div class = "ctr">
         <div class = "ctr1">
             <h3 style="text-align: center; color: white;">List of Hotels</h3>
-            <h6 style="text-align: center; color: white;">Hotel in  @Model.searchHotelDto.City | @Model.searchHotelDto.BookingDate</h6>
+            <h6 style="text-align: center; color: white;">Hotel in  @Model.searchHotelDto.City | @Model.searchHotelDto.BookingDate.ToShortDateString() | @Model.searchHotelDto.TotalRoom Room(s) | @Model.searchHotelDto.Duration Night(s)</h6>
         </div>
+        <br>
         @foreach (var item in Model.findHotelDtos)
         {
             <div class="ctnr">
@@ -62,19 +72,23 @@
                     <dd class = "col-sm-7">
                         <div class="container" >
                             <h4><b>@Html.DisplayFor(modelItem => item.Name)</b></h4>
+                            <br>
                             <p>@Html.DisplayFor(modelItem => item.Phone)</p>
+                            <br>
                             <p>@Html.DisplayFor(modelItem => item.Address)</p>
                             <p>
-                                @Html.DisplayFor(modelItem => item.Rating)
-                                <i class="material-icons" style="color: yellow;">star</i>
+                                <div class="container">
+                                    <div style="color: black;">@Html.DisplayFor(modelItem => item.Rating) &nbsp;
+                                </div>
+                                <i class="material-icons" style="color: orange;">star</i>
                             </p>
                         </div>
                     </dd>
                     <dd class = "col-sm-3">
                         <br>
                         <p>
-                            Start from Rp 
-                            @Html.DisplayFor(modelItem => item.Rooms[0].Price)
+                            Start from 
+                            <span style = "color: #E67E22">IDR @Html.DisplayFor(modelItem => item.Rooms[0].Price)</span>
                             /room/night
                         </p>
                         @Html.ActionLink("Detail Hotel", "DetailHotel", new {bookingDate = Model.searchHotelDto.BookingDate,
