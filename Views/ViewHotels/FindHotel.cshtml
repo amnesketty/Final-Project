@@ -19,13 +19,15 @@
         <br>
 
     @if(Model.findHotelDtos.Count == 0) {
-    <div class="ctrnotfound">
-     @* <p>NOT <span>FOUND</span></p>  *@
-    <i class="material-icons"  style="color: #E67E22; font-size:100px " >search_off</i>
-    </div>
-}
+        <div class="ctrnotfound">
+        <i class="material-icons"  style="color: #E67E22; font-size:100px " >search_off</i>
+        <p style="text-align: center; margin-left:20px; color:#E67E22; "><b>NOT</b></p>
+            <p style="text-align: center; margin-left:10px; color:#E67E22; "><b>FOUND</b></p>
+        </div>
+    }
         @foreach (var item in Model.findHotelDtos)
         {
+            
             <div class="ctnr">
                 <dl class = "row">
                     <dt class = "col-sm-2">
