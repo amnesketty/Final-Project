@@ -68,7 +68,7 @@ namespace lounga.Services.AuthServices
                 var user = await _context.Users
                     .FirstOrDefaultAsync(item => item.Username.ToLower() == userLoginDto.Username.ToLower());
 
-                if (user == null)    
+                if (user == null)
                 {
                     response.Success = false;
                     response.Message = "User not found!";
