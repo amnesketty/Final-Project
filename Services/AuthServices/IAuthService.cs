@@ -13,5 +13,6 @@ namespace lounga.Services.AuthServices
         Task<ServiceResponse<UserProfileDto>> Login (UserLoginDto userLoginDto);
         Task<bool> IsRegistered (string Username);
         Task<ServiceResponse<UserTransactionDto>> GetUserTransaction (); 
+        Task<ServiceResponse<UserProfileDto>> Profile ();
     }
 }
