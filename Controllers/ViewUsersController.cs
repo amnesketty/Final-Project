@@ -40,9 +40,10 @@ namespace lounga.Controllers
                     HttpContext.Session.SetString("Token", user.Token);
                     ViewData["loginStatus"] = response.Message;
                     return RedirectToAction("Main", "ViewHome");
-                }                
+                }               
                 ViewData["loginStatus"] = response.Message;
-                return View();
+                return View();                   
+                
             }
             return View();
         }

@@ -57,10 +57,10 @@ namespace lounga.Controllers
             };
             return View(webFindFlightDto);
         }
-
+        [Authorize]
         public async Task<IActionResult> DetailFlights(DateTime departureDate, int amountPassenger, int flightId)
         {
-
+            Console.WriteLine(HttpContext.Session.GetString("Token"));
             var response = await _flightService.GetFlightDtoById(flightId);
             GetFlightDto getFlightbyId = response.Data;
             return View(getFlightbyId);
@@ -112,17 +112,6 @@ namespace lounga.Controllers
             };
             var responseAddPassenger = await _passengerService.AddListPassenger(data);
 
-            // WebBookingFlightDto webBookingFlightDto = new WebBookingFlightDto{
-            //         addPassengerDto = addPassengerDto,
-            // };
-            // var response = await _flightService.GetFlightDtoById(id);
-            // GetFlightDto getFlightbyId = response.Data;
-            // return View(getFlightbyId);
-            // if (ModelState.IsValid)
-            // {
-            //     return RedirectToAction("BookFlight", webBookingFlightDto);
-
-            // }
             return RedirectToAction("Main", "ViewHome");
         }
 

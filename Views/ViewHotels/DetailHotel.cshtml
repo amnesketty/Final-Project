@@ -4,70 +4,8 @@
     var uniqueTipe = Model.getHotelDto.Rooms.Select(r => r.Type).Distinct().ToList();
 }
 
-<style>
-.button {
-  background-color: #E67E22;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.ctnr {
-  padding-top: 5px;
-  padding-left: 15px;
-  background-color: whitesmoke;
-  box-shadow: 0 5px 5px rgba(0,0,0,.1);
-}
-
-.ctr {
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-bottom: 5px;
-  background-color: #E67E22;
-}
-
-.container {
-  display: grid;
-  padding-left: 0px;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-}
-
-.ctr0 {
-  padding-right: 200px;
-  padding-left: 200px;
-  width: 1320px;
-  padding-bottom: 5px;
-}
-
-.all { 
-    display:flex;    
-    justify-content:space-between; 
-}
-
-</style>
-
-<script>
-    var airConditioner = model.getHotelDto!.FacilitiesHotel.airConditioner
-
-    var gym = model.getHotelDto!.FacilitiesHotel.gym
-    if gym === true {
-        return <mat-icon style="color: green"></mat-icon>
-    }
-    else {
-        return <mat-icon style="color: red"></mat-icon>
-    }
-
-</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/LATEST-VERSION">
+<link rel="stylesheet" href="~/css/DetailHotel.css" asp-append-version="true" />
 <body >
     <div class = "ctr0">
         <br>
@@ -201,7 +139,7 @@
                         @Html.DisplayFor(model => Room.Type)
                     </dt>
                     <dd class = "col-sm-5" style="display:flex;align-items:center; color: #E67E22">
-                        Rp @Html.DisplayFor(model => Room.Price)
+                        IDR @Html.DisplayFor(model => Room.Price)
                     </dd>
                     <dd class = "col-sm-3" style="display:flex;align-items:center;">
                         @Html.ActionLink("Select Room", "BookingHotel", new {bookingDate = Model.bookingDate, name = Model.name,
