@@ -1,3 +1,10 @@
+body {
+  /* font-family: "Open Sans"; */
+  /* background: #e0e0e0; */
+  /* color: #ecf0f1; */
+  line-height: 1.6em;
+}
+
 .detailflightheader {
     width: 50cm;
     border-radius: 4px;

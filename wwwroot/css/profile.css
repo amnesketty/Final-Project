@@ -1,8 +1,8 @@
 body {
     /* font-family: "Open Sans"; */
-    background: #e0e0e0;
+    /* background: #e0e0e0; */
     /* color: #ecf0f1; */
-    line-height: 1.618em;
+    line-height: 1.6em;
 }
 .wrapper {
     max-width: 60rem;
@@ -136,4 +136,18 @@ body {
     padding-top: 0.25rem;
     padding-left: 0.25rem;
     background-color: #ffffff;
+}
+
+/* Set a style for the submit button */
+.btn-lounga {
+    background-color: #fff;
+    color: #E67E22;
+    margin-top: 25px;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 26;
+    font-weight: bold;
 }
