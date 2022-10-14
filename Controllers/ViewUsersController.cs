@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using lounga.Dto.User;
+using lounga.Dto.Web;
 using lounga.Services.AuthServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,13 +83,13 @@ namespace lounga.Controllers
         public async Task<IActionResult> Profile()
         {
             var responseUser = await _authService.Profile();
-            //UserProfileDto userProfileDto = responseUser.Data;
-            ViewData["userProfileDto"] = responseUser.Data;
             var responseTransaction = await _authService.GetUserTransaction();
-            ViewData["userTransactionDto"] = responseTransaction.Data;
-            //UserTransactionDto userTransactionDto = responseTransaction.Data;
-            
-            return View();
+            WebProfileDto webProfileDto = new WebProfileDto
+            {
+                userProfileDto = responseUser.Data,
+                userTransactionDto = responseTransaction.Data
+            };
+            return View(webProfileDto);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

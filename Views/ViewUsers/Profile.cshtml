@@ -1,3 +1,4 @@
+@model lounga.Dto.Web.WebProfileDto
 @{
     ViewData["Title"] = "Profile";
     var userProfileDto = ViewData["userProfileDto"];
@@ -6,9 +7,86 @@
 
 <html>
 <head>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, " />
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 <body>
-    
+<div class = "wrapper">
+    <div class = "row">
+        <div class = "column">
+            <img class="content-image" src="@Model.userProfileDto.AvatarImage"
+                alt="Lounga.png" height="120px" width="120px" style="margin-left:28%;margin-right:28%;">
+            <div class="content-profile">
+                <label class="content-label">First Name</label><br>
+                <input class="content-label" asp-for="userProfileDto.FirstName" value="@Model.userProfileDto.FirstName" disabled/><br>
+                <label class="content-label">Last Name</label><br>
+                <input class="content-label" asp-for="userProfileDto.FirstName" value="@Model.userProfileDto.LastName" disabled/><br>
+                <label class="content-label">Email</label><br>
+                <input class="content-label" asp-for="userProfileDto.FirstName" value="@Model.userProfileDto.Email" disabled/><br>
+                <label class="content-label">Phone Number</label><br>
+                <input class="content-label" asp-for="userProfileDto.FirstName" value="@Model.userProfileDto.Phone" disabled/><br>
+            </div>
+            
+        </div>
+        <div class="column2">
+            <h1>
+                <b>Hello, @Model.userProfileDto.FirstName!</b>
+            </h1><br>
+            <div class="tabs">
+                <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                    <label for="tab-1" class="tab-label">
+                        <i class='fa fa-building'></i>   
+                        <b>Hotel History</b>
+                    </label>
+                    <div class="tab-content">
+                        <div class="sidenav">
+                            @foreach (var item in Model.userTransactionDto.BookingHotels)
+                            {
+                                <div class = "card-transaction">
+                                <label style="color: #E67E22"><b>Booking Hotel No. </b></label>
+                                <label style="color: #E67E22"><b>@item.BookingHotelNo</b></label><br>
+                                <label style="font-size: 28px; margin-top: 1rem; margin-bottom: 1rem"><b>@item.Name</b></label><br>
+                                <label>Total Price: </label>
+                                <label>@item.Price</label><br>
+                                <label>Booking Date: </label>
+                                <label>@item.BookingDate.ToString("d MMMM yyyy")</label><br>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-2" checked class="tab-switch">
+                    <label for="tab-2" class="tab-label">
+                        <i class='fa fa-plane'></i>
+                        <b>Flight History</b>
+                    </label>
+                    <div class="tab-content">
+                        <div class="sidenav">
+                            @foreach (var item in Model.userTransactionDto.BookingFlights)
+                            {
+                                <div class = "card-transaction">
+                                <label style="color: #E67E22"><b>Booking Flight No. </b></label>
+                                <label style="color: #E67E22"><b>@item.BookingFlightNo</b></label><br>
+                                <label style="font-size: 28px; margin-top: 1rem; margin-bottom: 1rem">
+                                    <b>@item.DestinationFrom - @item.DestinationTo</b>
+                                </label>
+                                <br>
+                                <label>Total Price: </label>
+                                <label>@item.TotalPrice</label><br>
+                                <label>Booking Date: </label>
+                                <label>@item.BookingDate.ToString("d MMMM yyyy")</label><br>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

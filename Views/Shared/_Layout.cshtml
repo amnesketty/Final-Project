@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Lounga</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script>
         function myFunction(element) {
         alert(element.innerText);
@@ -30,16 +30,13 @@
                             <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="Main" style="color: #E67E22; font-size:20px">Home</a></b>
                         </li>
                         <li class="nav-item">
-                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="HistoryTransaction" style="color: #E67E22; font-size:20px">My Order</a></b>
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="Main" style="color: #E67E22; font-size:20px">Order Ticket Now</a></b>
                         </li>
                         <li class="nav-item">
-                            <b><a class="nav-link" asp-area="" asp-controller="ViewHome" asp-action="HistoryTransaction" style="color: #E67E22; font-size:20px">My Profile</a></b>
-                        </li>
-                        <li class="nav-item">
-                            <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Register" style="color: #E67E22; font-size:20px">Register</a></b>
+                            <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Profile" style="color: #E67E22; font-size:20px">Your Transaction</a></b>
                         </li>
                     </ul>
-                    <b><a class="nav-link" onclick="myFunction(this)" style="color: #E67E22; font-size:20px">Profile</a></b>
+                    <b><a class="nav-link" asp-area="" asp-controller="ViewUsers" asp-action="Profile" style="background: #dbdbdb; margin-top: 0.75rem; color: #E67E22; font-size:48px; border-radius: 50%;"><i class='fa fa-user'></i></a></b>
                 </div>
             </div>
         </nav>
