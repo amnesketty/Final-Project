@@ -173,11 +173,11 @@ body {
   /* sidenav detail flight */
   .sidenav {
     border-radius: 2%;
-    width: 440px;
-    height: 500px;
+    width: 420px;
+    height: 528px;
     position: fixed;
     z-index: 3;
-    top: 112px;
+    top: 123px;
     left: 10px;
     background: #eee;
     overflow-x: hidden;
