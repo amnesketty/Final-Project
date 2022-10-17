@@ -2,127 +2,141 @@
 @{
     ViewData["Title"] = "BookingFlight";
 }
+
 <head>
     <link rel="stylesheet" href="~/css/detail-flight.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body >
-<div class="sidenav">
-    <div class="ctrsidenav">
-        <p style="text-align:center; color: grey; font-size:25px;"><b>DETAIL OF FLIGHT</b></p>
-        <hr>
+
+<body>
+    <div class="sidenav">
+        <div class="ctrsidenav">
+            <p style="text-align:center; color: grey; font-size:25px;"><b>DETAIL OF FLIGHT</b></p>
+            <hr>
             <dl class="row">
-            <dt class = "col-sm-6">
-               <p style="color: #E67E22; font-size: 20px"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.Airline)</p>
-               <p>@Html.DisplayFor(modelitem => modelitem.getFlightDto.Aircraft) | @Html.DisplayFor(modelitem => modelitem.getFlightDto.AircraftsType) </p>
-            </dt>
-            <dl class="row">
-            <dt class = "col-sm-5">
-                @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationFrom)
-            </dt>
-            <dt class = "col-sm-4">
-                @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationTo)
-            </dt>
-            <br>
-            <dl class="row">
-            <dt class = "col-sm-5">
-               <p  style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.DepartureTime)</p>
-            </dt>
-            <dt class = "col-sm-5">
-                <p style="color: grey;">@Html.DisplayFor(modelitem => modelitem.getFlightDto.ArrivalTime)</p>
-            </dt>
-            <dd class = "col-sm-10">
-                <div class="progress-container">
-                    <div class="progress" id="progress"> </div>
-                     <div class="circle">
-                        <i class="material-icons"  style=" margin-left:1px; font-size:25px; transform: rotate(90deg);" transform: rotate(-90deg); >flight</i>
-                    </div>
-                    <div class="circle active">
-                     <i class="material-icons"  style="color: #E67E22; margin-left:1px; font-size:25px; transform: rotate(90deg);" transform: rotate(-90deg); >flight</i>
-                    </div>
-                    <dt class = "col-sm-5">
-                    <p  style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatClass)</p>
+                <dt class="col-sm-6">
+                    <p style="color: #E67E22; font-size: 20px"> @Html.DisplayFor(modelitem =>
+                        modelitem.getFlightDto.Airline)</p>
+                    <p>@Html.DisplayFor(modelitem => modelitem.getFlightDto.Aircraft) | @Html.DisplayFor(modelitem =>
+                        modelitem.getFlightDto.AircraftsType) </p>
+                </dt>
+                <dl class="row">
+                    <dt class="col-sm-5">
+                            @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationFrom)
                     </dt>
-                    <dt class = "col-sm-5">
-                    <p  style="color: grey;">Baggage<span>
-                        @Html.DisplayFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.CabinBaggage)kg</span></p>
+                    <dt class="col-sm-4">
+                            @Html.DisplayFor(modelitem => modelitem.getFlightDto.DestinationTo)
                     </dt>
-                                <dt class = "col-sm-5">
-                    <p  style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatPitch)</p>
-                    </dt>             
-                    <dt class = "col-sm-5">
-                    <p  style="color: grey;"> Baggage<span>
-                        @Html.DisplayFor(modelitem => modelitem.getFlightDto.FacilitiesFlight.Baggage)kg</span></p>
-                    </dt>
-                    <dt class = "col-sm-5">
-                    <p  style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatLayout)</p>
-                    </dt>
-                    <p style="color: grey;">IDR  <span style="color:#E67E22;">@Html.DisplayFor(modelitem => modelitem.getFlightDto.Price)/Person</span></p>
+                    <br>
+                    <dl class="row">
+                        <dt class="col-sm-5">
+                            <p style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.DepartureTime)
+                            </p>
+                        </dt>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;">@Html.DisplayFor(modelitem => modelitem.getFlightDto.ArrivalTime)
+                            </p>
+                        </dt>
+                        <dd class="col-sm-10">
+                            <div class="progress-container">
+                                <div class="progress" id="progress"> </div>
+                                <div class="circle">
+                                    <i class="material-icons"
+                                        style=" margin-left:1px; font-size:25px; transform: rotate(90deg);" transform:
+                                        rotate(-90deg);>flight</i>
+                                </div>
+                                <div class="circle active">
+                                    <i class="material-icons"
+                                        style="color: #E67E22; margin-left:1px; font-size:25px; transform: rotate(90deg);"
+                                        transform: rotate(-90deg);>flight</i>
+                                </div>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatClass)</p>
+                        </dt>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;">Baggage<span>
+                                                    @Html.DisplayFor(modelitem =>
+                                    modelitem.getFlightDto.FacilitiesFlight.CabinBaggage)kg</span></p>
+                        </dt>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatPitch)</p>
+                        </dt>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;"> Baggage<span>
+                                                    @Html.DisplayFor(modelitem =>
+                                    modelitem.getFlightDto.FacilitiesFlight.Baggage)kg</span></p>
+                        </dt>
+                        <dt class="col-sm-5">
+                            <p style="color: grey;"> @Html.DisplayFor(modelitem => modelitem.getFlightDto.SeatLayout)
+                            </p>
+                        </dt>
+                        <p style="color: grey;">IDR <span style="color:#E67E22;">@Html.DisplayFor(modelitem =>
+                                modelitem.getFlightDto.Price)/Person</span></p>
         </div>
-</div>
-<br>
-<div class="ctr0dp">
-    <div class="ctrdp">
+    </div>
+    <br>
+    <div class="ctr0dp">
+        <div class="ctrdp">
             <h3 style="color: whitesmoke;">Booking Summary</h3>
             <div class="containerairline">
-        <i class="material-icons"  style=" color: white; margin-right:5px; font-size:25px; transform: rotate(90deg);" transform: rotate(-90deg); >flight</i>
+                <i class="material-icons"
+                    style=" color: white; margin-right:5px; font-size:25px; transform: rotate(90deg);" transform:
+                    rotate(-90deg);>flight</i>
                 <div style="color: black;"><b> @Html.DisplayFor(model => model.getFlightDto.Airline)</b>
 
                 </div>
             </div>
             <p style="color: white;">From @Model.destinationFrom | To @Model.destinationTo</p>
-            <p style="color: white;">@Model.getFlightDto.DepartureTime.ToString("d MMMM yy hh:mm tt") - @Model.getFlightDto.ArrivalTime.ToString("d MMMM yy hh:mm tt")</p>
+            <p style="color: white;">@Model.getFlightDto.DepartureTime.ToString("d MMMM yy hh:mm tt") -
+                        @Model.getFlightDto.ArrivalTime.ToString("d MMMM yy hh:mm tt")</p>
             <p style="color: white;">@Model.getFlightDto.SeatClass</p>
-            <p style="color: white;">Total Price for @Model.amountPassenger Passenger 
-                 Rp @Model.totalPrice</p>
-    </div>
-            <div class= "ctr0dp">
-
-                <h1 style=" text-align:left; font-size:30px; color:grey;">DETAIL OF PASSENGERS</h1>
+            <p style="color: white;">Total Price for @Model.amountPassenger Passenger
+                Rp @Model.totalPrice</p>
         </div>
-<div class="ctr2dp">
-@using (Html.BeginForm("BookingFlight","ViewFlights", FormMethod.Post))
+        <div class="ctr0dp">
 
-{
-
-    @Html.HiddenFor(m => m.bookingDate)
-    @Html.HiddenFor(m => m.destinationFrom)
-    @Html.HiddenFor(m => m.destinationTo)
-    @Html.HiddenFor(m => m.amountPassenger)
-    @Html.HiddenFor(m => m.totalPrice)
-    @Html.HiddenFor(m => m.flightId)
-
-    for (var i=0; i < @Model.amountPassenger; i++)
-    {
-        <label style="font-weight: bold;"> Contact's Detail @(i+1) : </label><br>
-        
-        <div class="ctr2dp">
-        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Title)<br>
-        @* @Html.TextBoxFor(m=>m.addPassengerDtos[i].Title, new {@type = "text", @class="textboxdp"})<br> *@
-        @Html.DropDownListFor(m => m.addPassengerDtos[i].Title,                 
-                  new List<SelectListItem> { 
-                       new SelectListItem { Value = "Mr." , Text = "Mr." },
-                       new SelectListItem { Value = "Ms." , Text = "Ms." },
-                       new SelectListItem { Value = "Mrs." , Text = "Mrs." }
-                    },
-                  new { @class="myselect"})
-
+            <h1 style=" text-align:left; font-size:30px; color:grey;">DETAIL OF PASSENGERS</h1>
         </div>
         <div class="ctr2dp">
-        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Name)<br>
-        @Html.TextBoxFor(m=>m.addPassengerDtos[i].Name, new {@type = "text", @class="textboxdp"})<br>
+            @using (Html.BeginForm("BookingFlight", "ViewFlights", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.bookingDate)
+                @Html.HiddenFor(m => m.destinationFrom)
+                @Html.HiddenFor(m => m.destinationTo)
+                @Html.HiddenFor(m => m.amountPassenger)
+                @Html.HiddenFor(m => m.totalPrice)
+                @Html.HiddenFor(m => m.flightId)
+
+                for (var i = 0; i < @Model.amountPassenger; i++)
+                {
+                    <label style="font-weight: bold;"> Contact's Detail @(i+1) : </label><br>
+
+                    <div class="ctr2dp">
+                        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Title)<br>
+                        @* @Html.TextBoxFor(m=>m.addPassengerDtos[i].Title, new {@type = "text", @class="textboxdp"})<br> *@
+                        @Html.DropDownListFor(m => m.addPassengerDtos[i].Title,
+                            new List<SelectListItem> {
+                            new SelectListItem { Value = "Mr." , Text = "Mr." },
+                            new SelectListItem { Value = "Ms." , Text = "Ms." },
+                            new SelectListItem { Value = "Mrs." , Text = "Mrs." }
+                            },
+                        new { @class="myselect"})
+                    </div>
+                    <div class="ctr2dp">
+                        @Html.DisplayNameFor(m => m.addPassengerDtos[i].Name)<br>
+                        @Html.TextBoxFor(m=>m.addPassengerDtos[i].Name, new {@type = "text", @class="textboxdp"})<br>
+                    </div>
+                    <div class="ctr2dp">
+                        @Html.DisplayNameFor(m => m.addPassengerDtos[i].IdCard)<br>
+                        @Html.TextBoxFor(m=>m.addPassengerDtos[i].IdCard, new {@type = "text", @class="textboxdp"})<br>
+                    </div>
+                }
+                <input class="btn btn-primary" type="submit" value="Book Now" />
+            }
         </div>
-        <div class="ctr2dp">
-        @Html.DisplayNameFor(m => m.addPassengerDtos[i].IdCard)<br>
-        @Html.TextBoxFor(m=>m.addPassengerDtos[i].IdCard, new {@type = "text", @class="textboxdp"})<br>
-        </div>
-    }
-    <input class="btn btn-primary" type="submit" value="Book Now"/>
-}
-</div>
 </body>
 <br>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

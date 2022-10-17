@@ -60,7 +60,6 @@ namespace lounga.Controllers
         [Authorize]
         public async Task<IActionResult> DetailFlights(DateTime departureDate, int amountPassenger, int flightId)
         {
-            Console.WriteLine(HttpContext.Session.GetString("Token"));
             var response = await _flightService.GetFlightDtoById(flightId);
             GetFlightDto getFlightbyId = response.Data;
             return View(getFlightbyId);
@@ -85,10 +84,8 @@ namespace lounga.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BookingFlight( WebBookingFlightDto webBookingFlightDto)
+        public async Task<IActionResult> BookingFlight(WebBookingFlightDto webBookingFlightDto)
         {
-            Console.WriteLine(webBookingFlightDto.bookingDate.ToUniversalTime().ToString());
-            Console.WriteLine(webBookingFlightDto.addPassengerDtos[0].Name);
             AddBookingFlightDto addBookingFlightDto = new AddBookingFlightDto 
             {
                 BookingDate= webBookingFlightDto.bookingDate.ToUniversalTime(),
